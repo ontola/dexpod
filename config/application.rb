@@ -35,5 +35,14 @@ module Dexpod
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.host_name = ENV['HOSTNAME']
+
+    config.action_mailer.default_url_options = {
+      host: config.host_name,
+      protocol: :https
+    }
+
+    config.from_email = ENV['FROM_EMAIL']
   end
 end
