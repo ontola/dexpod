@@ -17,6 +17,8 @@ require 'action_mailer/railtie'
 # require "sprockets/railtie"
 require 'rails/test_unit/railtie'
 
+require 'linked_rails/middleware/linked_data_params'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -37,6 +39,8 @@ module Dexpod
     config.api_only = true
 
     config.host_name = ENV['HOSTNAME']
+    config.hosts << ENV['HOSTNAME']
+    config.hosts << 'argu.svc.cluster.local'
 
     config.action_mailer.default_url_options = {
       host: config.host_name,
@@ -44,5 +48,7 @@ module Dexpod
     }
 
     config.from_email = ENV['FROM_EMAIL']
+
+    config.middleware.use LinkedRails::Middleware::LinkedDataParams
   end
 end

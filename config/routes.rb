@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root 'home#show'
+  get '/home', to: 'home#show'
+  get '/c_a', to: 'current_user#show'
+  get '/ns/core', to: 'vocabularies#show'
+  get '/manifest', to: 'manifests#show'
+
   devise_for :users, skip: :all
 
   devise_scope :user do
@@ -14,4 +20,6 @@ Rails.application.routes.draw do
   end
 
   resources :users
+
+  match '*path', to: 'not_found#show', via: :all
 end

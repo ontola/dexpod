@@ -21,3 +21,12 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
   end
 end
+
+module ActionDispatch
+  class IntegrationTest
+    setup do
+      host! Rails.application.config.host_name
+    end
+  end
+end
+
