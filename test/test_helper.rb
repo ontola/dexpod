@@ -4,8 +4,11 @@ ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
 require 'minitest/rails'
+require 'minitest/reporters'
 
 require_relative 'support/test_methods'
+
+Minitest::Reporters.use!
 
 module ActiveSupport
   class TestCase
