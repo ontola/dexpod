@@ -9,6 +9,10 @@ class ApplicationController < ActionController::API
 
   private
 
+  def current_pod
+    @current_pod ||= User.find_by!(pod_name: Apartment::Tenant.current).pod unless Apartment::Tenant.current == 'public'
+  end
+
   def serializer_params
     {
       scope: current_user

@@ -42,7 +42,9 @@ Rails.application.routes.draw do
     get '/unlock', to: 'devise/unlocks#show'
   end
 
-  resources :users
+  resources :users do
+    include_route_concerns
+  end
 
   match '*path', to: 'not_found#show', via: :all
 end

@@ -41,7 +41,7 @@ class ManifestsController < ApplicationController
   end
 
   def theme_color
-    '#64a6bd'
+    current_pod&.theme_color || '#64a6bd'
   end
 
   def valid_token?

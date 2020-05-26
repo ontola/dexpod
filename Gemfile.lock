@@ -195,6 +195,7 @@ GEM
     parser (2.7.0.5)
       ast (~> 2.4.0)
     pg (1.2.3)
+    public_suffix (4.0.5)
     puma (4.3.3)
       nio4r (~> 2.0)
     pundit (2.1.0)
@@ -267,6 +268,11 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
+    ros-apartment (2.6.0)
+      activerecord (>= 5.0.0, < 6.1)
+      parallel (< 2.0)
+      public_suffix (>= 2.0.5, < 5.0)
+      rack (>= 1.3.6, < 3.0)
     rubocop (0.81.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -359,6 +365,7 @@ DEPENDENCIES
   rdf-turtle
   rdf-vocab
   redis
+  ros-apartment
   rubocop
   rubocop-rails
   rubocop-rspec
