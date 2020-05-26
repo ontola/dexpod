@@ -19,7 +19,7 @@ Doorkeeper::OpenidConnect.configure do
   end
 
   subject do |resource_owner, _application|
-    resource_owner.iri
+    resource_owner.profile.iri
   end
 
   # Protocol to use when generating URIs for the discovery endpoint,

@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   resources :users do
     include_route_concerns
   end
+  resource :profile, only: :show, path: :profile
 
   match '*path', to: 'not_found#show', via: :all
 end

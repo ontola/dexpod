@@ -23,6 +23,10 @@ class User < ApplicationRecord
     @pod ||= Pod.new(user: self) if pod_name
   end
 
+  def profile
+    @profile ||= Profile.new(user: self) if pod_name
+  end
+
   private
 
   def create_tenant
