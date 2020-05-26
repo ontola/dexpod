@@ -44,6 +44,10 @@ class ManifestsController < ApplicationController
     '#64a6bd'
   end
 
+  def valid_token?
+    true
+  end
+
   def verify_logged_in?
     false
   end

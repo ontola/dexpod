@@ -61,6 +61,12 @@ module OauthHelper
     )
   end
 
+  def redirect_guests
+    return true if current_user && !current_user&.guest?
+
+    redirect_to(LinkedRails.iri(path: '/u/sign_in', query: {r: request.original_url}.to_param).to_s)
+  end
+
   def update_oauth_token(token)
     response.headers['New-Refresh-Token'] = token.refresh_token
     response.headers['New-Authorization'] = token.token

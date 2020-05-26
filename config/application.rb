@@ -39,8 +39,7 @@ module Dexpod
     config.api_only = true
 
     config.host_name = ENV['HOSTNAME']
-    config.hosts << ENV['HOSTNAME']
-    config.hosts << 'argu.svc.cluster.local'
+    config.origin = "https://#{ENV['HOSTNAME']}"
 
     config.action_mailer.default_url_options = {
       host: config.host_name,
@@ -50,5 +49,16 @@ module Dexpod
     config.from_email = ENV['FROM_EMAIL']
 
     config.middleware.use LinkedRails::Middleware::LinkedDataParams
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins do |source, _env|
+          source.presence || '*'
+        end
+
+        resource '/.well-known/*', headers: :any, methods: %i[get]
+        resource '/oauth/*', headers: :any, methods: %i[get post put patch delete options head], credentials: true
+        resource '*', headers: :any, methods: %i[get post put patch delete options head], credentials: true
+      end
+    end
   end
 end

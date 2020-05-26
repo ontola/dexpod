@@ -8,7 +8,14 @@ Rails.application.routes.draw do
   get '/manifest', to: 'manifests#show'
 
   use_doorkeeper do
-    controllers tokens: 'users/tokens'
+    controllers tokens: 'oauth/tokens'
+    controllers authorizations: 'oauth/authorizations'
+  end
+  use_doorkeeper_openid_connect do
+    controllers discovery: 'oauth/discovery'
+  end
+  scope 'oauth' do
+    post 'register', to: 'oauth/clients#create'
   end
 
   devise_for :users, skip: :all
