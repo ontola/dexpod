@@ -1,0 +1,24 @@
+Pundit::NotAuthorizedError:
+  id: 'NOT_AUTHORIZED'
+  status: 403
+Errors::UnknownEmail:
+  id: 'UNKNOWN_EMAIL'
+  status: 422
+Errors::WrongPassword:
+  id: 'WRONG_PASSWORD'
+  status: 422
+ActiveRecord::RecordNotFound:
+  id: 'NOT_FOUND'
+  status: 404
+ActionController::RoutingError:
+  id: 'NOT_FOUND'
+  status: 404
+ActiveRecord::RecordNotUnique:
+  id: 'NOT_UNIQUE'
+  status: 304
+ActionController::UnpermittedParameters:
+  id: 'UNPERMITTED_PARAMETERS'
+  status: 422
+ActionController::ParameterMissing:
+  id: 'PARAMETER_MISSING'
+  status: 422

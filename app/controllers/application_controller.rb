@@ -4,13 +4,10 @@ class ApplicationController < ActionController::API
   include ActionController::MimeResponds
   include ActiveResponse::Controller
   include LinkedRails::Controller
+  include OauthHelper
   before_action :set_manifest_header
 
   private
-
-  def current_user
-    @current_user ||= GuestUser.new
-  end
 
   def serializer_params
     {

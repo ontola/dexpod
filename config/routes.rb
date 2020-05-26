@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get '/ns/core', to: 'vocabularies#show'
   get '/manifest', to: 'manifests#show'
 
+  use_doorkeeper do
+    controllers tokens: 'users/tokens'
+  end
+
   devise_for :users, skip: :all
 
   devise_scope :user do

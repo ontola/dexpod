@@ -9,6 +9,8 @@ gem 'active_response', git: 'https://github.com/ontola/active_response'
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
+gem 'doorkeeper'
+gem 'doorkeeper-jwt'
 gem 'fast_jsonapi', git: 'https://github.com/fast-jsonapi/fast_jsonapi', ref: '2de80d48896751d30fb410e042fd21a710100423'
 gem 'json-ld'
 gem 'linked_rails', git: 'https://github.com/ontola/linked_rails', branch: 'core-127-fast-serializers'

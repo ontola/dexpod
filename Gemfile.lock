@@ -111,6 +111,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    doorkeeper (5.4.0)
+      railties (>= 5)
+    doorkeeper-jwt (0.4.0)
+      jwt (~> 2.1)
     dotenv (2.7.5)
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
@@ -144,6 +148,7 @@ GEM
       multi_json (~> 1.14)
       rack (~> 2.0)
       rdf (~> 3.1)
+    jwt (2.2.1)
     kaminari-activerecord (1.2.0)
       activerecord
       kaminari-core (= 1.2.0)
@@ -316,6 +321,8 @@ DEPENDENCIES
   bootsnap
   byebug
   devise
+  doorkeeper
+  doorkeeper-jwt
   dotenv-rails
   factory_bot
   factory_bot_rails
