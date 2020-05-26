@@ -28,7 +28,7 @@ class HomeController < ApplicationController
       image: RDF::URI('http://fontawesome.io/icon/home'),
       iri: LinkedRails.iri,
       name: 'Dexes',
-      # navigations_menu: AppMenuList.new(resource: current_user).menu(:navigations).iri
+      navigations_menu: AppMenuList.new(resource: current_user).menu(:navigations).iri
     )
   end
 end

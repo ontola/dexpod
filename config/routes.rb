@@ -7,6 +7,18 @@ Rails.application.routes.draw do
   get '/ns/core', to: 'vocabularies#show'
   get '/manifest', to: 'manifests#show'
 
+  namespace :actions, module: 'linked_rails' do
+    resources :items, path: '', only: %i[index show]
+  end
+  resources :menus, module: 'linked_rails', only: %i[show index] do
+    resources :sub_menus, only: :index, path: 'menus'
+  end
+  scope :apex, module: 'linked_rails' do
+    resources :menus, only: %i[show index] do
+      resources :sub_menus, only: :index, path: 'menus'
+    end
+  end
+
   use_doorkeeper do
     controllers tokens: 'oauth/tokens'
     controllers authorizations: 'oauth/authorizations'
