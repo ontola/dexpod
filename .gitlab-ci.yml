@@ -1,0 +1,130 @@
+image: ruby:2.7.0
+
+cache:
+  paths:
+    - vendor/
+
+variables:
+  DOCKER_DRIVER: overlay2
+  POSTGRES_DB: testdb
+  POSTGRES_PASSWORD: testdb
+  POSTGRES_USER: testdb
+
+default:
+  before_script:
+    - bundle install --deployment --path vendor/bundle
+    - bundle exec rake db:create
+    - bundle exec rake db:schema:load
+    - bundle exec rake db:test:prepare
+
+build:
+  stage: build
+  image: docker:18.09.8
+  services:
+    - docker:18.09.8-dind
+    - postgres:11
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
+    - docker run --network host --env POSTGRESQL_ADDRESS=localhost --env DEXES_DATABASE=test --env RAILS_ENV=production  --env REDIS_URL=$REDIS_URL --env SECRET_KEY_BASE=secret --env JWT_ENCRYPTION_TOKEN=secret --env DEVISE_SECRET=secret $CI_REGISTRY_IMAGE:latest ./bin/rails runner "puts 'succeeded'"
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+productionTagManual:
+  stage: manualTag
+  image: docker:18.09.8
+  services:
+    - docker:18.09.8-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:production
+    - docker push $CI_REGISTRY_IMAGE:production
+  when: manual
+
+stagingTagManual:
+  stage: manualTag
+  image: docker:18.09.8
+  services:
+    - docker:18.09.8-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:staging
+    - docker push $CI_REGISTRY_IMAGE:staging
+  when: manual
+
+codeQuality:
+  stage: test
+  before_script:
+    - gem install brakeman
+    - gem install bundle-audit
+    - gem install license_finder
+  script:
+    - brakeman -z
+    - bundle exec rubocop
+    - bundle-audit update && bundle-audit check --ignore CVE-2015-9284
+#    - license_finder
+
+#test:
+#  stage: test
+#  services:
+#    - redis
+#    - postgres:11
+#  script:
+#    - bundle exec rake test
+
+autoTagProduction:
+  stage: tag
+  image: docker:18.09.8
+  services:
+    - docker:18.09.8-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:production
+    - docker push $CI_REGISTRY_IMAGE:production
+  only:
+    - master
+
+autoTagStaging:
+  stage: tag
+  image: docker:18.09.8
+  services:
+    - docker:18.09.8-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:staging
+    - docker push $CI_REGISTRY_IMAGE:staging
+  only:
+    - develop
+
+productionDevProxy:
+  stage: devProxy
+  before_script:
+    - ''
+  script:
+    - eval $PRODUCTION_PIPELINE_TRIGGER
+  when: manual
+
+stagingDevProxy:
+  stage: devProxy
+  before_script:
+    - ''
+  script:
+    - eval $STAGING_PIPELINE_TRIGGER
+  when: manual
+
+stages:
+  - build
+  - manualTag
+  - devProxy
+  - test
+  - tag

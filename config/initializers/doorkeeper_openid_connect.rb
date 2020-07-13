@@ -3,7 +3,7 @@
 Doorkeeper::OpenidConnect.configure do
   issuer Rails.application.config.origin
 
-  signing_key ENV['OIDC_KEY'].gsub('\n', "\n")
+  signing_key ENV['OIDC_KEY']&.gsub('\n', "\n")
 
   subject_types_supported %i[public]
 

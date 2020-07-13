@@ -31,6 +31,7 @@ gem 'rdf-vocab'
 gem 'redis'
 gem 'ros-apartment', require: 'apartment'
 gem 'sprockets', '~> 3'
+gem 'tzinfo-data'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -52,5 +53,3 @@ group :test do
   gem 'minitest-rails'
   gem 'minitest-reporters'
 end
-
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
