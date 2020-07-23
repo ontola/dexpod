@@ -7,6 +7,7 @@ ruby '2.7.0'
 
 gem 'active_response', git: 'https://github.com/ontola/active_response'
 gem 'bootsnap', require: false
+gem 'bugsnag'
 gem 'devise'
 gem 'doorkeeper'
 gem 'doorkeeper-jwt'

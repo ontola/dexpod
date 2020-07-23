@@ -18,6 +18,7 @@ require 'action_mailer/railtie'
 require 'rails/test_unit/railtie'
 
 require 'linked_rails/middleware/linked_data_params'
+require_relative './initializers/version'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
