@@ -62,7 +62,7 @@ module OauthHelper
   end
 
   def redirect_guests
-    return true if current_user && !current_user&.guest?
+    return true if (current_user && !current_user&.guest?) || response_body
 
     redirect_to(LinkedRails.iri(path: '/u/sign_in', query: {r: request.original_url}.to_param).to_s)
   end
