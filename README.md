@@ -43,7 +43,6 @@ See https://github.com/solid/webid-oidc-spec
 - Aan de nginx.template.conf de gekozen hostname en een variant met wildcard (*.dexes.localdev) toevoegen als server_name. De volgende keer dat je de devproxy herstart wordt de nieuwe config dan - toegevoegd aan nginx.conf.
 - De gekozen hostname toevoegen aan /etc/hosts. Voeg gelijk de sudomeinen die je wil gebruiken voor de tests en demo toe, want een wildcard kan daar niet. Bv joep.dexes.localdev, test.dexes.localdev
 - Sluit de argu backend af. Dexes gaat namelijk op dezelfde poort draaien.
-- ga naar `development.rb` en voeg een regel toe voor de podnaam die je aan gaat maken: `config.hosts << "naam.#{ENV['HOSTNAME']}"`
 - Maak de database aan `bundle exec rake db:setup`
 - Start dexes in productie mode (RAILS_ENV=production) en herstart de devproxy ./dev.sh
 - `RAILS_ENV=development bundle exec rails s -b 0.0.0.0 -p 3000`

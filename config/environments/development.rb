@@ -15,6 +15,9 @@ Rails.application.configure do
   config.consider_all_requests_local = true
 
   config.hosts = []
+  config.hosts << '.svc.cluster.local'
+  config.hosts << ENV['HOSTNAME']
+  config.hosts << ".#{ENV['HOSTNAME']}"
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
