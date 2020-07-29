@@ -99,13 +99,21 @@ Apartment.configure do |config|
   # config.pg_excluded_names = ["uuid_generate_v4"]
 end
 
+class FirstSubDomainWithoutAPI < Apartment::Elevators::FirstSubdomain
+  def parse_tenant_name(request)
+    super(request) unless spi_request?(request)
+  end
+
+  def spi_request?(request)
+    ENV['ARGU_API_URL'].present? && request.url.starts_with?(ENV['ARGU_API_URL'])
+  end
+end
+
 # Setup a custom Tenant switching middleware. The Proc should return the name of the Tenant that
 # you want to switch to.
-# Rails.application.config.middleware.use Apartment::Elevators::Generic, lambda { |request|
-#   request.host.split('.').first
-# }
+Rails.application.config.middleware.use FirstSubDomainWithoutAPI
 
 # Rails.application.config.middleware.use Apartment::Elevators::Domain
 # Rails.application.config.middleware.use Apartment::Elevators::Subdomain
-Rails.application.config.middleware.use Apartment::Elevators::FirstSubdomain
+# Rails.application.config.middleware.use Apartment::Elevators::FirstSubdomain
 # Rails.application.config.middleware.use Apartment::Elevators::Host
