@@ -13,6 +13,13 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
+  config.web_console.whitelisted_ips = [
+    '192.168.0.0/16',
+    '10.0.1.0/16',
+    '172.17.0.0/16',
+    '172.99.0.0/16',
+    ENV['TRUSTED_IP']
+  ].compact
 
   config.hosts = []
   config.hosts << '.svc.cluster.local'
