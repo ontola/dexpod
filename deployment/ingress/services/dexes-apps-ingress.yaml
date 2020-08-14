@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: default
+  name: dexes-apps-ingress
+  annotations:
+    kubernetes.io/ingress-class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-production-issuer
+spec:
+  tls:
+    - hosts:
+        - dexpods.eu
+        - "*.dexpods.eu"
+      secretName: letsencrypt-production-tls2
+  rules:
+    - host: "dexpods.eu"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: dexes-production
+              servicePort: 80
+    - host: "*.dexpods.eu"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: dexes-production
+              servicePort: 80
+

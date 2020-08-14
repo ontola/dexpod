@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dexes-backend
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: dexes-backend
+  ports:
+    - name: "http"
+      port: 3000
+      targetPort: 3000

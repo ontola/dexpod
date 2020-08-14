@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dexes-backend
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      app: dexes-backend
+  template:
+    metadata:
+      labels:
+        app: dexes-backend
+    spec:
+      containers:
+        - name: dexes-backend
+          image: registry.gitlab.com/ontola/dexpod:production
+          envFrom:
+            - secretRef:
+                name: backend-secret
+            - secretRef:
+                name: postgres-secret
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 250m
+      imagePullSecrets:
+        - name: gitlab-dexpod
