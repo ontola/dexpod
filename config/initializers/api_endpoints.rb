@@ -9,6 +9,7 @@ begin
     /.well-known/webfinger
     /.well-known/openid-configuration
     /oauth/(.*)
+    /rails/(.*)
   ]
 
   (required_keys - current_keys).each do |key|

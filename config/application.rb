@@ -36,6 +36,10 @@ module Dexpod
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    %i[controllers forms models policies serializers].each do |type|
+      config.autoload_paths += %W[#{config.root}/app/#{type}/nodes]
+    end
+
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
@@ -51,6 +55,12 @@ module Dexpod
     }
 
     config.from_email = ENV['FROM_EMAIL']
+
+    # https://github.com/rails/rails/issues/34665
+    ActiveStorage::Engine.config
+      .active_storage
+      .content_types_to_serve_as_binary
+      .delete('image/svg+xml')
 
     config.middleware.use FirstSubDomainWithoutAPIAndDexTransfer
     config.middleware.use LinkedRails::Middleware::LinkedDataParams

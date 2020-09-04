@@ -1,13 +1,43 @@
 # frozen_string_literal: true
 
-Rails.application.routes.draw do
-  root 'home#show'
-  get '/home', to: 'home#show'
-  get '/c_a', to: 'current_user#show'
-  get '/ns/core', to: 'vocabularies#show'
-  get '/manifest', to: 'manifests#show'
+require 'constraints/dex_transfer_constraint'
+require 'constraints/dexes_constraint'
+require 'constraints/dexpod_constraint'
 
-  namespace :actions, module: 'linked_rails' do
+Rails.application.routes.draw do
+  concern :nested_actionable do
+    namespace :actions do
+      resources :items, path: '', only: %i[index show], collection: @scope.parent.try(:[], :controller)
+    end
+  end
+
+  concern :site_setup do
+    resource :home_page,
+             only: :show,
+             path: '/'
+    resource :home_page,
+             only: :show,
+             path: :home do
+      concerns :nested_actionable
+      include_route_concerns
+    end
+  end
+
+  use_linked_rails(
+    current_user: 'current_user',
+    manifests: 'manifests'
+  )
+  use_linked_rails_auth(
+    authorizations: 'oauth/authorizations'
+  )
+  use_doorkeeper_openid_connect do
+    controllers discovery: 'oauth/discovery'
+  end
+  scope 'oauth' do
+    post 'register', to: 'oauth/clients#create'
+  end
+
+  namespace :actions do
     resources :items, path: '', only: %i[index show]
   end
   resources :menus, module: 'linked_rails', only: %i[show index] do
@@ -19,33 +49,64 @@ Rails.application.routes.draw do
     end
   end
 
-  use_doorkeeper do
-    controllers tokens: 'oauth/tokens'
-    controllers authorizations: 'oauth/authorizations'
+  constraints(Constraints::DexTransferConstraint) do
+    namespace :dex_transfer, path: nil do
+      concerns :site_setup
+    end
+
+    # Stop routing for DexTransfer
+    match '*path', to: 'not_found#show', via: :all
   end
-  use_doorkeeper_openid_connect do
-    controllers discovery: 'oauth/discovery'
+  constraints(Constraints::DexesConstraint) do
+    namespace :dexes, path: nil do
+      concerns :site_setup
+    end
   end
-  scope 'oauth' do
-    post 'register', to: 'oauth/clients#create'
+  constraints(Constraints::DexpodConstraint) do
+    namespace :dexpod, path: nil do
+      concerns :site_setup
+    end
   end
 
-  devise_for :users, skip: :all
+  get :pod, to: 'pods#show'
 
-  devise_scope :user do
-    post '/users', to: 'registrations#create'
-    delete '/account', to: 'registrations#destroy'
-    put '/password', to: 'devise/passwords#update'
-    post '/password', to: 'devise/passwords#create'
-    get '/confirmation', to: 'devise/confirmations#show'
-    post '/unlock', to: 'devise/unlocks#create'
-    get '/unlock', to: 'devise/unlocks#show'
+  constraints(Constraints::DexpodConstraint) do # rubocop:disable Metrics/BlockLength
+    resources :nodes,
+              only: %i[index show new create] do
+      include_route_concerns
+      collection do
+        concerns :nested_actionable
+      end
+    end
+
+    Node.descendants.each do |klass|
+      resource_name = klass.model_name.route_key
+
+      resources resource_name, only: %i[show new create] do
+        klass.collections.each do |collection|
+          resources collection[:name], only: %i[index new create] do
+            include_route_concerns
+            collection do
+              concerns :nested_actionable
+            end
+          end
+        end
+
+        include_route_concerns
+        collection do
+          concerns :nested_actionable
+        end
+      end
+    end
   end
 
-  resources :users do
+  resources :users,
+            only: %i[show new create] do
     include_route_concerns
   end
+
   resource :profile, only: :show, path: :profile
 
-  match '*path', to: 'not_found#show', via: :all
+  # TODO: Fix activestorage routing with fallback
+  # match '*path', to: 'not_found#show', via: :all
 end
