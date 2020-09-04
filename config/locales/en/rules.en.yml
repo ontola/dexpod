@@ -1,0 +1,9 @@
+en:
+  rules:
+    plural: "Rules"
+  prohibitions:
+    plural: "Forbidden"
+  permissions:
+    plural: "Permitted"
+  obligations:
+    plural: "Obligated"

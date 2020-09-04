@@ -12,6 +12,10 @@ class NodePolicy < ApplicationPolicy
 
   def show?
     pod_owner?
+
+    # @todo pod_owner, shared or invitee
+    # Invitees can only see the node, not the content
+    true
   end
 
   def create?

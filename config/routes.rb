@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     namespace :dex_transfer, path: nil do
       concerns :site_setup
     end
+    resources :offers, only: %i[new create]
 
     # Stop routing for DexTransfer
     match '*path', to: 'not_found#show', via: :all
@@ -66,6 +67,33 @@ Rails.application.routes.draw do
     namespace :dexpod, path: nil do
       concerns :site_setup
     end
+    resources :offers do
+      include_route_concerns
+      collection do
+        concerns :nested_actionable
+      end
+      resources :invites, only: :index
+      resources :rules, only: :index
+      Rule.descendants.each do |klass|
+        resources klass.route_key, only: :index
+      end
+    end
+    resources :invites do
+      include_route_concerns
+      collection do
+        concerns :nested_actionable
+      end
+      post '/accept', to: 'agreements#create'
+    end
+    resources :rules do
+      include_route_concerns
+    end
+    Rule.descendants.each do |klass|
+      resources klass.route_key do
+        include_route_concerns
+      end
+    end
+    resources :agreements
   end
 
   get :pod, to: 'pods#show'

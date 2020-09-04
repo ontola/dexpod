@@ -39,6 +39,25 @@ ActiveRecord::Schema.define(version: 2020_08_25_124820) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "agreements", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "invite_id", null: false
+    t.integer "user_id", null: false
+    t.index ["invite_id"], name: "index_agreements_on_invite_id"
+    t.index ["user_id"], name: "index_agreements_on_user_id"
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "email"
+    t.integer "offer_id", null: false
+    t.string "secret", null: false
+    t.index ["offer_id"], name: "index_invites_on_offer_id"
+    t.index ["secret"], name: "index_invites_on_secret"
+  end
+
   create_table "nodes", force: :cascade do |t|
     t.string "type", default: "folder", null: false
     t.bigint "root_id"
@@ -96,6 +115,15 @@ ActiveRecord::Schema.define(version: 2020_08_25_124820) do
     t.string "nonce", null: false
   end
 
+  create_table "offers", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.integer "node_id", null: false
+    t.index ["node_id"], name: "index_offers_on_node_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
+  end
+
   create_table "pods", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "root_node_id"
@@ -106,6 +134,16 @@ ActiveRecord::Schema.define(version: 2020_08_25_124820) do
     t.index ["pod_name"], name: "index_pods_on_pod_name", unique: true
     t.index ["user_id", "pod_name"], name: "index_pods_on_user_id_and_pod_name"
     t.index ["user_id"], name: "index_pods_on_user_id"
+  end
+
+  create_table "rules", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "type"
+    t.integer "offer_id", null: false
+    t.integer "action", null: false
+    t.text "description"
+    t.index ["offer_id"], name: "index_rules_on_offer_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -135,8 +173,12 @@ ActiveRecord::Schema.define(version: 2020_08_25_124820) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "agreements", "invites"
+  add_foreign_key "invites", "offers"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_openid_requests", "oauth_access_grants", column: "access_grant_id", on_delete: :cascade
+  add_foreign_key "offers", "nodes"
+  add_foreign_key "rules", "offers"
 end

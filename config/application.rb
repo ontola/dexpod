@@ -39,6 +39,9 @@ module Dexpod
     %i[controllers forms models policies serializers].each do |type|
       config.autoload_paths += %W[#{config.root}/app/#{type}/nodes]
     end
+    %i[controllers policies].each do |type|
+      config.autoload_paths += %W[#{config.root}/app/#{type}/rules]
+    end
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
@@ -55,6 +58,8 @@ module Dexpod
     }
 
     config.from_email = ENV['FROM_EMAIL']
+
+    config.autoload_paths += %W[#{config.root}/app/models/rules]
 
     # https://github.com/rails/rails/issues/34665
     ActiveStorage::Engine.config
