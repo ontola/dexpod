@@ -41,6 +41,8 @@ Metrics/BlockLength:
     - setup
 Layout/LineLength:
   Max: 120
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
 Rails/UnknownEnv:
   Environments:
     - production

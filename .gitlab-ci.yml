@@ -61,6 +61,7 @@ stagingTagManual:
 codeQuality:
   stage: test
   before_script:
+    - bundle install
     - gem install brakeman
     - gem install bundle-audit
     - gem install license_finder
