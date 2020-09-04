@@ -1,0 +1,12 @@
+nl:
+  active_response:
+    actions:
+      create:
+        success: "Opslaan is gelukt"
+        failure: "Opslaan is niet gelukt"
+      update:
+        success: "Opslaan is gelukt"
+        failure: "Opslaan is niet gelukt"
+      destroy:
+        success: "Verwijderen is gelukt"
+        failure: "Verwijderen is niet gelukt"

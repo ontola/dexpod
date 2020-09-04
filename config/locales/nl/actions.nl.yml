@@ -1,0 +1,31 @@
+nl:
+  actions:
+    default:
+      create:
+        submit: "Opslaan"
+      destroy:
+        label: "Verwijderen"
+        description: "Weet je zeker dat je dit wil verwijderen?"
+        submit: "Verwijderen"
+      update:
+        submit: "Opslaan"
+    access_tokens:
+      create:
+        label: "Inloggen"
+        submit: "Ga verder"
+    confirmations:
+      create:
+        label: "Bevestigingslink opnieuw versturen"
+        submit: "Verstuur"
+    passwords:
+      create:
+        label: "Wachtwoord vergeten?"
+        submit: "Verstuur"
+    registrations:
+      create:
+        label: "Registreren"
+        submit: "Bevestig"
+    sessions:
+      create:
+        label: "Inloggen of registeren"
+        submit: "Ga verder"

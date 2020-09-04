@@ -61,6 +61,12 @@ module Dexpod
 
     config.autoload_paths += %W[#{config.root}/app/models/rules]
 
+    config.time_zone = 'UTC'
+    config.i18n.available_locales = %i[nl en]
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}')]
+    config.i18n.enforce_available_locales = true
+    config.i18n.default_locale = ENV['DEFAULT_LOCALE'] || :nl
+
     # https://github.com/rails/rails/issues/34665
     ActiveStorage::Engine.config
       .active_storage

@@ -3,7 +3,10 @@ en:
     actions:
       create:
         success: "Created successfully"
+        failure: "Failed to create record"
       update:
         success: "Changes saved successfully"
+        failure: "Failed to update record"
       destroy:
         success: "Destroyed successfully"
+        failure: "Failed to delete record"

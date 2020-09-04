@@ -1,0 +1,9 @@
+nl:
+  menu:
+    home: "Home"
+    dexes: "Ga naar Dexes"
+    my_pod: "Ga naar mijn pod"
+    sign_out: "Uitloggen"
+    user_menu:
+      view: "Bekijk"
+      settings: "Instellingen"

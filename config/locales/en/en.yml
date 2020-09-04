@@ -1,0 +1,4 @@
+en:
+  edit_type: "Edit %{type}"
+  show_type: "Show %{type}"
+  update: "Update"

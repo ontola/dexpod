@@ -1,0 +1,4 @@
+nl:
+  edit_type: "Wijzig %{type}"
+  show_type: "Bekijk %{type}"
+  update: "Wijzig"

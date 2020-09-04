@@ -1,0 +1,5 @@
+nl:
+  users:
+    type: "gebruiker"
+    settings:
+      title: "Instellingen"
