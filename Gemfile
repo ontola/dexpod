@@ -50,6 +50,7 @@ group :development do
   gem 'rubocop-rspec'
   gem 'spring'
   gem 'spring-watcher-listen'
+  gem 'solargraph'
   gem 'web-console'
 end
 
