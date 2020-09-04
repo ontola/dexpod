@@ -24,6 +24,8 @@ require_relative './initializers/version'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require_relative '../lib/first_sub_domain_without_api_and_dex_transfer'
+
 module Dexpod
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -41,6 +43,7 @@ module Dexpod
 
     config.host_name = ENV['HOSTNAME']
     config.origin = "https://#{ENV['HOSTNAME']}"
+    config.dex_transfer_host_name = ENV['DEX_TRANSFER_HOSTNAME']
 
     config.action_mailer.default_url_options = {
       host: config.host_name,
@@ -49,6 +52,7 @@ module Dexpod
 
     config.from_email = ENV['FROM_EMAIL']
 
+    config.middleware.use FirstSubDomainWithoutAPIAndDexTransfer
     config.middleware.use LinkedRails::Middleware::LinkedDataParams
     config.middleware.insert_before 0, Rack::Cors do
       allow do

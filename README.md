@@ -41,7 +41,9 @@ See https://github.com/solid/webid-oidc-spec
 - `dexes` branch in libro uitpakken
 - .env aanmaken in dexes op basis van .env.template . Veel waardes kan je overnemen van de env in devproxy. De hostname moet je zelf bedenken, bv dexes.localdev . OIDC_SUBJECT_SALT mag iets randoms - zijn (`bundle exec rake secret`). OIDC_KEY is een private key die je zelf kan genereren `ssh-keygen -t rsa -b 4096` (-----BEGIN RSA PRIVATE KEY-----\n[...]\n-----END RSA PRIVATE KEY-----\n  als single line in de env, dus converteer de newlines naar `\n`).
 - Aan de nginx.template.conf de gekozen hostname en een variant met wildcard (*.dexes.localdev) toevoegen als server_name. De volgende keer dat je de devproxy herstart wordt de nieuwe config dan - toegevoegd aan nginx.conf.
-- De gekozen hostname toevoegen aan /etc/hosts. Voeg gelijk de sudomeinen die je wil gebruiken voor de tests en demo toe, want een wildcard kan daar niet. Bv joep.dexes.localdev, test.dexes.localdev
+- Instellen hostnames, of
+  - [Automatisch routen van alle localdev domeinen](https://qiita.com/bmj0114/items/9c24d863bcab1a634503)
+  - De gekozen hostname toevoegen aan /etc/hosts. Voeg gelijk de sudomeinen die je wil gebruiken voor de tests en demo toe, want een wildcard kan daar niet. Bv joep.dexes.localdev, test.dexes.localdev
 - Sluit de argu backend af. Dexes gaat namelijk op dezelfde poort draaien.
 - Maak de database aan `bundle exec rake db:setup`
 - Start dexes in productie mode (RAILS_ENV=production) en herstart de devproxy ./dev.sh

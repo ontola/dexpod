@@ -8,6 +8,7 @@ default: &default
   password: <%= ENV['POSTGRESQL_PASSWORD'] %>
   host: <%= ENV['POSTGRESQL_ADDRESS'] %>
   port: <%= ENV['POSTGRESQL_PORT'] %>
+  schema_search_path: 'public,shared_extensions'
 development:
   <<: *default
 test:

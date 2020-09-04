@@ -12,8 +12,11 @@ module LinkedRails
   class << self
     def iri(opts = {})
       host =
-        if Apartment::Tenant.current == 'public'
+        case Apartment::Tenant.current
+        when 'public'
           LinkedRails.host
+        when 'dex_transfer'
+          Rails.application.config.dex_transfer_host_name
         else
           "#{Apartment::Tenant.current}.#{LinkedRails.host}"
         end
@@ -30,13 +33,19 @@ module LinkedRails
       def iri_with_root(root_relative_iri)
         iri = root_relative_iri.dup
         iri.scheme = LinkedRails.scheme
-        iri.host =
-          if Apartment::Tenant.current == 'public'
-            LinkedRails.host
-          else
-            "#{Apartment::Tenant.current}.#{LinkedRails.host}"
-          end
+        iri.host = host_from_tenant
         iri
+      end
+
+      def host_from_tenant
+        case Apartment::Tenant.current
+        when 'public'
+          LinkedRails.host
+        when 'dex_transfer'
+          Rails.application.config.dex_transfer_host_name
+        else
+          "#{Apartment::Tenant.current}.#{LinkedRails.host}"
+        end
       end
     end
   end

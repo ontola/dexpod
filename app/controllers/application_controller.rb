@@ -1,20 +1,57 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  NAME_SPACES = %w[DexTransfer Dexes DexPod]
+
   include ActionController::MimeResponds
   include ActiveResponse::Controller
   include LinkedRails::Controller
   include OauthHelper
+  include RootHelper
+
   before_action :set_manifest_header
 
   private
 
+  def const_get(const)
+    namespace ? namespace.const_get(const) : const.to_s.safe_constantize
+  end
+
+  def current_manifest
+    @current_manifest ||= manifest_class.new(pod: current_pod)
+  end
+
+  # The pod targeted in this request, if any
   def current_pod
-    @current_pod ||= User.find_by!(pod_name: Apartment::Tenant.current).pod unless Apartment::Tenant.current == 'public'
+    @current_pod ||= Pod.find_by!(pod_name: current_tenant) if pod?
+  end
+
+  def pod_owner?
+    current_user.pod_owner?
+  end
+
+  def manifest_class
+    case current_tenant
+    when :dex_transfer
+      DexTransfer::Manifest
+    when :public
+      Manifest
+    else
+      Dexpod::Manifest
+    end
+  end
+
+  def namespace
+    return unless params[:controller].include?('/')
+
+    @namespace ||= NAME_SPACES
+                     .detect { |name| params[:controller].split('/').shift.classify == name }
+                     &.safe_constantize
   end
 
   def serializer_params
     {
+      manifest: current_manifest,
       scope: current_user
     }
   end
