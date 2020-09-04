@@ -8,15 +8,15 @@ GIT
 
 GIT
   remote: https://github.com/ontola/active_response
-  revision: 4a568f7d6b5a06385b4e6f3258c745a4445c249c
+  revision: 89c2334b043c0fbf91616a315fdac2a038c5b048
   specs:
     active_response (0.0.1)
       railties
 
 GIT
   remote: https://github.com/ontola/linked_rails
-  revision: 282e52a1c9c3bfe9bbeab226685f7b3808ea9c81
-  branch: core-127-fast-serializers
+  revision: d37d1a57ee5de48a02db8e10db88c65395c77e10
+  branch: dexes
   specs:
     linked_rails (0.0.0)
       active_response
@@ -28,9 +28,16 @@ GIT
       uri_template
 
 GIT
+  remote: https://github.com/ontola/linked_rails-auth
+  revision: f1efa75321fe78db733e5aa582f9c8317d3afa3b
+  specs:
+    linked_rails-auth (0.1.0)
+      rails (~> 6.0.3, >= 6.0.3.2)
+
+GIT
   remote: https://github.com/ontola/rdf-serializers
-  revision: e74faf784d4a80341891593acfb896a204e1082c
-  branch: fast-jsonapi
+  revision: 8c7f795432ec2e00c808d253b2637ef650181d8e
+  branch: graph_operator
   specs:
     rdf-serializers (0.0.7)
       fast_jsonapi
@@ -120,7 +127,7 @@ GEM
       railties (>= 5)
     doorkeeper-jwt (0.4.0)
       jwt (~> 2.1)
-    doorkeeper-openid_connect (1.7.2)
+    doorkeeper-openid_connect (1.7.4)
       doorkeeper (>= 5.2, < 5.5)
       json-jwt (>= 1.11.0)
     dotenv (2.7.5)
@@ -361,6 +368,7 @@ DEPENDENCIES
   json-ld
   jsonapi-renderer
   linked_rails!
+  linked_rails-auth!
   listen
   minitest-rails
   minitest-reporters

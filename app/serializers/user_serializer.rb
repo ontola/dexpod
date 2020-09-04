@@ -1,8 +1,18 @@
 # frozen_string_literal: true
 
 class UserSerializer < LinkedSerializer
-  attribute :pod_name, predicate: NS::ARGU[:podName]
-  attribute :theme_color, predicate: NS::ARGU[:baseColor]
+  has_one :pod,
+          predicate: NS::ARGU[:pod]
+
   attribute :display_name, predicate: NS::FOAF[:name]
-  has_one :pod, predicate: NS::ARGU[:pod]
+
+  attribute :password, predicate: NS::ARGU[:password], datatype: NS::ONTOLA['datatype/password'], if: method(:never)
+  attribute :password_confirmation,
+            predicate: NS::ARGU[:passwordConfirmation],
+            datatype: NS::ONTOLA['datatype/password'],
+            if: method(:never)
+  attribute :current_password,
+            predicate: NS::ARGU[:currentPassword],
+            datatype: NS::ONTOLA['datatype/password'],
+            if: method(:never)
 end

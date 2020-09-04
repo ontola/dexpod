@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class UserPolicy < ApplicationPolicy
+class PodPolicy < ApplicationPolicy
   permit_attributes %i[theme_color]
-  permit_attributes %i[email redirect_url password password_confirmation current_password]
-  permit_nested_attributes %i[pod]
+  permit_attributes %i[pod_name],
+                    new_record: true
 
   def no_pod_name
     record.pod.blank?

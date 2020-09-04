@@ -1,15 +1,33 @@
 # frozen_string_literal: true
 
-class Pod
-  include ActiveModel::Model
-  include LinkedRails::Model
+class Pod < ApplicationRecord
+  enhance LinkedRails::Enhancements::Updatable
 
-  attr_accessor :user
-  delegate :pod_name, :theme_color, to: :user
+  belongs_to :user
+  belongs_to :root_node,
+             class_name: 'Node',
+             dependent: :destroy,
+             optional: true
+
+  after_create :setup_pod
+  after_update :rename_pod, if: :rename_pod?
+  validates :pod_name, uniqueness: true
+
+  alias_attribute :display_name, :pod_name
+
+  def pod_name=(val)
+    super(val&.downcase)
+  end
 
   def iri
-    @iri ||= LinkedRails.iri(host: "#{pod_name}.#{LinkedRails.host}")
+    @iri ||= LinkedRails.iri(host: "#{pod_name}.#{LinkedRails.host}/pod")
   end
+
+  def home_iri
+    @home_iri ||= LinkedRails.iri(host: "#{pod_name}.#{LinkedRails.host}/")
+  end
+
+  private
 
   def create_tenant
     Apartment::Tenant.create(pod_name)
@@ -21,7 +39,17 @@ class Pod
     end
   end
 
-  private
+  def create_fs
+    Apartment::Tenant.switch(pod_name) do
+      self.root_node = Folder.new(
+        root_id: nil,
+        parent_id: nil,
+        title: I18n.t('nodes.my_files')
+      )
+      root_node.save(validate: false)
+    end
+    save!
+  end
 
   def create_system_token(app, scopes, secret)
     token = Doorkeeper::AccessToken.find_or_create_for(
@@ -33,5 +61,21 @@ class Pod
     )
     token.update(token: secret)
     token
+  end
+
+  def rename_pod
+    ActiveRecord::Base.connection.execute(
+      "ALTER SCHEMA #{ApplicationRecord.connection.quote_string(pod_name_was)} "\
+      "RENAME TO #{ApplicationRecord.connection.quote_string(pod_name)}"
+    )
+  end
+
+  def rename_pod?
+    pod_name_previously_changed?
+  end
+
+  def setup_pod
+    create_tenant
+    create_fs
   end
 end

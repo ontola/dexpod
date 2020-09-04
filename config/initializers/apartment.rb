@@ -17,7 +17,7 @@ Apartment.configure do |config|
   # Add any models that you do not want to be multi-tenanted, but remain in the global (public) namespace.
   # A typical example would be a Customer or Tenant model that stores each Tenant's information.
 
-  config.excluded_models = %w[User]
+  config.excluded_models = %w[User Pod]
 
   # In order to migrate all of your Tenants you need to provide a list of Tenant names to Apartment.
   # You can make this dynamic by providing a Proc object to be called on migrations.
@@ -50,7 +50,7 @@ Apartment.configure do |config|
   #   end
   # end
   #
-  config.tenant_names = -> { User.pluck(:pod_name) }
+  config.tenant_names = -> { Pod.pluck(:pod_name) + ['dex_transfer'] }
 
   # PostgreSQL:
   #   Specifies whether to use PostgreSQL schemas or create a new database per Tenant.
@@ -75,8 +75,8 @@ Apartment.configure do |config|
   # There are cases where you might want some schemas to always be in your search_path
   # e.g when using a PostgreSQL extension like hstore.
   # Any schemas added here will be available along with your selected Tenant.
-  #
-  # config.persistent_schemas = %w{ hstore }
+
+  config.persistent_schemas = %w[shared_extensions]
 
   # <== PostgreSQL only options
   #
@@ -98,22 +98,3 @@ Apartment.configure do |config|
   #
   # config.pg_excluded_names = ["uuid_generate_v4"]
 end
-
-class FirstSubDomainWithoutAPI < Apartment::Elevators::FirstSubdomain
-  def parse_tenant_name(request)
-    super(request) unless spi_request?(request)
-  end
-
-  def spi_request?(request)
-    ENV['ARGU_API_URL'].present? && request.url.starts_with?(ENV['ARGU_API_URL'])
-  end
-end
-
-# Setup a custom Tenant switching middleware. The Proc should return the name of the Tenant that
-# you want to switch to.
-Rails.application.config.middleware.use FirstSubDomainWithoutAPI
-
-# Rails.application.config.middleware.use Apartment::Elevators::Domain
-# Rails.application.config.middleware.use Apartment::Elevators::Subdomain
-# Rails.application.config.middleware.use Apartment::Elevators::FirstSubdomain
-# Rails.application.config.middleware.use Apartment::Elevators::Host

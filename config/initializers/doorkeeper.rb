@@ -5,6 +5,10 @@ Doorkeeper.configure do
   # Check the list of supported ORMs here: https://github.com/doorkeeper-gem/doorkeeper#orms
   orm :active_record
 
+  api_only
+  base_controller 'ApplicationController'
+  base_metal_controller 'ApplicationController'
+
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
     if doorkeeper_token&.acceptable?('user')
@@ -15,10 +19,9 @@ Doorkeeper.configure do
   end
 
   resource_owner_from_credentials do
-    request.params[:user] = {
-      email: (request.params[:username] || request.params[:email])&.downcase,
-      password: request.params[:password]
-    }
+    request.params[:user] = request.params[:access_token] || {}
+    request.params[:user][:email] ||= (request.params[:username] || request.params[:email])&.downcase
+    request.params[:user][:password] ||= request.params[:token] || request.params[:password]
     request.env['devise.allow_params_authentication'] = true
     user =
       if request.params[:scope] == 'guest'

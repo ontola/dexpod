@@ -3,9 +3,18 @@
 class User < ApplicationRecord
   enhance LinkedRails::Enhancements::Actionable
   enhance LinkedRails::Enhancements::Updatable
+  include RootHelper
   devise :confirmable, :database_authenticatable, :lockable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable
-  after_save :create_tenant, if: :create_tenant?
+  attr_accessor :redirect_url
+
+  has_one :pod,
+          inverse_of: :user,
+          autosave: true,
+          dependent: :restrict_with_exception
+  has_many :agreements
+
+  accepts_nested_attributes_for :pod
 
   def display_name
     email
@@ -19,25 +28,17 @@ class User < ApplicationRecord
     !password.nil? || !password_confirmation.nil?
   end
 
-  def pod
-    @pod ||= Pod.new(user: self) if pod_name
-  end
-
-  def pod_name=(val)
-    super(val&.downcase)
+  def pod_owner?
+    !public_tenant? && !dex_transfer? && pod&.pod_name == current_tenant.to_s
   end
 
   def profile
-    @profile ||= Profile.new(user: self) if pod_name
+    @profile ||= Profile.new(user: self) if pod
   end
 
   private
 
-  def create_tenant
-    pod.create_tenant
-  end
-
-  def create_tenant?
-    pod_name_previously_changed?
+  def create_pod?
+    pod.blank? || pod.pod_name_previously_changed?
   end
 end

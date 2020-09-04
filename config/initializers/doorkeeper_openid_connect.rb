@@ -34,7 +34,7 @@ Doorkeeper::OpenidConnect.configure do
     # @return [string] End-User's full name in displayable form including all name parts, possibly including titles and
     # suffixes, ordered according to the End-User's locale and preferences.
     normal_claim :name, scope: :openid do |resource_owner, _scopes, _access_token|
-      resource_owner.pod_name
+      resource_owner.pod.pod_name
     end
 
     # @return [string] Given name(s) or first name(s) of the End-User. Note that in some cultures, people can have
@@ -66,7 +66,7 @@ Doorkeeper::OpenidConnect.configure do
     # j.doe. This value MAY be any valid JSON string including special characters such as @, /, or whitespace. The RP
     # MUST NOT rely upon this value being unique, as discussed in Section 5.7.
     normal_claim :preferred_username, scope: :openid do |resource_owner, _scopes, _access_token|
-      resource_owner.pod_name
+      resource_owner.pod.pod_name
     end
 
     # @return [string] URL of the End-User's profile page. The contents of this Web page SHOULD be about the End-User.
