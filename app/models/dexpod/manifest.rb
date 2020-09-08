@@ -13,5 +13,9 @@ module Dexpod
     def site_theme_color
       pod.theme_color
     end
+
+    def header_text
+      'auto'
+    end
   end
 end

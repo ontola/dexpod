@@ -22,6 +22,10 @@ class Manifest
     'dexes'
   end
 
+  def header_text
+    'white'
+  end
+
   def site_theme_color
     app_theme_color
   end
@@ -69,7 +73,7 @@ class Manifest
     {
       css_class: 'dexes',
       header_background: 'primary',
-      header_text: 'auto',
+      header_text: header_text,
       primary_color: site_theme_color,
       secondary_color: site_secondary_color,
       theme: theme,
