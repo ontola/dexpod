@@ -5,6 +5,12 @@ class UsersController < ApplicationController
 
   private
 
+  def update_execute
+    params = permit_params
+    params[:pod_attributes][:id] = current_resource.pod.id if params.key?(:pod_attributes)
+    current_resource!.update(params)
+  end
+
   def update_success
     return super unless current_pod.blank? && current_resource.pod.present?
 
