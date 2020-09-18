@@ -14,6 +14,8 @@ class User < ApplicationRecord
           dependent: :restrict_with_exception
   has_many :agreements
 
+  with_collection :agreements
+
   accepts_nested_attributes_for :pod
 
   def display_name

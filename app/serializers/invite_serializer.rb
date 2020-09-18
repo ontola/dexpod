@@ -2,6 +2,6 @@
 
 class InviteSerializer < LinkedSerializer
   attribute :email, predicate: NS::SCHEMA[:email]
-  attribute :name, predicate: NS::SCHEMA[:name]
+  attribute :assigner_email, predicate: NS::DEX[:assigner]
   has_one :offer, predicate: NS::DEX[:offer]
 end

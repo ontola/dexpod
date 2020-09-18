@@ -4,9 +4,13 @@ class Invite < ApplicationRecord
   enhance LinkedRails::Enhancements::Actionable
   enhance LinkedRails::Enhancements::Indexable
   belongs_to :offer
+  has_one :user, through: :offer
   before_create :generate_secret
   after_create :send_invite_mail
-  alias_attribute :name, :email
+
+  def assigner_email
+    user.email
+  end
 
   private
 
