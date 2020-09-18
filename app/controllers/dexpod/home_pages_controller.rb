@@ -8,11 +8,19 @@ module Dexpod
     private
 
     def homepage_widgets
+      return [] unless pod_owner?
+
       @homepage_widgets ||= [
         LinkedRails::Widget.new(
           size: 3,
           resources: [
             current_pod.root_node.iri
+          ]
+        ),
+        LinkedRails::Widget.new(
+          size: 3,
+          resources: [
+            Agreement.root_collection.iri
           ]
         )
       ]

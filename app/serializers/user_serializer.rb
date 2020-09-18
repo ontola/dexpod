@@ -15,4 +15,6 @@ class UserSerializer < LinkedSerializer
             predicate: NS::ARGU[:currentPassword],
             datatype: NS::ONTOLA[:'datatype/password'],
             if: method(:never)
+
+  with_collection :agreements, predicate: NS::DEX[:agreements]
 end
