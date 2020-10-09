@@ -35,7 +35,7 @@ class NodePolicy < ApplicationPolicy
   end
 
   def index_children?(klass, opts = {})
-    pod_owner?
+    show?
   end
 
   def new_folder

@@ -8,8 +8,4 @@ class FolderPolicy < NodePolicy
     parent
     folder_id
   ]
-
-  def show?
-    pod_owner?
-  end
 end
