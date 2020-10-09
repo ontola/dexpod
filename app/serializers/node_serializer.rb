@@ -6,6 +6,8 @@ class NodeSerializer < RecordSerializer
   has_one :quick_actions,
           predicate: NS::ONTOLA[:quickActions]
 
+  attribute :content_url,
+            predicate: NS::SCHEMA[:contentUrl]
   attribute :icon,
             predicate: NS::SCHEMA[:image]
 end

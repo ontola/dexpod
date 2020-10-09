@@ -7,6 +7,7 @@ class Node < ApplicationRecord
   enhance LinkedRails::Enhancements::Updatable
   enhance LinkedRails::Enhancements::Destroyable
   enhance LinkedRails::Enhancements::Tableable
+  enhance Offerable
 
   belongs_to :parent,
              class_name: 'Folder',
@@ -53,12 +54,19 @@ class Node < ApplicationRecord
             presence: true,
             unless: :root_object?
 
+  def content_url; end
+  def content_url=(_val); end
+
   def folder?
     false
   end
 
   def quick_actions
-    @quick_actions ||= LinkedRails::Sequence.new([action(:update)&.iri, action(:destroy)&.iri].compact)
+    @quick_actions ||= LinkedRails::Sequence.new([
+      action(:update)&.iri,
+      action(:destroy)&.iri,
+      action(:new_offer)&.iri
+    ].compact)
   end
 
   def root_object?
