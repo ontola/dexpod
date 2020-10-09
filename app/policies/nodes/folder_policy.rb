@@ -6,7 +6,6 @@ class FolderPolicy < NodePolicy
     title
     type
     parent
-    rdf_type
     folder_id
   ]
 

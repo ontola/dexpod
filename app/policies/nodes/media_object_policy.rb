@@ -2,5 +2,5 @@
 
 class MediaObjectPolicy < NodePolicy
   permit_attributes %i[title description]
-  permit_attributes %i[content_source content content_attachment content_test rdf_type]
+  permit_attributes %i[content_source]
 end

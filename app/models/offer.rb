@@ -39,6 +39,7 @@ class Offer < ApplicationRecord
 
   def node_attributes=(attrs)
     attrs[:parent] ||= Pod.find_by(pod_name: Apartment::Tenant.current)&.root_node
+    attrs[:type] = 'MediaObject' if attrs.key?(:content_url)
     super
   end
 

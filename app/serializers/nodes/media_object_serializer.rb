@@ -4,14 +4,6 @@ class MediaObjectSerializer < NodeSerializer
   extend LinkedRails::Helpers::OntolaActionsHelper
 
   class << self
-    def content_url(object)
-      return unless object.persisted?
-
-      url = Rails.application.routes.url_helpers.rails_blob_path(object.content,
-                                                                 only_path: true)
-      LinkedRails.iri(path: url)
-    end
-
     def copy_action_statements(object, _params) # rubocop:disable Metrics/AbcSize
       action_iri = ontola_copy_action(object.iri)
       target_iri = RDF::URI("#{action_iri}#entrypoint")
@@ -35,12 +27,6 @@ class MediaObjectSerializer < NodeSerializer
       NS::SCHEMA[:MediaObject]
     end
   end
-  attribute :content,
-            predicate: NS::SCHEMA[:contentUrl],
-            &method(:content_url)
-  has_one :content_attachment,
-          predicate: NS::ARGU[:contentAttachment],
-          &method(:content_url)
   attribute :content_type,
             predicate: NS::SCHEMA[:encodingFormat],
             datatype: NS::XSD[:string] do |object|

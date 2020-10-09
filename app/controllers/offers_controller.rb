@@ -17,6 +17,9 @@ class OffersController < AuthorizedController
   end
 
   def new_resource_params
-    super.merge(user: current_user)
+    super.merge(
+      user: current_user,
+      node: parent_resource
+    )
   end
 end

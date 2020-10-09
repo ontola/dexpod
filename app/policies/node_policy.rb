@@ -2,12 +2,12 @@
 
 class NodePolicy < ApplicationPolicy
   permit_attributes %i[
+    content_url
     display_name
     page
     folder_id
     owner
     parent_id
-    rdf_type
   ]
 
   def show?

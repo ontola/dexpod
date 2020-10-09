@@ -48,10 +48,22 @@ class MediaObject < Node
   # before_save :set_publisher_and_creator
 
   alias_attribute :display_name, :filename
+  alias content_url= content=
 
   with_columns default: [
     NS::SCHEMA[:name]
   ]
+
+  def content_url
+    return unless persisted?
+
+    url = Rails.application.routes.url_helpers.rails_blob_path(
+        content,
+        only_path: true
+    )
+    LinkedRails.iri(path: url)
+  end
+
   def filename
     content.filename if content.present?
   end
