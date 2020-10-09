@@ -20,8 +20,6 @@ class MediaObject < Node
   enhance LinkedRails::Enhancements::Creatable
   enhance LinkedRails::Enhancements::Tableable
 
-  belongs_to :share, inverse_of: :media_objects, optional: true
-
   has_one_attached :content
   with_columns default: [
     # NS::DBO[:filename],
