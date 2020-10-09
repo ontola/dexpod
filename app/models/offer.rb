@@ -18,7 +18,7 @@ class Offer < ApplicationRecord
   has_many :invites,
            dependent: :destroy
   belongs_to :user
-  belongs_to :media_object,
+  belongs_to :node,
              foreign_key: :node_id,
              inverse_of: :offers
 
@@ -28,7 +28,7 @@ class Offer < ApplicationRecord
   with_collection :permissions
   with_collection :prohibitions
 
-  accepts_nested_attributes_for :media_object
+  accepts_nested_attributes_for :node
   accepts_nested_attributes_for :invites
 
   attr_accessor :rule_sets, :attribution_description
@@ -37,7 +37,7 @@ class Offer < ApplicationRecord
 
   enum rule_sets: {read: 0, edit: 1, share: 2, attribution: 3}
 
-  def media_object_attributes=(attrs)
+  def node_attributes=(attrs)
     attrs[:parent] ||= Pod.find_by(pod_name: Apartment::Tenant.current)&.root_node
     super
   end
@@ -62,7 +62,7 @@ class Offer < ApplicationRecord
 
   class << self
     def includes_for_serializer
-      super.merge(media_object: {})
+      super.merge(node: {})
     end
 
     def route_key

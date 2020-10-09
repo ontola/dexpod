@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OfferSerializer < LinkedSerializer
-  has_one :media_object,
+  has_one :node,
           predicate: NS::DEX[:file]
   attribute :attribution_description,
             predicate: NS::DEX[:attributionDescription]
