@@ -26,7 +26,7 @@ class Node < ApplicationRecord
            foreign_key: :parent_id,
            dependent: :destroy
   has_many :offers,
-           inverse_of: :media_object,
+           inverse_of: :nodes,
            dependent: :destroy
 
   has_ltree_hierarchy
@@ -37,6 +37,7 @@ class Node < ApplicationRecord
                   ]
   with_collection :media_objects
   with_collection :folders
+  with_collection :offers
 
   with_columns default: [
     NS::SCHEMA[:image],
