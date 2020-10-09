@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_25_124820) do
+ActiveRecord::Schema.define(version: 2020_10_09_075017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2020_08_25_124820) do
   end
 
   create_table "nodes", force: :cascade do |t|
-    t.string "type", default: "folder", null: false
+    t.string "type", default: "Folder", null: false
     t.bigint "root_id"
     t.bigint "parent_id"
     t.ltree "path"
