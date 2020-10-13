@@ -2,17 +2,17 @@ nl:
   offers:
     type_new: "Deel een bestand"
     rule_sets:
-      contains_private: 'Bevat prive data'
+      contains_private: 'Bevat persoonsgegevens'
       edit: 'Mag bewerken'
       share: 'Mag delen'
-      attribution: 'Moet naam vermelden'
+      attribution: 'Naamsvermelding verplicht'
     properties:
       attribution_description:
-        label: "Toelichting naam vermelding"
+        label: "Toelichting naamsvermelding"
         description: "Geef aan welke op welke manier de naam moet worden vermeld"
       contains_private_description:
-        label: "Toelichting prive data"
-        description: "Geef aan welke prive data deze data bevat"
+        label: "Toelichting persoonsgegevens"
+        description: "Geef aan welke persoonsgegevens deze data bevat"
       invites:
         label: "Uitnodigen"
       node:

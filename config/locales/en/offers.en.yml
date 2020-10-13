@@ -1,8 +1,21 @@
-en:
+nl:
   offers:
     type_new: "Share a file"
     rule_sets:
-      contains_private: 'fewwef'
-      edit: 'wfeefw'
-      share: 'fweefw'
-      attribution: 'wfewef'
+      contains_private: 'Contains personal data'
+      edit: 'Allow making changes'
+      share: 'Allow sharing with others'
+      attribution: 'Requires attribution'
+    properties:
+      attribution_description:
+        label: "Attribution information"
+        description: "Explain how the attribution should occur"
+      contains_private_description:
+        label: "Contains personal data information"
+        description: "Explain which personal information is in here"
+      invites:
+        label: "Invitation"
+      node:
+        label: "File"
+      rule_sets:
+        label: "Conditions"
