@@ -31,11 +31,11 @@ class Offer < ApplicationRecord
   accepts_nested_attributes_for :node
   accepts_nested_attributes_for :invites
 
-  attr_accessor :rule_sets, :attribution_description
+  attr_accessor :rule_sets, :attribution_description, :contains_private_description
 
   before_save :build_rules
 
-  enum rule_sets: {read: 0, edit: 1, share: 2, attribution: 3}
+  enum rule_sets: {contains_private: 0, edit: 1, share: 2, attribution: 3}
 
   def node_attributes=(attrs)
     attrs[:parent] ||= Pod.find_by(pod_name: Apartment::Tenant.current)&.root_node
@@ -49,8 +49,8 @@ class Offer < ApplicationRecord
     sets = rule_sets.is_a?(Array) ? rule_sets : [rule_sets]
     sets.each do |set|
       case set
-      when 'read'
-        rules << Permission.read.new(offer: self)
+      when 'contains_private'
+        rules << Permission.contains_private.new(offer: self, description: contains_private_description)
       when 'edit'
         rules << Permission.edit.new(offer: self)
       when 'share'

@@ -7,6 +7,8 @@ class ShareNodeForm < ApplicationForm
            min_count: 1
   field :rule_sets,
         max_count: 999
+  field :contains_private_description,
+        datatype: NS::XSD[:string]
   field :attribution_description,
         datatype: NS::XSD[:string]
 end

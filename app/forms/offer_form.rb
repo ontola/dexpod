@@ -8,6 +8,10 @@ class OfferForm < ApplicationForm
            min_count: 1
   field :rule_sets,
         max_count: 999
+  field :contains_private_description,
+        datatype: NS::XSD[:string],
+        max_length: 500
   field :attribution_description,
-        datatype: NS::XSD[:string]
+        datatype: NS::XSD[:string],
+        max_length: 500
 end
