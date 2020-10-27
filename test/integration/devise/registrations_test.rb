@@ -3,6 +3,7 @@
 require 'test_helper'
 
 class RegistrationsTest < ActionDispatch::IntegrationTest
+  let!(:application) { create(:application) }
   let(:user) { create(:user) }
 
   ####################################
