@@ -26,6 +26,15 @@ class ApplicationController < ActionController::API
     @current_pod ||= Pod.find_by!(pod_name: current_tenant) if pod?
   end
 
+  def handle_and_report_error(error)
+    raise if Rails.env.development? || Rails.env.test?
+
+    Bugsnag.notify(error)
+    raise if response_body
+
+    handle_error(error)
+  end
+
   def pod_owner?
     current_user.pod_owner?
   end
