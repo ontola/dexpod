@@ -1,4 +1,30 @@
-# README
+# DexPod
+
+The DexPod is a [Solid Pod](https://solidproject.org/) server implementation written in Ruby, powered by [Linked-Rails](https://github.com/ontola/linked_rails).
+Solid is a set of specifications, building on RDF (Linked Data) to give people more control over their data.
+
+## Architecture
+
+This repo is a Ruby on Rails server
+
+## Compliance with Solid Spec
+
+Since the [specification of Solid](https://solid.github.io/specification/) itself and the related specs are still a work in progress, it is impossible to fully comply at this moment.
+However, some parts of the specification have been stable for some time and are unlikely to change.
+
+- [x] HTTP content-type negotiation
+- [x] Various RDF serialization formats (Turtle, N3, N-Triples, HexTuples)
+- [x] [WebID-OIDC](https://solid.github.io/specification/webid-oidc/) for authentication
+- [ ] [Linked Data Notifications](https://www.w3.org/TR/ldn/) ([issue #26](https://gitlab.com/ontola/dexpod/-/issues/26)
+- [ ] ACL
+- [ ] Posting arbitrary RDF documents
+
+## Extra functionality
+
+The DexPod provides some features that are not (yet) included in the Solid specification:
+
+- **State synchronization** of RDF using [linked-deltas](https://github.com/ontola/linked-delta)
+- **DataDeals**: formal agreements between data sharers and users, powered by [the W3C ODRL spec](https://www.w3.org/TR/odrl-model/)
 
 ## Setup
 - deze repo uitpakken in initial-commits branch
@@ -65,7 +91,7 @@ See https://github.com/solid/webid-oidc-spec
 * User A creates Invites which are send by email.
 * User B receives an Invite, opens it, and sees the Offer.
 * User B logs in with his pod b.dexes.nl on a.dexes.nl.
-* User B accepts the Offer. An Agreement is created in the pod a.dexes.nl. 
+* User B accepts the Offer. An Agreement is created in the pod a.dexes.nl.
 * This Agreement has a.dexes.nl as assigner and b.dexes.nl as assignee.
 * User B can now show the File, because the pod he signed in with has an Agreement to do this.
 * a.dexes.nl sends an email to User A to tell about the new Agreement.
@@ -97,4 +123,3 @@ See https://github.com/solid/webid-oidc-spec
 ## Both:
 * BFE receives token and refresh token, and stores these in the session, together with reference to the client config.
 * When an access_token expires, the BFE will read the token_endpoint from the client config and refreshes the token.
-
