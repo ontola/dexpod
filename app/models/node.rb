@@ -12,7 +12,6 @@ class Node < ApplicationRecord
   belongs_to :parent,
              class_name: 'Folder',
              inverse_of: :nodes
-
   has_many :nodes,
            class_name: 'Node',
            inverse_of: :parent,
