@@ -120,6 +120,7 @@ RSpec.configure do |config|
   end
 
   config.after do |example|
+    LinkedRails::Cache.invalidate_all
     ActionMailer::Base.deliveries.clear
 
     if example.exception

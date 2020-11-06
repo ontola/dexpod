@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/ontola/linked_rails
-  revision: d37d1a57ee5de48a02db8e10db88c65395c77e10
+  revision: 08ddd9b4b300120a9c8f24e92cdc67de827eb82f
   branch: dexes
   specs:
     linked_rails (0.0.0)
@@ -29,7 +29,7 @@ GIT
 
 GIT
   remote: https://github.com/ontola/linked_rails-auth
-  revision: 97e104523b1372d8730b3d390521192219488414
+  revision: e00bc1d7a482b4d93b925de6f6189624fadfb41b
   specs:
     linked_rails-auth (0.1.0)
       doorkeeper
@@ -161,7 +161,7 @@ GEM
     ebnf (1.2.0)
       rdf (~> 3.1)
       sxp (~> 1.1)
-    erubi (1.9.0)
+    erubi (1.10.0)
     factory_bot (5.1.1)
       activesupport (>= 4.2.0)
     factory_bot_rails (5.1.1)
@@ -203,7 +203,7 @@ GEM
       rack (~> 2.0)
       rdf (~> 3.1)
     jsonapi-renderer (0.2.2)
-    jwt (2.2.1)
+    jwt (2.2.2)
     kaminari-activerecord (1.2.1)
       activerecord
       kaminari-core (= 1.2.1)
@@ -308,7 +308,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rdf (3.1.6)
+    rdf (3.1.7)
       hamster (~> 3.0)
       link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (3.1.0)
@@ -445,7 +445,7 @@ GEM
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    tzinfo (1.2.7)
+    tzinfo (1.2.8)
       thread_safe (~> 0.1)
     tzinfo-data (1.2020.1)
       tzinfo (>= 1.0.0)
@@ -479,7 +479,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.25)
-    zeitwerk (2.4.0)
+    zeitwerk (2.4.1)
 
 PLATFORMS
   ruby
