@@ -34,7 +34,7 @@ class Pod < ApplicationRecord
 
     Apartment::Tenant.switch(pod_name) do
       load(Dir[Rails.root.join('db/seeds/doorkeeper_apps.seeds.rb')][0])
-      libro_app = Doorkeeper::Application.find_by(uid: ENV['ARGU_APP_ID'])
+      libro_app = Doorkeeper::Application.find_by(uid: ENV['LIBRO_CLIENT_ID'])
       create_system_token(libro_app, 'service', ENV['RAILS_OAUTH_TOKEN'])
     end
   end

@@ -5,6 +5,12 @@ class ManifestsController < ApplicationController
     render json: current_resource.web_manifest
   end
 
+  def tenant
+    render json: {
+      iri_prefix: LinkedRails.iri.host
+    }
+  end
+
   private
 
   def current_resource

@@ -488,7 +488,8 @@ Doorkeeper::JWT.configure do
 
     user_opts = user && {
       type: user.guest? ? 'guest' : 'user',
-      id: user.id,
+      '@id': user.iri,
+      id: user.id.to_s,
       email: user.email,
       language: I18n.locale
     }

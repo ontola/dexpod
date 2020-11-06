@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end
 
   use_linked_rails(
+    bulk: 'bulk',
     current_user: 'current_user',
     manifests: 'manifests'
   )
@@ -33,6 +34,9 @@ Rails.application.routes.draw do
   use_doorkeeper_openid_connect do
     controllers discovery: 'oauth/discovery'
   end
+
+  get '_public/spi/find_tenant', to: 'manifests#tenant'
+
   scope 'oauth' do
     post 'register', to: 'oauth/clients#create'
   end
