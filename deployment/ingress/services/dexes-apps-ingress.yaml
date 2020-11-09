@@ -10,17 +10,90 @@ spec:
   tls:
     - hosts:
         - dexpods.eu
-        - "*.dexpods.eu"
+        - '*.dexpods.eu'
+        - '*.staging.dexpods.eu'
+        - dextransfer.eu
+        - staging.dextransfer.eu
       secretName: letsencrypt-production-tls2
   rules:
-    - host: "dexpods.eu"
+    - host: staging.dexpods.eu
+      http:
+        paths:
+          - path: /link-lib/bulk
+            backend:
+              serviceName: apex-rs-staging
+              servicePort: 3030
+    - host: '*.staging.dexpods.eu'
+      http:
+        paths:
+          - path: /link-lib/bulk
+            backend:
+              serviceName: apex-rs-staging
+              servicePort: 3030
+    - host: staging.dextransfer.eu
+      http:
+        paths:
+          - path: /link-lib/bulk
+            backend:
+              serviceName: apex-rs-staging
+              servicePort: 3030
+    - host: staging.dexpods.eu
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: dexes-staging
+              servicePort: 80
+    - host: '*.staging.dexpods.eu'
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: dexes-staging
+              servicePort: 80
+    - host: staging.dextransfer.eu
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: dexes-staging
+              servicePort: 80
+    - host: dexpods.eu
+      http:
+        paths:
+          - path: /link-lib/bulk
+            backend:
+              serviceName: apex-rs-production
+              servicePort: 3030
+    - host: '*.dexpods.eu'
+      http:
+        paths:
+          - path: /link-lib/bulk
+            backend:
+              serviceName: apex-rs-production
+              servicePort: 3030
+    - host: dextransfer.eu
+      http:
+        paths:
+          - path: /link-lib/bulk
+            backend:
+              serviceName: apex-rs-production
+              servicePort: 3030
+    - host: dexpods.eu
       http:
         paths:
           - path: /
             backend:
               serviceName: dexes-production
               servicePort: 80
-    - host: "*.dexpods.eu"
+    - host: '*.dexpods.eu'
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: dexes-production
+              servicePort: 80
+    - host: dextransfer.eu
       http:
         paths:
           - path: /

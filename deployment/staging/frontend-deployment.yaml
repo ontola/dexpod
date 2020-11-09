@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dexes-frontend
+  namespace: staging
+spec:
+  selector:
+    matchLabels:
+      app: dexes-frontend
+  template:
+    metadata:
+      labels:
+        app: dexes-frontend
+    spec:
+      containers:
+        - name: dexes-frontend
+          image: registry.gitlab.com/ontola/libro:b0eaf83136e179e1a286a3482809e42546cc5607
+          envFrom:
+            - secretRef:
+                name: frontend-secret
+      imagePullSecrets:
+        - name: gitlab-libro

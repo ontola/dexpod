@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dexes-staging
+  namespace: default
+spec:
+  type: ExternalName
+  externalName: dexes-frontend.staging.svc.cluster.local
+  ports:
+    - port: 80

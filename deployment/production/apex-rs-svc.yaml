@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: apex-rs
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: apex-rs
+  ports:
+    - name: "http"
+      port: 3030
+      targetPort: 3030

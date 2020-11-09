@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: apex-rs-production
+  namespace: default
+spec:
+  type: ExternalName
+  externalName: apex-rs.production.svc.cluster.local
+  ports:
+    - port: 80
