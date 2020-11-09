@@ -5,10 +5,20 @@ cache:
     - vendor/
 
 variables:
-  DOCKER_DRIVER: overlay2
-  POSTGRES_DB: testdb
-  POSTGRES_PASSWORD: testdb
-  POSTGRES_USER: testdb
+  ARGU_APP_ID: 'libro'
+  ARGU_APP_SECRET: 'libro'
+  BUGSNAG_KEY: 'b3e527c0a89dd7ecec4f61a29e1e2265'
+  DEX_TRANSFER_HOSTNAME: 'dextransfer.localdev'
+  DEXES_DATABASE: 'dexes_test'
+  DOCKER_DRIVER: 'overlay2'
+  HOSTNAME: 'dexpods.localdev'
+  JWT_ENCRYPTION_TOKEN: 'secret'
+  POSTGRESQL_PASSWORD: 'testdb'
+  POSTGRESQL_USER: 'testdb'
+  POSTGRES_PASSWORD: 'testdb'
+  POSTGRES_USER: 'testdb'
+  RAILS_OAUTH_TOKEN: 'secret'
+  VERIFY_NONE: 'true'
 
 default:
   before_script:
@@ -71,13 +81,48 @@ codeQuality:
     - bundle-audit update && bundle-audit check --ignore CVE-2015-9284
 #    - license_finder
 
-#test:
-#  stage: test
-#  services:
-#    - redis
-#    - postgres:11
-#  script:
-#    - bundle exec rake test
+spec:
+  stage: test
+  image: circleci/ruby:2.7.0-browsers
+  services:
+    - docker:18.09.8-dind
+    - redis
+    - mdillon/postgis
+  before_script:
+    - sudo sh -c "echo '127.0.0.1 $HOSTNAME' >> /etc/hosts"
+    - sudo sh -c "echo '127.0.0.1 user.$HOSTNAME' >> /etc/hosts"
+    - sudo sh -c "echo '127.0.0.1 $DEX_TRANSFER_HOSTNAME' >> /etc/hosts"
+    - sudo sh -c "echo '127.0.0.1 argu.svc.cluster.local' >> /etc/hosts"
+    - sudo cat /etc/hosts
+    - bundle install --deployment --path vendor/bundle
+    - ./bin/rails runner "puts 'succeeded'"
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
+    - docker run -d --name frontend --network="host" --add-host argu.svc.cluster.local:127.0.0.1 -e LIBRO_CLIENT_ID -e LIBRO_CLIENT_SECRET -e LOG_LEVEL=debug -e RAILS_OAUTH_TOKEN -e SESSION_SECRET=secret -e BUGSNAG_KEY -e JWT_ENCRYPTION_TOKEN -e SERVICE_GUEST_TOKEN=token registry.gitlab.com/ontola/libro:$LIBRO_TAG
+    - cd spec/server; ./setup.sh; cd ../..
+    - docker run -v $(pwd)/spec/server/nginx.conf:/etc/nginx/nginx.conf -v $(pwd)/spec/server/ssl:/etc/nginx/ssl --network="host" --name nginx -d nginx
+    - bundle exec rake db:create
+    - bundle exec rake db:schema:load
+  script:
+    - bundle exec rspec  --format documentation --format RSpec::Instafail
+  after_script:
+    - docker ps --no-trunc -a &> $CI_PROJECT_DIR/container-status.txt || true
+    - docker logs frontend &> $CI_PROJECT_DIR/frontend-logs.txt || true
+  artifacts:
+    paths:
+      - container-status.txt
+      - frontend-logs.txt
+      - log/
+      - tmp/capybara/
+    expire_in: 1 week
+    when: on_failure
+
+test:
+  stage: test
+  services:
+    - redis
+    - postgres:11
+  script:
+    - bundle exec rake test
 
 autoTagProduction:
   stage: tag

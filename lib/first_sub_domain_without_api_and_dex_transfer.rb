@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'apartment/elevators/generic'
+require 'apartment/elevators/first_subdomain'
 
 class FirstSubDomainWithoutAPIAndDexTransfer < Apartment::Elevators::Generic
   def parse_tenant_name(request)

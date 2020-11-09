@@ -135,6 +135,7 @@ Rails.application.routes.draw do
 
   resource :profile, only: :show, path: :profile
 
-  # TODO: Fix activestorage routing with fallback
-  # match '*path', to: 'not_found#show', via: :all
+  match '*path', to: 'not_found#show', via: :all, constraints: lambda { |req|
+      req.path.exclude? 'rails/active_storage'
+    }
 end
