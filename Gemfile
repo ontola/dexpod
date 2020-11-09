@@ -48,7 +48,6 @@ group :development do
   gem 'listen'
   gem 'rubocop'
   gem 'rubocop-rails'
-  gem 'rubocop-rspec'
   gem 'spring'
   gem 'spring-watcher-listen'
   gem 'solargraph'
@@ -56,8 +55,20 @@ group :development do
 end
 
 group :test do
+  gem 'capybara', '>= 2.15', '< 4.0'
+  gem 'capybara-screenshot'
   gem 'factory_bot'
   gem 'factory_bot_rails'
+  gem 'faraday'
+  gem 'minitest'
+  gem 'minitest-bang'
   gem 'minitest-rails'
   gem 'minitest-reporters'
+  gem 'rspec-instafail', require: false
+  gem 'rspec_junit_formatter'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-wait'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
+  gem 'webmock', '3.5.1'
 end

@@ -39,3 +39,12 @@ yarn-debug.log*
 .env
 
 *secret.yaml
+
+*.key
+*.crt
+*.pem
+*.old
+*.attr
+*.log
+serial
+*index.txt

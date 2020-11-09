@@ -6,6 +6,8 @@
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
   # Settings specified here will take precedence over those in config/application.rb.
   config.host_name = 'example.com'
   config.origin = "https://#{ENV['HOSTNAME']}"
