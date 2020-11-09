@@ -3,18 +3,18 @@
 require 'test_helper'
 
 class RegistrationsTest < ActionDispatch::IntegrationTest
-  let!(:application) { create(:application) }
   let(:user) { create(:user) }
 
   ####################################
   # As Guest
   ####################################
   test 'should not post create existing' do
+    sign_in :guest_user
     user
     assert_difference('User.count' => 0) do
       post users_path,
            params: {
-             user: {
+             registration: {
                email: user.email
              }
            }, headers: request_headers
@@ -23,11 +23,12 @@ class RegistrationsTest < ActionDispatch::IntegrationTest
   end
 
   test 'should post create without password' do
+    sign_in :guest_user
     user
     assert_difference('User.count' => 1) do
       post users_path,
            params: {
-             user: {
+             registration: {
                email: 'new@example.com'
              }
            }, headers: request_headers
@@ -36,11 +37,12 @@ class RegistrationsTest < ActionDispatch::IntegrationTest
   end
 
   test 'should post create with password' do
+    sign_in :guest_user
     user
     assert_difference('User.count' => 1) do
       post users_path,
            params: {
-             user: {
+             registration: {
                email: 'new@example.com',
                password: 'password'
              }

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apex-rs
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      app: apex-rs
+  template:
+    metadata:
+      labels:
+        app: apex-rs
+    spec:
+      containers:
+        - name: apex-rs
+          image: registry.gitlab.com/ontola/apex-rs:production
+          envFrom:
+            - secretRef:
+                name: apex-rs-secret
+            - secretRef:
+                name: postgres-secret
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 250m
+      imagePullSecrets:
+        - name: gitlab-apex-rs
