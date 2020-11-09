@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_09_075017) do
+ActiveRecord::Schema.define(version: 2020_11_09_151827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_075017) do
     t.bigint "user_id", null: false
     t.bigint "root_node_id"
     t.string "pod_name", null: false
-    t.string "theme_color"
+    t.string "theme_color", default: "#000000", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["pod_name"], name: "index_pods_on_pod_name", unique: true
