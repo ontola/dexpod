@@ -31,7 +31,7 @@ WebMock.disable_net_connect!(
   allow: HelperMethods::ALLOWED_HOSTS
 )
 
-Capybara.register_driver :selenium_chrome do |app|
+Capybara.register_driver :selenium_chrome do |app| # rubocop:disable Metrics/BlockLength
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
     'elementScrollBehavior' => 1,
     'goog:loggingPrefs' => {browser: 'ALL'},

@@ -410,7 +410,7 @@ Doorkeeper.configure do
   # so that the user skips the authorization step.
   # For example if dealing with a trusted application.
   #
-  skip_authorization do |resource_owner, client|
+  skip_authorization do |_resource_owner, _client|
     true
   end
 

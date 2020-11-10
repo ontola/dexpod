@@ -56,8 +56,8 @@ class MediaObject < Node
     return unless persisted?
 
     url = Rails.application.routes.url_helpers.rails_blob_path(
-        content,
-        only_path: true
+      content,
+      only_path: true
     )
     LinkedRails.iri(path: url)
   end

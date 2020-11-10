@@ -43,7 +43,6 @@ class ApplicationPolicy
     destroy?
   end
 
-
   private
 
   def forbid_with_message(message)

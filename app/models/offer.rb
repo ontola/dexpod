@@ -45,7 +45,7 @@ class Offer < ApplicationRecord
 
   private
 
-  def build_rules
+  def build_rules # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     sets = rule_sets.is_a?(Array) ? rule_sets : [rule_sets]
     sets.each do |set|
       case set

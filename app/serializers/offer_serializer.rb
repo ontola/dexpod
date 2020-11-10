@@ -7,7 +7,7 @@ class OfferSerializer < LinkedSerializer
             predicate: NS::DEX[:attributionDescription]
   attribute :contains_private_description,
             predicate: NS::DEX[:containsPrivateDescription]
-  with_collection :invites, predicate: NS::DEX[:invites] #, if: method(:creator?)
+  with_collection :invites, predicate: NS::DEX[:invites] # , if: method(:creator?)
   with_collection :obligations, predicate: NS::DEX[:obligations]
   with_collection :permissions, predicate: NS::DEX[:permissions]
   with_collection :prohibitions, predicate: NS::DEX[:prohibitions]
