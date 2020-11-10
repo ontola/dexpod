@@ -8,12 +8,14 @@ require 'selenium/webdriver'
 require 'webdrivers'
 require 'rspec/instafail'
 require 'webmock/rspec'
+require 'sidekiq/testing'
 
 require 'support/exception_helper'
 require 'support/helper_methods'
 require 'support/matchers'
 
 Bugsnag.configuration.notify_release_stages = %w[test]
+Sidekiq::Testing.inline!
 
 Capybara.configure do |config|
   config.default_driver = :selenium_chrome
