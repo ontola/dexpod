@@ -13,6 +13,8 @@ class Agreement < ApplicationRecord
   has_one :assigner, class_name: 'User', through: :offer, source: :user
   has_one :node, through: :offer
 
+  after_create :schedule_broadcast
+
   delegate :email, to: :invite
 
   with_columns default: [
@@ -28,6 +30,12 @@ class Agreement < ApplicationRecord
 
   def file_name
     offer.node.display_name
+  end
+
+  private
+
+  def schedule_broadcast
+    AgreementBroadcastJob.perform_later(id)
   end
 
   class << self

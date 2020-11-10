@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dexes-sidekiq
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      app: dexes-sidekiq
+  template:
+    metadata:
+      labels:
+        app: dexes-sidekiq
+    spec:
+      containers:
+        - name: dexes-sidekiq
+          image: registry.gitlab.com/ontola/dexpod:production
+          command: ["bundle", "exec", "sidekiq"]
+          args: ["-e", "production"]
+          envFrom:
+            - secretRef:
+                name: backend-secret
+            - secretRef:
+                name: postgres-secret
+      imagePullSecrets:
+        - name: gitlab-dexpod
