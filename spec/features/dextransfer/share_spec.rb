@@ -22,7 +22,7 @@ describe 'Share' do
   private
 
   def select_file
-    within("fieldset[property=\"#{NS::DEX[:file].to_s}\"]") do
+    within("fieldset[property=\"#{NS::DEX[:file]}\"]") do
       attach_file(nil, File.absolute_path('spec/fixtures/photo.jpg'), make_visible: true)
     end
   end

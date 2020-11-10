@@ -54,6 +54,7 @@ class Node < ApplicationRecord
             unless: :root_object?
 
   def content_url; end
+
   def content_url=(_val); end
 
   def folder?

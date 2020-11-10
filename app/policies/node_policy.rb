@@ -34,7 +34,7 @@ class NodePolicy < ApplicationPolicy
     pod_owner?
   end
 
-  def index_children?(klass, opts = {})
+  def index_children?(_klass, _opts = {})
     show?
   end
 

@@ -50,9 +50,9 @@ group :development do
   gem 'listen'
   gem 'rubocop'
   gem 'rubocop-rails'
+  gem 'solargraph'
   gem 'spring'
   gem 'spring-watcher-listen'
-  gem 'solargraph'
   gem 'web-console'
 end
 
@@ -67,9 +67,9 @@ group :test do
   gem 'minitest-rails'
   gem 'minitest-reporters'
   gem 'rspec-instafail', require: false
-  gem 'rspec_junit_formatter'
   gem 'rspec-rails', '~> 3.5'
   gem 'rspec-wait'
+  gem 'rspec_junit_formatter'
   gem 'selenium-webdriver'
   gem 'webdrivers'
   gem 'webmock', '3.5.1'

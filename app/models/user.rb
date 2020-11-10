@@ -12,7 +12,7 @@ class User < ApplicationRecord
           inverse_of: :user,
           autosave: true,
           dependent: :restrict_with_exception
-  has_many :agreements
+  has_many :agreements, dependent: :destroy
 
   with_collection :agreements
 

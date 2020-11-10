@@ -7,7 +7,7 @@ module Dexpod
 
     private
 
-    def homepage_widgets
+    def homepage_widgets # rubocop:disable Metrics/MethodLength
       return [] unless pod_owner?
 
       @homepage_widgets ||= [

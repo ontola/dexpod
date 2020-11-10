@@ -7,7 +7,7 @@ module HelperMethods # rubocop:disable Metrics/ModuleLength
     'https://user.dexpods.localdev',
     'https://dexpods.localdev',
     'https://dextransfer.localdev'
-  ]
+  ].freeze
 
   def application_menu
     wait_for { page }.to have_css('.AppMenu')
@@ -62,7 +62,7 @@ module HelperMethods # rubocop:disable Metrics/ModuleLength
     click_button 'Ga verder'
   end
 
-  def fill_in_registration_form(email = 'new@example.com') # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def fill_in_registration_form(email = 'new@example.com') # rubocop:disable Metrics/AbcSize
     wait_for(page).to have_content('Inloggen of registeren')
     fill_in field_name('http://schema.org/email'), with: email
     click_button 'Ga verder'

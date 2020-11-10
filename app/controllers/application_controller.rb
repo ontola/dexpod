@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  NAME_SPACES = %w[DexTransfer Dexes DexPod]
+  NAME_SPACES = %w[DexTransfer Dexes DexPod].freeze
 
   include ActionController::MimeResponds
   include ActiveResponse::Controller

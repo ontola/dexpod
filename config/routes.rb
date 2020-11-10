@@ -67,7 +67,7 @@ Rails.application.routes.draw do
       concerns :site_setup
     end
   end
-  constraints(Constraints::DexpodConstraint) do
+  constraints(Constraints::DexpodConstraint) do # rubocop:disable Metrics/BlockLength
     namespace :dexpod, path: nil do
       concerns :site_setup
     end
@@ -102,7 +102,7 @@ Rails.application.routes.draw do
 
   get :pod, to: 'pods#show'
 
-  constraints(Constraints::DexpodConstraint) do # rubocop:disable Metrics/BlockLength
+  constraints(Constraints::DexpodConstraint) do
     resources :nodes,
               only: %i[index show new create] do
       include_route_concerns
@@ -140,6 +140,6 @@ Rails.application.routes.draw do
   resource :profile, only: :show, path: :profile
 
   match '*path', to: 'not_found#show', via: :all, constraints: lambda { |req|
-      req.path.exclude? 'rails/active_storage'
-    }
+                                                                 req.path.exclude? 'rails/active_storage'
+                                                               }
 end
