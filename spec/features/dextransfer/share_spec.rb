@@ -12,10 +12,12 @@ describe 'Share' do
     fill_in_login_form(user.email)
     wait_for(page).to have_content('Deel een bestand')
     select_file
-    assert_difference('Offer.count' => 1) do
-      click_button 'Opslaan'
-      wait_for { page }.to have_current_path("/offers/#{Offer.last.id}")
-      wait_for(page).to have_content('photo.jpg')
+    Apartment::Tenant.switch!(user.pod.pod_name) do
+      assert_difference('Offer.count' => 1) do
+        click_button 'Opslaan'
+        wait_for { page }.to have_current_path("/offers/#{Offer.last.id}")
+        wait_for(page).to have_content('photo.jpg')
+      end
     end
   end
 
