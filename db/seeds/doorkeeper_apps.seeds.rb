@@ -14,3 +14,13 @@ libro_app.update_columns(uid: ENV['LIBRO_CLIENT_ID'], secret: ENV['LIBRO_CLIENT_
 # rubocop:enable Rails/SkipsModelValidations
 
 ActiveRecord::Base.connection.reset_pk_sequence!(Doorkeeper::Application.table_name)
+
+token = Doorkeeper::AccessToken.find_or_create_for(
+  application: libro_app,
+  scopes: 'service',
+  expires_in: 10.years.to_i,
+  resource_owner: nil,
+  use_refresh_token: true
+)
+token.update(token: ENV['RAILS_OAUTH_TOKEN'])
+token

@@ -15,15 +15,19 @@
 namespace :db do
   desc 'Also create shared_extensions Schema'
   task extensions: :environment do
-    # Create Schema
+    # Create shared_extensions
     ActiveRecord::Base.connection.execute 'CREATE SCHEMA IF NOT EXISTS shared_extensions;'
     %w[plpgsql hstore ltree uuid-ossp].each do |extension|
       ActiveRecord::Base.connection.execute(
         "CREATE EXTENSION IF NOT EXISTS \"#{extension}\" SCHEMA shared_extensions;"
       )
     end
-    # Grant usage to public
+
+    # Grant shared_extensions usage to public
     ActiveRecord::Base.connection.execute 'GRANT usage ON SCHEMA shared_extensions to public;'
+
+    # Create dex_transfer
+    Apartment::Tenant.create('dex_transfer')
   end
 end
 
