@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UserForm < ApplicationForm
+class WebIdForm < ApplicationForm
   has_one :pod,
           min_count: 1
 

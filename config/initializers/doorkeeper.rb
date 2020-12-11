@@ -12,7 +12,7 @@ Doorkeeper.configure do
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
     if doorkeeper_token&.acceptable?('user')
-      User.find_by(id: doorkeeper_token.resource_owner_id)
+      WebId.find_by(id: doorkeeper_token.resource_owner_id)
     elsif doorkeeper_token&.acceptable?('guest') && doorkeeper_token_payload['user']
       GuestUser.new(id: doorkeeper_token.resource_owner_id)
     end
@@ -22,12 +22,13 @@ Doorkeeper.configure do
     request.params[:user] = request.params[:access_token] || {}
     request.params[:user][:email] ||= (request.params[:username] || request.params[:email])&.downcase
     request.params[:user][:password] ||= request.params[:token] || request.params[:password]
+    request.params[:web_id] = request.params[:user]
     request.env['devise.allow_params_authentication'] = true
     user =
       if request.params[:scope] == 'guest'
         GuestUser.new
       else
-        request.env['warden'].authenticate(scope: :user, store: false)
+        request.env['warden'].authenticate(scope: :web_id, store: false)
       end
     raise_login_error(request) if user.blank?
     request.env['warden'].logout
@@ -483,7 +484,7 @@ Doorkeeper::JWT.configure do
       if opts[:scopes].include?('guest')
         GuestUser.new(id: opts[:resource_owner_id])
       elsif opts[:resource_owner_id]
-        User.find(opts[:resource_owner_id])
+        WebId.find(opts[:resource_owner_id])
       end
 
     user_opts = user && {

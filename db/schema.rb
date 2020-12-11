@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_151827) do
+ActiveRecord::Schema.define(version: 2020_12_11_103927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(version: 2020_11_09_151827) do
     t.index ["user_id"], name: "index_agreements_on_user_id"
   end
 
+  create_table "identities", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "provider_id", null: false
+    t.string "identifier"
+    t.string "access_token", limit: 1024
+    t.string "id_token", limit: 2048
+    t.index ["identifier", "provider_id"], name: "index_identities_on_identifier_and_provider_id", unique: true
+  end
+
   create_table "invites", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -83,7 +94,7 @@ ActiveRecord::Schema.define(version: 2020_11_09_151827) do
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
-    t.integer "resource_owner_id"
+    t.string "resource_owner_id"
     t.bigint "application_id", null: false
     t.string "token", null: false
     t.string "refresh_token"
@@ -125,15 +136,33 @@ ActiveRecord::Schema.define(version: 2020_11_09_151827) do
   end
 
   create_table "pods", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "web_id_id", null: false
     t.bigint "root_node_id"
     t.string "pod_name", null: false
     t.string "theme_color", default: "#000000", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["pod_name"], name: "index_pods_on_pod_name", unique: true
-    t.index ["user_id", "pod_name"], name: "index_pods_on_user_id_and_pod_name"
-    t.index ["user_id"], name: "index_pods_on_user_id"
+    t.index ["web_id_id", "pod_name"], name: "index_pods_on_web_id_id_and_pod_name"
+    t.index ["web_id_id"], name: "index_pods_on_web_id_id"
+  end
+
+  create_table "providers", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "issuer"
+    t.string "jwks_uri"
+    t.string "name"
+    t.string "identifier"
+    t.string "secret"
+    t.string "scopes_supported"
+    t.string "host"
+    t.string "scheme"
+    t.string "authorization_endpoint"
+    t.string "token_endpoint"
+    t.string "userinfo_endpoint"
+    t.datetime "expires_at"
+    t.index ["issuer"], name: "index_providers_on_issuer", unique: true
   end
 
   create_table "rules", force: :cascade do |t|
@@ -147,6 +176,12 @@ ActiveRecord::Schema.define(version: 2020_11_09_151827) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+  end
+
+  create_table "web_ids", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -166,19 +201,24 @@ ActiveRecord::Schema.define(version: 2020_11_09_151827) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+    t.index ["confirmation_token"], name: "index_web_ids_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_web_ids_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_web_ids_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_web_ids_on_unlock_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "agreements", "invites"
+  add_foreign_key "agreements", "users"
+  add_foreign_key "identities", "providers"
+  add_foreign_key "identities", "users"
   add_foreign_key "invites", "offers"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
-  add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
+  add_foreign_key "oauth_access_grants", "web_ids", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_openid_requests", "oauth_access_grants", column: "access_grant_id", on_delete: :cascade
   add_foreign_key "offers", "nodes"
+  add_foreign_key "offers", "users"
+  add_foreign_key "pods", "web_ids"
   add_foreign_key "rules", "offers"
 end

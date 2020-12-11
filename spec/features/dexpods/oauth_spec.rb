@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 describe 'Oauth' do
-  let(:user) { create(:user) }
+  let(:web_id) { create(:web_id) }
 
   it 'Valid token' do
-    sign_in user
+    sign_in web_id
 
     assert_difference(
       'Doorkeeper::AccessToken.where(scopes: "user").count' => 0,
@@ -17,7 +17,7 @@ describe 'Oauth' do
   end
 
   it 'Revoked token' do
-    sign_in user
+    sign_in web_id
     Doorkeeper::AccessToken.last.revoke
     assert_difference(
       'Doorkeeper::AccessToken.where(scopes: "guest").count' => 1,
@@ -30,7 +30,7 @@ describe 'Oauth' do
 
   it 'Expired token' do
     travel_to(1.month.ago) do
-      sign_in user
+      sign_in web_id
     end
     assert_difference(
       'Doorkeeper::AccessToken.where(scopes: "user").count' => 1,

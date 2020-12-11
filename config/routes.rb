@@ -28,9 +28,6 @@ Rails.application.routes.draw do
     current_user: 'current_user',
     manifests: 'manifests'
   )
-  use_linked_rails_auth(
-    authorizations: 'oauth/authorizations'
-  )
   use_doorkeeper_openid_connect do
     controllers discovery: 'oauth/discovery'
   end
@@ -63,11 +60,22 @@ Rails.application.routes.draw do
     match '*path', to: 'not_found#show', via: :all
   end
   constraints(Constraints::DexesConstraint) do
+    use_linked_rails_auth(
+      authorizations: 'oauth/authorizations',
+      devise_scope: :web_ids
+    )
     namespace :dexes, path: nil do
       concerns :site_setup
     end
   end
   constraints(Constraints::DexpodConstraint) do # rubocop:disable Metrics/BlockLength
+    use_linked_rails_auth(
+      sessions: 'sessions'
+    )
+    resources :providers, only: [] do
+      resource :identity, only: %i[show]
+    end
+
     namespace :dexpod, path: nil do
       concerns :site_setup
     end
