@@ -33,11 +33,7 @@ class Pod < ApplicationRecord
   def create_tenant
     Apartment::Tenant.create(pod_name)
 
-    Apartment::Tenant.switch(pod_name) do
-      load(Dir[Rails.root.join('db/seeds/doorkeeper_apps.seeds.rb')][0])
-      libro_app = Doorkeeper::Application.find_by(uid: ENV['LIBRO_CLIENT_ID'])
-      create_system_token(libro_app, 'service', ENV['RAILS_OAUTH_TOKEN'])
-    end
+    seed_tenant
   end
 
   def create_fs
@@ -52,18 +48,6 @@ class Pod < ApplicationRecord
     save!
   end
 
-  def create_system_token(app, scopes, secret)
-    token = Doorkeeper::AccessToken.find_or_create_for(
-      application: app,
-      scopes: scopes,
-      expires_in: 10.years.to_i,
-      resource_owner: nil,
-      use_refresh_token: true
-    )
-    token.update(token: secret)
-    token
-  end
-
   def rename_pod
     ActiveRecord::Base.connection.execute(
       "ALTER SCHEMA #{ApplicationRecord.connection.quote_string(pod_name_was)} "\
@@ -73,6 +57,12 @@ class Pod < ApplicationRecord
 
   def rename_pod?
     pod_name_previously_changed?
+  end
+
+  def seed_tenant
+    Apartment::Tenant.switch(pod_name) do
+      load(Dir[Rails.root.join('db/seeds/doorkeeper_apps.seeds.rb')][0])
+    end
   end
 
   def setup_pod
