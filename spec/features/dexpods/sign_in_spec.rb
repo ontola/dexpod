@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 describe 'Sign in' do
-  let(:user) { create(:user, pod: build(:pod)) }
+  let(:web_id) { create(:web_id, pod: build(:pod)) }
 
   it 'signs in existing user' do
     visit '/'
     wait_for(page).to have_link('Log in / registreer')
     click_link 'Log in / registreer'
-    fill_in_login_form(user.email)
+    fill_in_login_form(web_id.email)
     verify_logged_in
   end
 

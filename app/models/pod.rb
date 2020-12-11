@@ -3,7 +3,7 @@
 class Pod < ApplicationRecord
   enhance LinkedRails::Enhancements::Updatable
 
-  belongs_to :user
+  belongs_to :web_id
   belongs_to :root_node,
              class_name: 'Node',
              dependent: :destroy,

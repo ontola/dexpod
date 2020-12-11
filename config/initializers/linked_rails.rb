@@ -7,6 +7,7 @@ LinkedRails.scheme = :https
 LinkedRails.app_ns = NS::DEX
 LinkedRails.serializer_parent_class = 'LinkedSerializer'
 LinkedRails.registration_form_class = 'RegistrationForm'
+LinkedRails.user_class = 'WebId'
 
 module LinkedRails
   class << self

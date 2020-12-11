@@ -8,6 +8,8 @@ class GuestUser < User
     'Gast'
   end
 
+  def email; end
+
   def guest?
     true
   end
@@ -18,6 +20,10 @@ class GuestUser < User
 
   def iri_opts
     {id: id}
+  end
+
+  def pod_owner?
+    false
   end
 
   def self.iri

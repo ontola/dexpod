@@ -8,7 +8,7 @@ Doorkeeper::OpenidConnect.configure do
   subject_types_supported %i[public]
 
   resource_owner_from_access_token do |access_token|
-    User.find_by(id: access_token.resource_owner_id)
+    WebId.find_by(id: access_token.resource_owner_id)
   end
 
   auth_time_from_resource_owner(&:current_sign_in_at)
