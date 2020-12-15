@@ -7,6 +7,7 @@ begin
   current_keys = Redis.new(db: db).lrange(endpoints_key, 0, -1)
   required_keys = %w[
     /.well-known/webfinger
+    /.well-known/webfinger?(.*)
     /.well-known/openid-configuration
     /oauth/(.*)
     /rails/(.*)
