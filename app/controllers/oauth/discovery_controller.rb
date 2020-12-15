@@ -9,5 +9,9 @@ module Oauth
         registration_endpoint: register_url(protocol: protocol)
       )
     end
+
+    def root_url(*_args)
+      LinkedRails.iri.to_s
+    end
   end
 end
