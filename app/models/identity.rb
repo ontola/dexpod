@@ -6,8 +6,7 @@ class Identity < ApplicationRecord
 
   validates :identifier, uniqueness: {scope: :provider_id}
 
-  delegate :userinfo!, to: :access_token
-  delegate :name, to: :userinfo!
+  delegate :name, to: :userinfo, allow_nil: true
 
   def access_token
     @access_token ||=
@@ -15,6 +14,18 @@ class Identity < ApplicationRecord
         access_token: super,
         client: provider.client
       )
+  end
+
+  def userinfo!
+    Timeout.timeout(5) do
+      access_token.userinfo!
+    end
+  end
+
+  def userinfo
+    userinfo!
+  rescue Timeout::Error
+    nil
   end
 
   def check_id!
