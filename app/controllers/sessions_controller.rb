@@ -27,9 +27,17 @@ class SessionsController < LinkedRails::Auth::SessionsController
   def discover_provider
     provider = Provider.discover!(permit_params[:host])
 
-    provider.register!(provider_identity_url(provider)) unless provider.registered?
+    return provider if provider.registered?
+
+    register_provider(provider)
+  end
+
+  def register_provider(provider)
+    provider.register!(provider_identity_url(provider))
 
     provider
+  rescue OpenIDConnect::Discovery::DiscoveryFailed
+    nil
   end
 
   def new_resource_params
@@ -44,8 +52,6 @@ class SessionsController < LinkedRails::Auth::SessionsController
 
   def provider
     @provider ||= discover_provider
-  rescue OpenIDConnect::Discovery::DiscoveryFailed, OpenIDConnect::Discovery::InvalidIdentifier
-    nil
   end
 
   class <<self

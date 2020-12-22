@@ -116,10 +116,28 @@ class Provider < ApplicationRecord
   end
 
   class << self
-    def discover!(host)
-      config = OpenIDConnect::Discovery::Provider.discover!(host)
+    def discover!(raw_host)
+      host = "https://#{raw_host.split('://').last.chomp('/')}"
 
-      find_by(issuer: config.issuer) || create(issuer: config.issuer, name: host)
+      issuer = issuer_from_webfinger(host) || issuer_from_options(host) || host
+      find_by(issuer: issuer) || create(issuer: issuer, name: host)
+    end
+
+    def issuer_from_webfinger(host)
+      OpenIDConnect::Discovery::Provider.discover!(host)&.issuer
+    rescue OpenIDConnect::Discovery::DiscoveryFailed
+      nil
+    end
+
+    def issuer_from_options(host)
+      options = Faraday.new(host).run_request(:options, nil, nil, nil)
+
+      link =
+        options
+          .headers[:link]
+          &.split(',')
+          &.detect { |link| link.include?("rel=\"#{OpenIDConnect::Discovery::Provider::Issuer::REL_VALUE}\"") }
+      link.split(';')[0][/<(.*)>/, 1] if link
     end
   end
 end
