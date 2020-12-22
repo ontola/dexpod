@@ -35,7 +35,7 @@ class WebId < ApplicationRecord
   end
 
   def profile
-    @profile ||= Profile.new(user: self) if pod
+    @profile ||= Profile.new(web_id: self) if pod
   end
 
   private
