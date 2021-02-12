@@ -9,6 +9,8 @@ variables:
   BUGSNAG_KEY: 'b3e527c0a89dd7ecec4f61a29e1e2265'
   CACHE_CHANNEL: 'channel'
   DATABASE_URL: 'postgresql://testdb:testdb@localhost:5432/apex_rs_staging'
+  DEVICE_ID_COOKIE_NAME: 'deviceId'
+  DEVICE_ID_COOKIE_SIGNATURE_NAME: 'deviceId.sig'
   DEX_TRANSFER_HOSTNAME: 'dextransfer.localdev'
   DEXES_DATABASE: 'dexes_test'
   DOCKER_DRIVER: 'overlay2'

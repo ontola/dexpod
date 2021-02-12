@@ -26,6 +26,20 @@ class Manifest
     'white'
   end
 
+  def preload_iris # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    [
+      scope,
+      LinkedRails.iri(path: 'ns/core').to_s,
+      LinkedRails.iri(path: 'c_a').to_s,
+      LinkedRails.iri(path: 'forms/linked_rails/auth/sessions').to_s,
+      LinkedRails.iri(path: 'forms/linked_rails/auth/access_tokens').to_s,
+      LinkedRails.iri(path: 'forms/users/registrations').to_s,
+      LinkedRails.iri(path: '/u/access_tokens/new').to_s,
+      LinkedRails.iri(path: '/users/sign_up').to_s,
+      LinkedRails.iri(path: 'menus').to_s
+    ]
+  end
+
   def site_theme_color
     app_theme_color
   end
@@ -74,6 +88,7 @@ class Manifest
       css_class: 'dexes',
       header_background: 'primary',
       header_text: header_text,
+      preload: preload_iris,
       primary_color: site_theme_color,
       secondary_color: site_secondary_color,
       theme: theme,
