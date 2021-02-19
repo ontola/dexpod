@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Provider < ApplicationRecord
+class Provider < ApplicationRecord # rubocop:disable Metrics/ClassLength
   serialize :scopes_supported, JSON
 
   has_many :identities, dependent: :destroy
@@ -108,7 +108,7 @@ class Provider < ApplicationRecord
   def register_client(redirect_uri)
     OpenIDConnect::Client::Registrar.new(
       config.registration_endpoint,
-      client_name: 'NOV RP',
+      client_name: Apartment::Tenant.current,
       application_type: 'web',
       redirect_uris: [redirect_uri],
       subject_type: 'pairwise'
@@ -132,12 +132,12 @@ class Provider < ApplicationRecord
     def issuer_from_options(host)
       options = Faraday.new(host).run_request(:options, nil, nil, nil)
 
-      link =
+      issuer_link =
         options
           .headers[:link]
           &.split(',')
           &.detect { |link| link.include?("rel=\"#{OpenIDConnect::Discovery::Provider::Issuer::REL_VALUE}\"") }
-      link.split(';')[0][/<(.*)>/, 1] if link
+      issuer_link.split(';')[0][/<(.*)>/, 1] if issuer_link
     end
   end
 end

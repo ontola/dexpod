@@ -3,6 +3,7 @@
 class Identity < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :provider
+  scope :dexpod, -> { where('identifier LIKE ?', "https://%.#{LinkedRails.host}/pod/profile#me") }
 
   validates :identifier, uniqueness: {scope: :provider_id}
 

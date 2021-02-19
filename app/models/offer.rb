@@ -38,7 +38,7 @@ class Offer < ApplicationRecord
   enum rule_sets: {contains_private: 0, edit: 1, share: 2, attribution: 3}
 
   def node_attributes=(attrs)
-    attrs[:parent] ||= Pod.find_by(pod_name: Apartment::Tenant.current)&.root_node
+    attrs[:parent] ||= current_pod&.root_node
     attrs[:type] = 'MediaObject' if attrs.key?(:content_url)
     super
   end

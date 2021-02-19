@@ -44,6 +44,7 @@ gem 'sidekiq'
 gem 'sprockets', '~> 3'
 gem 'tzinfo-data'
 gem 'video_info'
+gem 'webrick'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

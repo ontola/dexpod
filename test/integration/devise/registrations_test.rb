@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class RegistrationsTest < ActionDispatch::IntegrationTest
-  let(:web_id) { create(:web_id) }
+  let(:web_id) { create(:pod).web_id }
 
   ####################################
   # As Guest

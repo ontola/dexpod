@@ -108,7 +108,7 @@ Rails.application.routes.draw do
     resources :agreements
   end
 
-  get :pod, to: 'pods#show'
+  resource :pod, path: 'pod', only: %i[show edit update]
 
   constraints(Constraints::DexpodConstraint) do
     resources :nodes,

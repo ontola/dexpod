@@ -5,9 +5,14 @@ class PodsController < ApplicationController
 
   private
 
-  def current_resource
-    return current_pod if action_name == 'show'
+  def update_success
+    respond_with_redirect(
+      location: LinkedRails.iri.to_s,
+      reload: true
+    )
+  end
 
-    super
+  def requested_resource
+    current_pod
   end
 end

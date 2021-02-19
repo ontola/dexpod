@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class WebId < ApplicationRecord
-  enhance LinkedRails::Enhancements::Actionable
-  enhance LinkedRails::Enhancements::Updatable
   include RootHelper
   devise :confirmable, :database_authenticatable, :lockable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable
@@ -28,10 +26,6 @@ class WebId < ApplicationRecord
 
   def password_required?
     !password.nil? || !password_confirmation.nil?
-  end
-
-  def pod_owner?
-    !public_tenant? && !dex_transfer? && pod&.pod_name == current_tenant.to_s
   end
 
   def profile

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Pod < ApplicationRecord
+  enhance LinkedRails::Enhancements::Actionable
   enhance LinkedRails::Enhancements::Updatable
 
   belongs_to :web_id
@@ -21,11 +22,15 @@ class Pod < ApplicationRecord
   end
 
   def iri
-    @iri ||= LinkedRails.iri(host: "#{pod_name}.#{LinkedRails.host}/pod")
+    @iri ||= LinkedRails.iri(host: "#{pod_name}.#{LinkedRails.host}#{root_relative_iri}")
   end
 
   def home_iri
     @home_iri ||= LinkedRails.iri(host: "#{pod_name}.#{LinkedRails.host}/")
+  end
+
+  def root_relative_iri
+    RDF::URI('/pod')
   end
 
   private

@@ -3,13 +3,13 @@
 module RootHelper
   module_function
 
-  def current_tenant
-    Apartment::Tenant.current.to_sym
+  # The pod targeted in this request, if any
+  def current_pod
+    @current_pod ||= Pod.find_by!(pod_name: current_tenant) if pod? # rubocop:disable Rails/HelperInstanceVariable
   end
 
-  # Whether the current request is for an individual pod
-  def pod?
-    !%i[public dex_transfer].include?(current_tenant)
+  def current_tenant
+    Apartment::Tenant.current.to_sym
   end
 
   def public_tenant?
@@ -18,5 +18,10 @@ module RootHelper
 
   def dex_transfer?
     current_tenant == :dex_transfer
+  end
+
+  # Whether the current request is for an individual pod
+  def pod?
+    !%i[public dex_transfer].include?(current_tenant)
   end
 end
