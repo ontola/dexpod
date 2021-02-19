@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AppMenuList < ApplicationMenuList
+  include RootHelper
+
   has_menu :info,
            label: -> { 'Gebruiker' },
            menus: -> { info_links }
@@ -33,7 +35,7 @@ class AppMenuList < ApplicationMenuList
 
   def info_links # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     items = []
-    if !user_context.guest? && !user_context.pod_owner?
+    if !user_context.guest? && RootHelper.public_tenant?
       items << menu_item(
         :my_pod,
         label: I18n.t('menu.my_pod'),
@@ -73,24 +75,18 @@ class AppMenuList < ApplicationMenuList
   def user_menu_items
     return [] if user_context.guest?
 
-    items = user_menu_base_items
+    items = []
+    items << update_pod_item if user_context.try(:pod_owner?)
     items << user_menu_sign_out_item
     items
   end
 
-  def user_menu_base_items # rubocop:disable Metrics/MethodLength
-    [
-      menu_item(
-        :show,
-        label: I18n.t('show_type', type: I18n.t('users.type')),
-        href: user_context.iri
-      ),
-      menu_item(
-        :settings,
-        label: I18n.t('users.settings.title'),
-        href: user_context.action(:update).iri
-      )
-    ]
+  def update_pod_item
+    menu_item(
+      :settings,
+      label: I18n.t('users.settings.title'),
+      href: current_pod.action(:update).iri
+    )
   end
 
   def user_menu_sign_out_item

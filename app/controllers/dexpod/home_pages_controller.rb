@@ -27,7 +27,11 @@ module Dexpod
     end
 
     def welcome_text
-      "Welkom bij de '#{current_pod.pod_name}' pod!"
+      if pod_owner?
+        'Welkom bij je pod!'
+      else
+        "Welkom bij de '#{current_pod.pod_name}' pod!"
+      end
     end
   end
 end

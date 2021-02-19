@@ -10,6 +10,6 @@ class PodPolicy < ApplicationPolicy
   end
 
   def update?
-    record == user_context
+    pod_owner?
   end
 end

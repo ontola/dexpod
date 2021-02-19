@@ -12,7 +12,8 @@ Doorkeeper.configure do
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
     if doorkeeper_token&.acceptable?('user')
-      WebId.find_by(id: doorkeeper_token.resource_owner_id)
+      klass = Apartment::Tenant.current == 'public' ? WebId : User
+      klass.find_by(id: doorkeeper_token.resource_owner_id)
     elsif doorkeeper_token&.acceptable?('guest') && doorkeeper_token_payload['user']
       GuestUser.new(id: doorkeeper_token.resource_owner_id)
     end
@@ -484,14 +485,14 @@ Doorkeeper::JWT.configure do
       if opts[:scopes].include?('guest')
         GuestUser.new(id: opts[:resource_owner_id])
       elsif opts[:resource_owner_id]
-        WebId.find(opts[:resource_owner_id])
+        klass = Apartment::Tenant.current == 'public' ? WebId : User
+        klass.find(opts[:resource_owner_id])
       end
 
     user_opts = user && {
       type: user.guest? ? 'guest' : 'user',
       '@id': user.iri,
       id: user.id.to_s,
-      email: user.email,
       language: I18n.locale
     }
     payload = {

@@ -21,11 +21,6 @@ class ApplicationController < ActionController::API
     @current_manifest ||= manifest_class.new(pod: current_pod)
   end
 
-  # The pod targeted in this request, if any
-  def current_pod
-    @current_pod ||= Pod.find_by!(pod_name: current_tenant) if pod?
-  end
-
   def handle_and_report_error(error)
     raise if Rails.env.development? || Rails.env.test?
 
