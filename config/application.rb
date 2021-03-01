@@ -24,6 +24,7 @@ Bundler.require(*Rails.groups)
 require 'linked_rails/middleware/linked_data_params'
 require_relative '../lib/kafka_broadcaster'
 require_relative '../lib/apartment_sidekiq'
+require_relative '../lib/types/iri_type'
 require_relative './initializers/version'
 
 require_relative '../lib/first_sub_domain_without_api_and_dex_transfer'

@@ -1,0 +1,8 @@
+en:
+  distributions:
+    properties:
+      node_id:
+        label: "File / folder"
+      format:
+        label: "Format"
+        helper_text: "Select the format of the file."

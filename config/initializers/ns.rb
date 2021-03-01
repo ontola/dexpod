@@ -7,6 +7,8 @@ module NS
   LL = LinkedRails::Vocab::LL
   ONTOLA = LinkedRails::Vocab::ONTOLA
   SP = LinkedRails::Vocab::SP
+  DCAT = RDF::Vocabulary.new('http://www.w3.org/ns/dcat#')
+  DONL = RDF::Vocabulary.new('https://data.overheid.nl/dcat.rdf#')
 
   ADMS = RDF::Vocabulary.new('http://www.w3.org/ns/adms#')
   AS = RDF::Vocab::AS

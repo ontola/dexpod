@@ -1,0 +1,44 @@
+{
+  "http://creativecommons.org/publicdomain/zero/1.0/deed.nl": {
+    "labels": {
+      "nl-NL": "CC-0 (1.0)",
+      "en-US": "CC-0 (1.0)"
+    }
+  },
+  "http://creativecommons.org/licenses/by/4.0/deed.nl": {
+    "labels": {
+      "nl-NL": "CC-BY (4.0)",
+      "en-US": "CC-BY (4.0)"
+    }
+  },
+  "http://creativecommons.org/licenses/by-sa/4.0/deed.nl": {
+    "labels": {
+      "nl-NL": "CC-BY-SA (4.0)",
+      "en-US": "CC-BY-SA (4.0)"
+    }
+  },
+  "http://standaarden.overheid.nl/owms/terms/geslotenlicentie": {
+    "labels": {
+      "nl-NL": "Geen open licentie",
+      "en-US": "No open license"
+    }
+  },
+  "http://standaarden.overheid.nl/owms/terms/geogedeeld": {
+    "labels": {
+      "nl-NL": "Geo gedeeld licentie",
+      "en-US": "Geo shared license"
+    }
+  },
+  "http://standaarden.overheid.nl/owms/terms/licentieonbekend": {
+    "labels": {
+      "nl-NL": "Onbekende licentie",
+      "en-US": "Unknown license"
+    }
+  },
+  "http://creativecommons.org/publicdomain/mark/1.0/deed.nl": {
+    "labels": {
+      "nl-NL": "Publiek domein",
+      "en-US": "Public domain"
+    }
+  }
+}

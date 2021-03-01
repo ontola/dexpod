@@ -3,5 +3,7 @@
 class ApplicationRecord < ActiveRecord::Base
   include LinkedRails::Model
 
+  MAXIMUM_DESCRIPTION_LENGTH = 20_000
+
   self.abstract_class = true
 end

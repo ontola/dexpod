@@ -17,6 +17,11 @@ en:
       create:
         label: "Send confirmation link again"
         submit: "Send"
+    datasets:
+      create:
+        label: "Publish to Dexes"
+        description: "You can publish your files on the [data market](https://dexes.eu) of Dexes. This enables other people will to find your files easily."
+        submit: "Publish"
     passwords:
       create:
         label: "Forgot password?"

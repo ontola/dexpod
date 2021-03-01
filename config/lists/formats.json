@@ -1,0 +1,452 @@
+{
+  "http://publications.europa.eu/resource/authority/file-type/MAP_PRVW": {
+    "labels": {
+      "nl-NL": "ArcGIS Map Preview",
+      "en-US": "ArcGIS Map Preview"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/MAP_SRVC": {
+    "labels": {
+      "nl-NL": "ArcGIS Map Service",
+      "en-US": "ArcGIS Map Service"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/ATOM": {
+    "labels": {
+      "nl-NL": "ATOM",
+      "en-US": "ATOM"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/AZW": {
+    "labels": {
+      "nl-NL": "AZW",
+      "en-US": "AZW"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/CSS": {
+    "labels": {
+      "nl-NL": "CSS",
+      "en-US": "CSS"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/CSV": {
+    "labels": {
+      "nl-NL": "CSV",
+      "en-US": "CSV"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/DBF": {
+    "labels": {
+      "nl-NL": "DBF",
+      "en-US": "DBF"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/DOC": {
+    "labels": {
+      "nl-NL": "DOC",
+      "en-US": "DOC"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/DOCX": {
+    "labels": {
+      "nl-NL": "DOCX",
+      "en-US": "DOCX"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/DTD_SGML": {
+    "labels": {
+      "nl-NL": "DTD/SGML",
+      "en-US": "DTD/SGML"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/DTD_XML": {
+    "labels": {
+      "nl-NL": "DTD/XML",
+      "en-US": "DTD/XML"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/E00": {
+    "labels": {
+      "nl-NL": "E00",
+      "en-US": "E00"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/ECW": {
+    "labels": {
+      "nl-NL": "ECW",
+      "en-US": "ECW"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/EPS": {
+    "labels": {
+      "nl-NL": "EPS",
+      "en-US": "EPS"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/EPUB": {
+    "labels": {
+      "nl-NL": "EPUB",
+      "en-US": "EPUB"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/FMX2": {
+    "labels": {
+      "nl-NL": "FMX2",
+      "en-US": "FMX2"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/FMX3": {
+    "labels": {
+      "nl-NL": "FMX3",
+      "en-US": "FMX3"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/FMX4": {
+    "labels": {
+      "nl-NL": "FMX4",
+      "en-US": "FMX4"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/GDB": {
+    "labels": {
+      "nl-NL": "GDB",
+      "en-US": "GDB"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/GIF": {
+    "labels": {
+      "nl-NL": "GIF",
+      "en-US": "GIF"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/GML": {
+    "labels": {
+      "nl-NL": "GML",
+      "en-US": "GML"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/GZIP": {
+    "labels": {
+      "nl-NL": "GZIP",
+      "en-US": "GZIP"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/HDF": {
+    "labels": {
+      "nl-NL": "HDF",
+      "en-US": "HDF"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/HTML": {
+    "labels": {
+      "nl-NL": "HTML",
+      "en-US": "HTML"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/INDD": {
+    "labels": {
+      "nl-NL": "INDD",
+      "en-US": "INDD"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/JPEG": {
+    "labels": {
+      "nl-NL": "JPEG",
+      "en-US": "JPEG"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/JSON": {
+    "labels": {
+      "nl-NL": "JSON",
+      "en-US": "JSON"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/KML": {
+    "labels": {
+      "nl-NL": "KML",
+      "en-US": "KML"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/KMZ": {
+    "labels": {
+      "nl-NL": "KMZ",
+      "en-US": "KMZ"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/MDB": {
+    "labels": {
+      "nl-NL": "MDB",
+      "en-US": "MDB"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/METS": {
+    "labels": {
+      "nl-NL": "METS",
+      "en-US": "METS"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/METS_ZIP": {
+    "labels": {
+      "nl-NL": "METS/ZIP",
+      "en-US": "METS/ZIP"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/MOBI": {
+    "labels": {
+      "nl-NL": "MOBI",
+      "en-US": "MOBI"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/MOP": {
+    "labels": {
+      "nl-NL": "MOP",
+      "en-US": "MOP"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/MXD": {
+    "labels": {
+      "nl-NL": "MXD",
+      "en-US": "MXD"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/NetCDF": {
+    "labels": {
+      "nl-NL": "NetCDF",
+      "en-US": "NetCDF"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/ODF": {
+    "labels": {
+      "nl-NL": "ODF",
+      "en-US": "ODF"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/ODS": {
+    "labels": {
+      "nl-NL": "ODS",
+      "en-US": "ODS"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/ODT": {
+    "labels": {
+      "nl-NL": "ODT",
+      "en-US": "ODT"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/WFS_SRVC": {
+    "labels": {
+      "nl-NL": "OGC:WFS",
+      "en-US": "OGC:WFS"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/WMS_SRVC": {
+    "labels": {
+      "nl-NL": "OGC:WMS",
+      "en-US": "OGC:WMS"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/OWL": {
+    "labels": {
+      "nl-NL": "OWL",
+      "en-US": "OWL"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/PDF": {
+    "labels": {
+      "nl-NL": "PDF",
+      "en-US": "PDF"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/PDFA1A": {
+    "labels": {
+      "nl-NL": "PDFA1A",
+      "en-US": "PDFA1A"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/PDFA1B": {
+    "labels": {
+      "nl-NL": "PDFA1B",
+      "en-US": "PDFA1B"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/PDFX": {
+    "labels": {
+      "nl-NL": "PDFX",
+      "en-US": "PDFX"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/PNG": {
+    "labels": {
+      "nl-NL": "PNG",
+      "en-US": "PNG"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/PPS": {
+    "labels": {
+      "nl-NL": "PPS",
+      "en-US": "PPS"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/PPSX": {
+    "labels": {
+      "nl-NL": "PPSX",
+      "en-US": "PPSX"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/PPT": {
+    "labels": {
+      "nl-NL": "PPT",
+      "en-US": "PPT"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/PPTX": {
+    "labels": {
+      "nl-NL": "PPTX",
+      "en-US": "PPTX"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/PS": {
+    "labels": {
+      "nl-NL": "PS",
+      "en-US": "PS"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/PSD": {
+    "labels": {
+      "nl-NL": "PSD",
+      "en-US": "PSD"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE": {
+    "labels": {
+      "nl-NL": "RDF/TURTLE",
+      "en-US": "RDF/TURTLE"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/RDF_XML": {
+    "labels": {
+      "nl-NL": "RDF/XML",
+      "en-US": "RDF/XML"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/RSS": {
+    "labels": {
+      "nl-NL": "RSS",
+      "en-US": "RSS"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/RTF": {
+    "labels": {
+      "nl-NL": "RTF",
+      "en-US": "RTF"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/SCHEMA_XML": {
+    "labels": {
+      "nl-NL": "SCHEMA/XML",
+      "en-US": "SCHEMA/XML"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/SGML": {
+    "labels": {
+      "nl-NL": "SGML",
+      "en-US": "SGML"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/SHP": {
+    "labels": {
+      "nl-NL": "SHAPE",
+      "en-US": "SHAPE"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/SKOS_XML": {
+    "labels": {
+      "nl-NL": "SKOS/XML",
+      "en-US": "SKOS/XML"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/SPARQLQ": {
+    "labels": {
+      "nl-NL": "SPARQLQ",
+      "en-US": "SPARQLQ"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/SPARQLQRES": {
+    "labels": {
+      "nl-NL": "SPARQLQRES",
+      "en-US": "SPARQLQRES"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/TAR": {
+    "labels": {
+      "nl-NL": "TAR",
+      "en-US": "TAR"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/TAR_XZ": {
+    "labels": {
+      "nl-NL": "TAR/XZ",
+      "en-US": "TAR/XZ"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/TIFF": {
+    "labels": {
+      "nl-NL": "TIFF",
+      "en-US": "TIFF"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/TSV": {
+    "labels": {
+      "nl-NL": "TSV",
+      "en-US": "TSV"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/TXT": {
+    "labels": {
+      "nl-NL": "TXT",
+      "en-US": "TXT"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/XHTML": {
+    "labels": {
+      "nl-NL": "XHTML",
+      "en-US": "XHTML"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/XLS": {
+    "labels": {
+      "nl-NL": "XLS",
+      "en-US": "XLS"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/XLSX": {
+    "labels": {
+      "nl-NL": "XLSX",
+      "en-US": "XLSX"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/XML": {
+    "labels": {
+      "nl-NL": "XML",
+      "en-US": "XML"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/XSLFO": {
+    "labels": {
+      "nl-NL": "XSLFO",
+      "en-US": "XSLFO"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/XSLT": {
+    "labels": {
+      "nl-NL": "XSLT",
+      "en-US": "XSLT"
+    }
+  },
+  "http://publications.europa.eu/resource/authority/file-type/ZIP": {
+    "labels": {
+      "nl-NL": "ZIP",
+      "en-US": "ZIP"
+    }
+  }
+}

@@ -8,6 +8,7 @@ class Node < ApplicationRecord
   enhance LinkedRails::Enhancements::Destroyable
   enhance LinkedRails::Enhancements::Tableable
   enhance Offerable
+  enhance Distributable
 
   belongs_to :parent,
              class_name: 'Folder',
@@ -26,8 +27,12 @@ class Node < ApplicationRecord
            foreign_key: :parent_id,
            dependent: :destroy
   has_many :offers,
-           inverse_of: :nodes,
+           inverse_of: :node,
            dependent: :destroy
+  has_many :distributions,
+           dependent: :destroy
+  has_many :datasets,
+           through: :distributions
 
   has_ltree_hierarchy
 
@@ -61,11 +66,11 @@ class Node < ApplicationRecord
     false
   end
 
-  def quick_actions
+  def quick_actions # rubocop:disable Metrics/AbcSize
     @quick_actions ||= LinkedRails::Sequence.new([
       action(:update)&.iri,
       action(:destroy)&.iri,
-      action(:new_offer)&.iri
+      datasets.any? ? datasets.first.action(:update)&.iri : dataset_collection.action(:create)&.iri
     ].compact)
   end
 

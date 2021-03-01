@@ -22,6 +22,14 @@ class KafkaBroadcaster
       )
     end
 
+    def produce_dataset(dataset)
+      producer.produce(
+        DatasetSerializer.new(dataset, include: %i[distributions]).dump(:hndjson),
+        key: dataset.iri,
+        topic: AGREEMENT_TOPIC
+      )
+    end
+
     def producer
       @producer ||= client.async_producer(
         delivery_interval: 10

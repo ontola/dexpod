@@ -2,8 +2,8 @@
 
 class ApplicationForm < LinkedRails::Form
   class << self
-    def form_options_iri(attr)
-      -> { LinkedRails.iri(path: "/enums/#{model_class.to_s.tableize}/#{attr}") }
+    def form_options_iri(attr, klass = model_class)
+      -> { LinkedRails.iri(path: "/enums/#{klass.to_s.tableize}/#{attr}") }
     end
   end
 end

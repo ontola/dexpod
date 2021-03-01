@@ -17,6 +17,11 @@ nl:
       create:
         label: "Bevestigingslink opnieuw versturen"
         submit: "Verstuur"
+    datasets:
+      create:
+        label: "Publiceren op Dexes"
+        description: "Je kunt jouw bestanden aanbieden op de [datamartkplaats](https://dexes.eu) van Dexes. Hierdoor kunnen anderen jouw dataset makkelijker vinden."
+        submit: "Publiceren"
     passwords:
       create:
         label: "Wachtwoord vergeten?"
