@@ -1,0 +1,8 @@
+nl:
+  distributions:
+    properties:
+      node_id:
+        label: "Bestand / map"
+      format:
+        label: "Formaat"
+        helper_text: "Selecteer het dataformaat van het bestand."

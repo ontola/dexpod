@@ -1,0 +1,18 @@
+nl:
+  datasets:
+    properties:
+      distributions:
+        label: "Distributie"
+      title:
+        label: "Naam"
+        helper_text: "Kies een omschrijvende naam. Gebruik termen die anderen kunnen zoeken."
+      description:
+        label: "Omschrijving"
+        helper_text: "Omschrijf waar je dataset over gaat."
+      themes:
+        label: "Thema's"
+      license:
+        label: "Onder welke licentie deel je de data?"
+      license_description:
+        label: "Eigen voorwaarden"
+        helper_text: "Leg hier uit wat de voorwaarden zijn. De gebruiker moet hier mee akkoord gaan."

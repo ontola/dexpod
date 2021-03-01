@@ -7,7 +7,7 @@ cache:
 variables:
   ARGU_API_URL: 'http://argu.svc.cluster.local:3000'
   BUGSNAG_KEY: 'b3e527c0a89dd7ecec4f61a29e1e2265'
-  CACHE_CHANNEL: 'channel'
+  CACHE_CHANNEL: 'cache'
   DATABASE_URL: 'postgresql://testdb:testdb@localhost:5432/apex_rs_staging'
   DEVICE_ID_COOKIE_NAME: 'deviceId'
   DEVICE_ID_COOKIE_SIGNATURE_NAME: 'deviceId.sig'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_103927) do
+ActiveRecord::Schema.define(version: 2021_02_09_105404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -46,6 +46,35 @@ ActiveRecord::Schema.define(version: 2020_12_11_103927) do
     t.integer "user_id", null: false
     t.index ["invite_id"], name: "index_agreements_on_invite_id"
     t.index ["user_id"], name: "index_agreements_on_user_id"
+  end
+
+  create_table "dataset_themes", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "dataset_id", null: false
+    t.string "theme"
+    t.index ["dataset_id"], name: "index_dataset_themes_on_dataset_id"
+  end
+
+  create_table "datasets", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.string "title", null: false
+    t.text "description"
+    t.string "license"
+    t.text "license_description"
+    t.index ["user_id"], name: "index_datasets_on_user_id"
+  end
+
+  create_table "distributions", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "dataset_id", null: false
+    t.bigint "node_id", null: false
+    t.string "format"
+    t.index ["dataset_id"], name: "index_distributions_on_dataset_id"
+    t.index ["node_id"], name: "index_distributions_on_node_id"
   end
 
   create_table "identities", force: :cascade do |t|

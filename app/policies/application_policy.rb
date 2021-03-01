@@ -23,6 +23,10 @@ class ApplicationPolicy
     pod_owner?
   end
 
+  def show?
+    pod_owner?
+  end
+
   def update?
     pod_owner?
   end

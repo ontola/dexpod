@@ -110,7 +110,7 @@ Rails.application.routes.draw do
 
   resource :pod, path: 'pod', only: %i[show edit update]
 
-  constraints(Constraints::DexpodConstraint) do
+  constraints(Constraints::DexpodConstraint) do # rubocop:disable Metrics/BlockLength
     resources :nodes,
               only: %i[index show new create] do
       include_route_concerns
@@ -136,6 +136,19 @@ Rails.application.routes.draw do
         collection do
           concerns :nested_actionable
         end
+      end
+    end
+
+    resources :datasets, only: %i[index show new create] do
+      include_route_concerns
+      collection do
+        concerns :nested_actionable
+      end
+    end
+    resources :distributions, only: %i[index show] do
+      include_route_concerns
+      collection do
+        concerns :nested_actionable
       end
     end
   end

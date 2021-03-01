@@ -1,0 +1,18 @@
+en:
+  datasets:
+    properties:
+      distributions:
+        label: "Distribution"
+      title:
+        label: "Name"
+        helper_text: "Choose a descriptive name. Use terms other people might use when searching."
+      description:
+        label: "Description"
+        helper_text: "Describe what your dataset is about."
+      themes:
+        label: "Themes"
+      license:
+        label: "Which license applies to your data?"
+      license_description:
+        label: "Custom terms"
+        helper_text: "Explain what the terms of usage are. The user must accept these terms."
