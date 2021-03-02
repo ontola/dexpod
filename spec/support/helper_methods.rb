@@ -102,6 +102,12 @@ module HelperMethods # rubocop:disable Metrics/ModuleLength
     found.find(child)
   end
 
+  def select_file(file = photo.jpg)
+    within("fieldset[property=\"#{NS::DEX[:file]}\"]") do
+      attach_file(nil, File.absolute_path("spec/fixtures/#{file}"), make_visible: true)
+    end
+  end
+
   def select_radio(label)
     find('label', text: label).click
   end
