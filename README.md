@@ -3,6 +3,8 @@
 The DexPod is a [Solid Pod](https://solidproject.org/) server implementation written in Ruby, powered by [Linked-Rails](https://github.com/ontola/linked_rails).
 Solid is a set of specifications, building on RDF (Linked Data) to give people more control over their data.
 
+Thanks to [Dexes](https://dexes.nl) and [SIDN Fonds](https://www.sidnfonds.nl/projecten/solid-starter) for funding this project.
+
 ## Architecture
 
 This repo is a Ruby on Rails server
@@ -25,6 +27,8 @@ The DexPod provides some features that are not (yet) included in the Solid speci
 
 - **State synchronization** of RDF using [linked-deltas](https://github.com/ontola/linked-delta)
 - **DataDeals**: formal agreements between data sharers and users, powered by [the W3C ODRL spec](https://www.w3.org/TR/odrl-model/)
+- **Solid-Drive**: Easy way to manage files and folders
+- **DCAT management**: Describe & share DCAT dataset descriptions / metadata.
 
 ## Setup
 - deze repo uitpakken in initial-commits branch
