@@ -5,10 +5,6 @@ Solid is a set of specifications, building on RDF (Linked Data) to give people m
 
 Thanks to [Dexes](https://dexes.nl) and [SIDN Fonds](https://www.sidnfonds.nl/projecten/solid-starter) for funding this project.
 
-## Architecture
-
-This repo is a Ruby on Rails server
-
 ## Compliance with Solid Spec
 
 Since the [specification of Solid](https://solid.github.io/specification/) itself and the related specs are still a work in progress, it is impossible to fully comply at this moment.
@@ -31,6 +27,7 @@ The DexPod provides some features that are not (yet) included in the Solid speci
 - **DCAT management**: Describe & share DCAT dataset descriptions / metadata.
 
 ## Setup
+
 - deze repo uitpakken in initial-commits branch
 - `dexes` branch in libro uitpakken
 - .env aanmaken in dexes op basis van .env.template . Veel waardes kan je overnemen van de env in devproxy. De hostname moet je zelf bedenken, bv dexes.localdev . OIDC_SUBJECT_SALT mag iets randoms - zijn (`bundle exec rake secret`). OIDC_KEY is een private key die je zelf kan genereren `ssh-keygen -t rsa -b 4096` (-----BEGIN RSA PRIVATE KEY-----\n[...]\n-----END RSA PRIVATE KEY-----\n  als single line in de env, dus converteer de newlines naar `\n`).
