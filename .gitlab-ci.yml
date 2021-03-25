@@ -85,9 +85,9 @@ codeQuality:
     - gem install bundle-audit
     - gem install license_finder
   script:
-    - brakeman -z
+    - brakeman -z --no-pager
     - bundle exec rubocop
-    - bundle-audit update && bundle-audit check --ignore CVE-2015-9284
+    - bundle-audit update && bundle-audit check
 #    - license_finder
 
 spec:
