@@ -1,6 +1,6 @@
 FROM ruby:2.7.0-alpine
 
-RUN apk --update --no-cache add curl openssh-client postgresql-dev libffi-dev libxml2-dev libxslt-dev libwebp-dev
+RUN apk --update --no-cache add curl openssh-client postgresql-dev libffi-dev libxml2-dev libxslt-dev libwebp-dev shared-mime-info
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
