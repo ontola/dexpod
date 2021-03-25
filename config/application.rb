@@ -54,7 +54,10 @@ module Dexpod
     config.origin = "https://#{ENV['HOSTNAME']}"
     config.dex_transfer_host_name = ENV['DEX_TRANSFER_HOSTNAME']
 
-    config.redis_database = ENV['REDIS_DATABASE']&.to_i || 0
+    config.cache_channel = ENV['CACHE_CHANNEL'].presence || 'cache'
+    config.cache_stream_channel = ENV['CACHE_STREAM_CHANNEL'].presence || 'cache_invalidations'
+    redis_url_db = ENV['REDIS_URL'] && URI(ENV['REDIS_URL']).path&.split('/')&.dig(1)
+    config.redis_database = (ENV['REDIS_DATABASE'] || redis_url_db)&.to_i || 0
 
     config.action_mailer.default_url_options = {
       host: config.host_name,

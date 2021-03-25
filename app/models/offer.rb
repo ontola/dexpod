@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Offer < ApplicationRecord
+  include Invalidatable
+
   enhance LinkedRails::Enhancements::Actionable
   enhance LinkedRails::Enhancements::Creatable
   enhance LinkedRails::Enhancements::Indexable

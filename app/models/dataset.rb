@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Dataset < ApplicationRecord
+  include Invalidatable
+
   enhance LinkedRails::Enhancements::Actionable
   enhance LinkedRails::Enhancements::Creatable
   enhance LinkedRails::Enhancements::Updatable

@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class Agreement < ApplicationRecord
+  include Invalidatable
+
   enhance LinkedRails::Enhancements::Creatable
   enhance LinkedRails::Enhancements::Indexable
   enhance LinkedRails::Enhancements::Tableable
+
   belongs_to :assignee,
              class_name: 'User',
              foreign_key: :user_id,
@@ -29,8 +32,6 @@ class Agreement < ApplicationRecord
   def file_name
     offer.node.display_name
   end
-
-  private
 
   class << self
     def default_collection_display

@@ -30,7 +30,7 @@ The DexPod provides some features that are not (yet) included in the Solid speci
 
 - deze repo uitpakken in initial-commits branch
 - `dexes` branch in libro uitpakken
-- .env aanmaken in dexes op basis van .env.template . Veel waardes kan je overnemen van de env in devproxy. De hostname moet je zelf bedenken, bv dexes.localdev . OIDC_SUBJECT_SALT mag iets randoms - zijn (`bundle exec rake secret`). OIDC_KEY is een private key die je zelf kan genereren `ssh-keygen -t rsa -b 4096` (-----BEGIN RSA PRIVATE KEY-----\n[...]\n-----END RSA PRIVATE KEY-----\n  als single line in de env, dus converteer de newlines naar `\n`).
+- .env aanmaken in dexes op basis van .env.template . Veel waardes kan je overnemen van de env in devproxy. De hostname moet je zelf bedenken, bv dexes.localdev . OIDC_SUBJECT_SALT mag iets randoms - zijn (`bundle exec rake secret`). OIDC_KEY is een private key die je zelf kan genereren `ssh-keygen -t rsa -b 4096 -m pem` (-----BEGIN RSA PRIVATE KEY-----\n[...]\n-----END RSA PRIVATE KEY-----\n  als single line in de env, dus converteer de newlines naar `\n`).
 - Aan de nginx.template.conf de gekozen hostname en een variant met wildcard (*.dexes.localdev) toevoegen als server_name. De volgende keer dat je de devproxy herstart wordt de nieuwe config dan - toegevoegd aan nginx.conf.
 - Instellen hostnames, of
   - [Automatisch routen van alle localdev domeinen](https://qiita.com/bmj0114/items/9c24d863bcab1a634503)

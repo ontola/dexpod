@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Distribution < ApplicationRecord
+  include Invalidatable
+
   belongs_to :dataset
   belongs_to :node
 
