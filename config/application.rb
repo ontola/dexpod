@@ -54,6 +54,8 @@ module Dexpod
     config.origin = "https://#{ENV['HOSTNAME']}"
     config.dex_transfer_host_name = ENV['DEX_TRANSFER_HOSTNAME']
 
+    config.redis_database = ENV['REDIS_DATABASE']&.to_i || 0
+
     config.action_mailer.default_url_options = {
       host: config.host_name,
       protocol: :https
