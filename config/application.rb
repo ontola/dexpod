@@ -22,7 +22,6 @@ require 'rails/test_unit/railtie'
 Bundler.require(*Rails.groups)
 
 require 'linked_rails/middleware/linked_data_params'
-require_relative '../lib/kafka_broadcaster'
 require_relative '../lib/apartment_sidekiq'
 require_relative '../lib/types/iri_type'
 require_relative './initializers/version'
