@@ -28,17 +28,22 @@ The DexPod provides some features that are not (yet) included in the Solid speci
 
 ## Setup
 
-- deze repo uitpakken in initial-commits branch
-- `dexes` branch in libro uitpakken
-- .env aanmaken in dexes op basis van .env.template . Veel waardes kan je overnemen van de env in devproxy. De hostname moet je zelf bedenken, bv dexes.localdev . OIDC_SUBJECT_SALT mag iets randoms - zijn (`bundle exec rake secret`). OIDC_KEY is een private key die je zelf kan genereren `ssh-keygen -t rsa -b 4096 -m pem` (-----BEGIN RSA PRIVATE KEY-----\n[...]\n-----END RSA PRIVATE KEY-----\n  als single line in de env, dus converteer de newlines naar `\n`).
-- Aan de nginx.template.conf de gekozen hostname en een variant met wildcard (*.dexes.localdev) toevoegen als server_name. De volgende keer dat je de devproxy herstart wordt de nieuwe config dan - toegevoegd aan nginx.conf.
-- Instellen hostnames, of
-  - [Automatisch routen van alle localdev domeinen](https://qiita.com/bmj0114/items/9c24d863bcab1a634503)
-  - De gekozen hostname toevoegen aan /etc/hosts. Voeg gelijk de sudomeinen die je wil gebruiken voor de tests en demo toe, want een wildcard kan daar niet. Bv joep.dexes.localdev, test.dexes.localdev
-- Sluit de argu backend af. Dexes gaat namelijk op dezelfde poort draaien.
-- Maak de database aan `bundle exec rake db:setup`
-- Start dexes in productie mode (RAILS_ENV=production) en herstart de devproxy ./dev.sh
-- `RAILS_ENV=development bundle exec rails s -b 0.0.0.0 -p 3000`
+- Clone this repo.
+- Clone libro on the same branch (not public yet)
+- Create a `.env` file in dexpod based on the `.env.template`.
+  - Devproxy users: copy most values form that `.env`
+  - The hostname is up to you, eg `dexes.localdev`
+  - `OIDC_SUBJECT_SALT` should be random (eg. `bundle exec rake secret`)
+  - `OIDC_KEY` is a private key on a single line, so convert newlines to literal `\\n`. The key can be generated with `ssh-keygen -t rsa -b 4096 -m pem` ensure its type is `RSA PRIVATE KEY`. (Eg. `-----BEGIN RSA PRIVATE KEY-----\n[...]\n-----END RSA PRIVATE KEY-----\n`)
+- Devproxy users: Add the chosen hostname and a wildcard variant (Eg `*.dexes.localdev`) to `nginx.template.conf` as the `server_name`. The devproxy will regenerate the nginx.config from the template on restarting the devproxy.
+- Set the hostnames to resolve locally, either
+  - Add the chosen hostnames to `/etc/hosts`. Add them on a [single line in OSX](https://stackoverflow.com/questions/10064581/how-can-i-eliminate-slow-resolving-loading-of-localhost-virtualhost-a-2-3-secon). Don't forget all domains for tests and demo, since /etc/hosts doesn't accept wildcardds (Eg. `my.dexes.localdev`, `test.dexes.localdev`).
+  - [Automatically route all `localdev` domains](https://qiita.com/bmj0114/items/9c24d863bcab1a634503)
+- Argu internal: Shut the argu backend down. Dexpod runs on the same port.
+- Create and [initialize the database](https://guides.rubyonrails.org/active_record_migrations.html) `bundle exec rake db:setup`
+- Start Dexpod (`RAILS_ENV=production` for production mode)
+  - `RAILS_ENV=development bundle exec rails s -b 0.0.0.0 -p 3000`
+  - Devproxy users: Reboot devproxy `./dev.sh`
 
 ## Demo
 - bezoek https://dexes.localdev
