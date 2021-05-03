@@ -27,9 +27,12 @@ The DexPod provides some features that are not (yet) included in the Solid speci
 - **DCAT management**: Describe & share DCAT dataset descriptions / metadata.
 
 ## Setup
+We use nginx internally ('devproxy') to provide reverse-proxying and TLS connections, where all traffic is routed to libro (the frontend) and requests to `/link-lib/bulk` are routed to the cache. Using the dexpod without these is possible, [`/rails/info/routes`](https://guides.rubyonrails.org/routing.html#listing-existing-routes) should list all possible API endpoints (subject to change).
 
-- Clone this repo.
-- Clone libro on the same branch (not public yet)
+- Clone the appropriate projects:
+  - Clone the dexpod project
+  - Clone libro on the same branch (not public yet)
+  - Clone the cache on the same branch (not public yet)
 - Create a `.env` file in dexpod based on the `.env.template`.
   - Devproxy users: copy most values form that `.env`
   - The hostname is up to you, eg `dexes.localdev`
@@ -39,7 +42,7 @@ The DexPod provides some features that are not (yet) included in the Solid speci
 - Set the hostnames to resolve locally, either
   - Add the chosen hostnames to `/etc/hosts`. Add them on a [single line in OSX](https://stackoverflow.com/questions/10064581/how-can-i-eliminate-slow-resolving-loading-of-localhost-virtualhost-a-2-3-secon). Don't forget all domains for tests and demo, since /etc/hosts doesn't accept wildcardds (Eg. `my.dexes.localdev`, `test.dexes.localdev`).
   - [Automatically route all `localdev` domains](https://qiita.com/bmj0114/items/9c24d863bcab1a634503)
-- Argu internal: Shut the argu backend down. Dexpod runs on the same port.
+- Ontola internal: Shut the Apex backend down. Dexpod runs on the same port.
 - Create and [initialize the database](https://guides.rubyonrails.org/active_record_migrations.html) `bundle exec rake db:setup`
 - Start Dexpod (`RAILS_ENV=production` for production mode)
   - `RAILS_ENV=development bundle exec rails s -b 0.0.0.0 -p 3000`
