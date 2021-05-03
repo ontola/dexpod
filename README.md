@@ -27,7 +27,7 @@ The DexPod provides some features that are not (yet) included in the Solid speci
 - **DCAT management**: Describe & share DCAT dataset descriptions / metadata.
 
 ## Setup
-We use nginx internally ('devproxy') to provide reverse-proxying and TLS connections, where all traffic is routed to libro (the frontend) and requests to `/link-lib/bulk` are routed to the cache. Using the dexpod without these is possible, [`/rails/info/routes`](https://guides.rubyonrails.org/routing.html#listing-existing-routes) should list all possible API endpoints (subject to change).
+We use nginx internally ('devproxy') to provide reverse-proxying and TLS connections, where all traffic is routed to libro (the frontend) and requests to `/link-lib/bulk` are routed to the cache. Using the dexpod without these is possible, [`/rails/info/routes`](https://guides.rubyonrails.org/routing.html#listing-existing-routes) should list all possible API endpoints (subject to change). Nearly all endpoints require authentication, you'll have to generate a token first ().
 
 - Clone the appropriate projects:
   - Clone the dexpod project
@@ -38,6 +38,8 @@ We use nginx internally ('devproxy') to provide reverse-proxying and TLS connect
   - The hostname is up to you, eg `dexes.localdev`
   - `OIDC_SUBJECT_SALT` should be random (eg. `bundle exec rake secret`)
   - `OIDC_KEY` is a private key on a single line, so convert newlines to literal `\\n`. The key can be generated with `ssh-keygen -t rsa -b 4096 -m pem` ensure its type is `RSA PRIVATE KEY`. (Eg. `-----BEGIN RSA PRIVATE KEY-----\n[...]\n-----END RSA PRIVATE KEY-----\n`)
+  - Create OAuth2 app credentials for your client by setting `LIBRO_CLIENT_ID` and `LIBRO_CLIENT_SECRET` which are created on database initialization.
+  - The first bearer token with administrative privileges can be set in the same way via `RAILS_OAUTH_TOKEN`.
 - Devproxy users: Add the chosen hostname and a wildcard variant (Eg `*.dexes.localdev`) to `nginx.template.conf` as the `server_name`. The devproxy will regenerate the nginx.config from the template on restarting the devproxy.
 - Set the hostnames to resolve locally, either
   - Add the chosen hostnames to `/etc/hosts`. Add them on a [single line in OSX](https://stackoverflow.com/questions/10064581/how-can-i-eliminate-slow-resolving-loading-of-localhost-virtualhost-a-2-3-secon). Don't forget all domains for tests and demo, since /etc/hosts doesn't accept wildcardds (Eg. `my.dexes.localdev`, `test.dexes.localdev`).
