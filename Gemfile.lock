@@ -373,7 +373,7 @@ GEM
       netrc (~> 0.8)
     reverse_markdown (2.0.0)
       nokogiri
-    rexml (3.2.4)
+    rexml (3.2.5)
     ros-apartment (2.6.0)
       activerecord (>= 5.0.0, < 6.1)
       parallel (< 2.0)
