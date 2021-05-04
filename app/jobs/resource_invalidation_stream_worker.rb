@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class ResourceInvalidationStreamWorker < ApplicationJob
-  include DeltaHelper
-
-  def perform(iri)
+  def perform(type, iri, resource_type)
     redis = Redis.new(db: Rails.configuration.redis_database)
 
-    entry = {delta: hex_delta([invalidate_resource(iri)])}
-    id = redis.xadd(Rails.configuration.cache_stream_channel, entry)
+    entry = {
+      type: type,
+      resource: iri,
+      resourceType: resource_type
+    }
+    id = redis.xadd(Rails.configuration.cache_stream, entry)
 
     return if Rails.env.test? || id.present?
 

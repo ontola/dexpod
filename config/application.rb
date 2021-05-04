@@ -55,7 +55,7 @@ module Dexpod
     config.dex_transfer_host_name = ENV['DEX_TRANSFER_HOSTNAME']
 
     config.cache_channel = ENV['CACHE_CHANNEL'].presence || 'cache'
-    config.cache_stream_channel = ENV['CACHE_STREAM_CHANNEL'].presence || 'cache_invalidations'
+    config.cache_stream = ENV['CACHE_STREAM'].presence || 'transactions'
     redis_url_db = ENV['REDIS_URL'] && URI(ENV['REDIS_URL']).path&.split('/')&.dig(1)
     config.redis_database = (ENV['REDIS_DATABASE'] || redis_url_db)&.to_i || 0
 
