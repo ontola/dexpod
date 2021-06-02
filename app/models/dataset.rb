@@ -19,7 +19,8 @@ class Dataset < ApplicationRecord
   attribute :license, IRIType.new
   attribute :themes, array: true
 
-  validates :description, length: {maximum: MAXIMUM_DESCRIPTION_LENGTH}
+  validates :title, presence: true
+  validates :description, length: {maximum: MAXIMUM_DESCRIPTION_LENGTH}, presence: true
   validates :license_description, length: {maximum: MAXIMUM_DESCRIPTION_LENGTH}
 
   def themes

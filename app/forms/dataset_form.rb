@@ -9,6 +9,7 @@ class DatasetForm < ApplicationForm
         grouped: true,
         datatype: NS::XSD[:string],
         sh_in: form_options_iri(:theme, DatasetTheme),
+        min_count: 1,
         max_count: 99
   field :license
   field :license_description
