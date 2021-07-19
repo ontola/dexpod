@@ -58,6 +58,7 @@ module Dexpod
     config.cache_stream = ENV['CACHE_STREAM'].presence || 'transactions'
     redis_url_db = ENV['REDIS_URL'] && URI(ENV['REDIS_URL']).path&.split('/')&.dig(1)
     config.redis_database = (ENV['REDIS_DATABASE'] || redis_url_db)&.to_i || 0
+    config.stream_redis_url = ENV['STREAM_REDIS_URL'] || ENV['REDIS_URL']
 
     config.action_mailer.default_url_options = {
       host: config.host_name,

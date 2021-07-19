@@ -2,7 +2,7 @@
 
 class ResourceInvalidationStreamWorker < ApplicationJob
   def perform(type, iri, resource_type)
-    redis = Redis.new(db: Rails.configuration.redis_database)
+    redis = Redis.new(url: Rails.configuration.stream_redis_url)
 
     entry = {
       type: type,
