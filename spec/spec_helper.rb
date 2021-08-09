@@ -112,7 +112,6 @@ RSpec.configure do |config|
 
   config.before do
     Capybara.app_host = 'https://dexpods.localdev'
-    LinkedRails.vocabulary_class.graph
     Rails.application.load_seed
   end
 

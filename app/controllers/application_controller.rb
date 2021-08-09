@@ -61,22 +61,4 @@ class ApplicationController < ActionController::API
   def set_manifest_header
     response.headers['Manifest'] = "#{LinkedRails.iri}/manifest.json"
   end
-
-  def form_resource_includes(action)
-    includes = super
-    return includes unless action_name == 'new' && action.included_object
-
-    includes = [includes] if includes.is_a?(Hash)
-    includes + built_associations(action)
-  end
-
-  def built_associations(action)
-    klass = action.included_object.class
-    return [] unless klass < ActiveRecord::Base
-
-    klass
-      .reflect_on_all_associations
-      .select { |association| action.included_object.association(association.name).loaded? }
-      .map(&:name)
-  end
 end

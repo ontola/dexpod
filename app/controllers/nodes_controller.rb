@@ -23,10 +23,6 @@ class NodesController < AuthorizedController
     )
   end
 
-  def new_resource_params
-    super.merge(parent: parent_resource)
-  end
-
   def new_success
     return super unless self.class == NodesController
 

@@ -497,7 +497,8 @@ Doorkeeper::JWT.configure do
     }
     payload = {
       iat: Time.current.to_i,
-      application_id: opts[:application]&.id,
+      iss: LinkedRails.iri.to_s,
+      application_id: opts[:application]&.uid,
       scopes: opts[:scopes].entries,
       user: user_opts
     }
@@ -524,16 +525,4 @@ Doorkeeper::JWT.configure do
   # https://github.com/progrium/ruby-jwt
   # defaults to nil
   encryption_method :hs512
-end
-
-module Doorkeeper
-  module OAuth
-    class PasswordAccessTokenRequest < BaseRequest
-      private
-
-      def validate_client
-        client.present?
-      end
-    end
-  end
 end

@@ -3,6 +3,7 @@
 class Pod < ApplicationRecord
   enhance LinkedRails::Enhancements::Actionable
   enhance LinkedRails::Enhancements::Updatable
+  enhance LinkedRails::Enhancements::Singularable
 
   belongs_to :web_id
   belongs_to :root_node,
@@ -73,5 +74,11 @@ class Pod < ApplicationRecord
   def setup_pod
     create_tenant
     create_fs
+  end
+
+  class << self
+    def requested_singular_resource(_params, _user_context)
+      RootHelper.current_pod
+    end
   end
 end

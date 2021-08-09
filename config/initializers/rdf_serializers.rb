@@ -6,8 +6,13 @@ RDF::Serializers.configure do |config|
   config.default_graph = NS::LL[:supplant]
 end
 
+prefixes =
+  RDF::Vocabulary.vocab_map.transform_values do |options|
+    options[:class] || RDF::Vocabulary.from_sym(options[:class_name])
+  end
+
 opts = {
-  prefixes: Hash[NS.constants.map { |const| [const.to_s.downcase.to_sym, NS.const_get(const)] }]
+  prefixes: prefixes
 }
 
 RDF_CONTENT_TYPES = %i[n3 nt nq ttl jsonld rdf hndjson].freeze

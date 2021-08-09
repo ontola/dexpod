@@ -52,23 +52,29 @@ module HelperMethods # rubocop:disable Metrics/ModuleLength
   end
 
   def fill_in_login_form(email, password = 'password') # rubocop:disable Metrics/AbcSize
-    wait_for(page).to have_content 'Inloggen of registeren'
-    fill_in field_name('http://schema.org/email'), with: email
-    click_button 'Ga verder'
-    wait_for(page).to have_content 'Wachtwoord'
-    wait_for(page).to have_field(field_name(NS::ONTOLA[:password].to_s))
-    fill_in field_name(NS::ONTOLA[:password].to_s), with: password
-    click_button 'Ga verder'
+    wait_for(page).to have_css('.MuiDialog-paper')
+    within('.MuiDialog-paper') do
+      wait_for(page).to have_content 'Inloggen of registeren'
+      fill_in field_name('http://schema.org/email'), with: email
+      click_button 'Ga verder'
+      wait_for(page).to have_content 'Wachtwoord'
+      wait_for(page).to have_field(field_name(NS.ontola[:password].to_s))
+      fill_in field_name(NS.ontola[:password].to_s), with: password
+      click_button 'Ga verder'
+    end
   end
 
   def fill_in_registration_form(email = 'new@example.com') # rubocop:disable Metrics/AbcSize
-    wait_for(page).to have_content('Inloggen of registeren')
-    fill_in field_name('http://schema.org/email'), with: email
-    click_button 'Ga verder'
-    fill_in field_name(NS::ARGU[:pod].to_s, 0, NS::ARGU[:podName].to_s), with: 'new_pod'
-    fill_in field_name(NS::ONTOLA[:password].to_s), with: 'password'
-    fill_in field_name(NS::ONTOLA[:passwordConfirmation].to_s), with: 'password'
-    click_button 'Bevestig'
+    wait_for(page).to have_css('.MuiDialog-paper')
+    within('.MuiDialog-paper') do
+      wait_for(page).to have_content('Inloggen of registeren')
+      fill_in field_name('http://schema.org/email'), with: email
+      click_button 'Ga verder'
+      fill_in field_name(NS.argu[:pod].to_s, 0, NS.argu[:podName].to_s), with: 'new_pod'
+      fill_in field_name(NS.ontola[:password].to_s), with: 'password'
+      fill_in field_name(NS.ontola[:passwordConfirmation].to_s), with: 'password'
+      click_button 'Bevestig'
+    end
   end
 
   def fill_in_select(name = nil, with: nil, selector: nil) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength

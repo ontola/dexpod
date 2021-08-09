@@ -4,12 +4,6 @@ require 'constraints/dexes_constraint'
 require 'constraints/dexpod_constraint'
 
 Rails.application.routes.draw do
-  concern :nested_actionable do
-    namespace :actions do
-      resources :items, path: '', only: %i[index show], collection: @scope.parent.try(:[], :controller)
-    end
-  end
-
   concern :site_setup do
     resource :home_page,
              only: :show,
@@ -17,7 +11,6 @@ Rails.application.routes.draw do
     resource :home_page,
              only: :show,
              path: :home do
-      concerns :nested_actionable
       include_route_concerns
     end
   end
@@ -37,18 +30,6 @@ Rails.application.routes.draw do
     post 'register', to: 'oauth/clients#create'
   end
 
-  namespace :actions do
-    resources :items, path: '', only: %i[index show]
-  end
-  resources :menus, module: 'linked_rails', only: %i[show index] do
-    resources :sub_menus, only: :index, path: 'menus'
-  end
-  scope :apex, module: 'linked_rails' do
-    resources :menus, only: %i[show index] do
-      resources :sub_menus, only: :index, path: 'menus'
-    end
-  end
-
   constraints(Constraints::DexesConstraint) do
     use_linked_rails_auth(
       authorizations: 'oauth/authorizations',
@@ -58,7 +39,8 @@ Rails.application.routes.draw do
       concerns :site_setup
     end
   end
-  constraints(Constraints::DexpodConstraint) do # rubocop:disable Metrics/BlockLength
+
+  constraints(Constraints::DexpodConstraint) do
     use_linked_rails_auth(
       sessions: 'sessions'
     )
@@ -71,59 +53,24 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :pod, path: 'pod', only: %i[show edit update]
+  singular_linked_resource(Pod)
 
-  constraints(Constraints::DexpodConstraint) do # rubocop:disable Metrics/BlockLength
-    resources :nodes,
-              only: %i[index show new create] do
-      include_route_concerns
-      collection do
-        concerns :nested_actionable
-      end
-    end
-
+  constraints(Constraints::DexpodConstraint) do
+    linked_resource(Node)
     Node.descendants.each do |klass|
-      resource_name = klass.model_name.route_key
-
-      resources resource_name, only: %i[show new create] do
-        klass.collections.each do |collection|
-          resources collection[:name], only: %i[index new create] do
-            include_route_concerns
-            collection do
-              concerns :nested_actionable
-            end
-          end
-        end
-
-        include_route_concerns
-        collection do
-          concerns :nested_actionable
-        end
-      end
+      linked_resource(klass)
     end
-
-    resources :datasets, only: %i[index show new create] do
-      include_route_concerns
-      collection do
-        concerns :nested_actionable
-      end
-    end
-    resources :distributions, only: %i[index show] do
-      include_route_concerns
-      collection do
-        concerns :nested_actionable
-      end
-    end
+    linked_resource(Dataset)
+    linked_resource(Distribution)
   end
 
-  resources :users,
-            only: %i[show new create] do
-    include_route_concerns
-  end
+  linked_resource(User)
+  singular_linked_resource(Profile)
 
-  resource :profile, only: :show, path: :profile
-
-  match '*path', to: 'not_found#show', via: :all, constraints: lambda { |req|
-                                                                 req.path.exclude? 'rails/active_storage'
-                                                               }
+  match '*path',
+        to: 'not_found#show',
+        via: :all,
+        constraints: lambda { |req|
+          req.path.exclude? 'rails/active_storage'
+        }
 end

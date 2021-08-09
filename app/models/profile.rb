@@ -3,6 +3,7 @@
 class Profile
   include ActiveModel::Model
   include LinkedRails::Model
+  enhance LinkedRails::Enhancements::Singularable
 
   attr_accessor :web_id
   delegate :email, to: :web_id
@@ -18,6 +19,14 @@ class Profile
   class << self
     def iri
       NS::FOAF[:Person]
+    end
+
+    def requested_singular_resource(_params, _user_context)
+      RootHelper.current_pod&.web_id&.profile
+    end
+
+    def singular_route_key
+      :profile
     end
   end
 end

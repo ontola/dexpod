@@ -11,8 +11,4 @@ class PodsController < ApplicationController
       reload: true
     )
   end
-
-  def requested_resource
-    current_pod
-  end
 end

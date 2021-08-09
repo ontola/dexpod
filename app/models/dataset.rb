@@ -45,16 +45,16 @@ class Dataset < ApplicationRecord
   end
 
   class << self
-    def build_new(opts = {})
-      return super unless opts[:collection].parent.is_a?(Node)
-
-      child = super
-      child.distributions << Distribution.new(node: opts[:collection].parent)
-      child
+    def attributes_for_new(opts)
+      {user: opts[:user_context]}
     end
 
-    def show_includes
-      super + [:distributions]
+    def build_new(opts = {})
+      return super unless opts[:parent].is_a?(Node)
+
+      child = super
+      child.distributions << Distribution.new(node: opts[:parent])
+      child
     end
   end
 end

@@ -9,22 +9,6 @@ class BulkController < LinkedRails::BulkController
     super
   end
 
-  def resource_body(resource) # rubocop:disable Metrics/MethodLength
-    return if resource.nil?
-
-    RDF::Serializers
-      .serializer_for(resource)
-      .new(
-        resource,
-        include: resource&.class.try(:preview_includes),
-        params: {
-          scope: user_context,
-          context: resource&.try(:iri)
-        }
-      )
-      .send(:render_hndjson)
-  end
-
   def response_for_wrong_host(opts)
     return super unless self.class.external_resources.key?(opts[:iri])
 

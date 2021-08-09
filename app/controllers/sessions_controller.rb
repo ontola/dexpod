@@ -40,12 +40,6 @@ class SessionsController < LinkedRails::Auth::SessionsController
     nil
   end
 
-  def new_resource_params
-    super.merge(
-      host: ENV['HOSTNAME']
-    )
-  end
-
   def permit_params
     params.require(:session).permit(:redirect_url, :email, :host)
   end

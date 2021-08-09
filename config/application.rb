@@ -21,6 +21,8 @@ require 'rails/test_unit/railtie'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+JSON::LD::Reader # rubocop:disable Lint/Void, fix weird autoload failure
+
 require 'linked_rails/middleware/linked_data_params'
 require_relative '../lib/apartment_sidekiq'
 require_relative '../lib/types/iri_type'
@@ -32,6 +34,7 @@ module Dexpod
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    # config.autoloader = :classic
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

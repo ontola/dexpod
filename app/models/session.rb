@@ -7,5 +7,15 @@ class Session < LinkedRails::Auth::Session
     def action_list
       SessionActionList
     end
+
+    def form_class
+      SessionForm
+    end
+
+    def requested_singular_resource(params, _user_context)
+      resource = super
+      resource.host = ENV['HOSTNAME']
+      resource
+    end
   end
 end

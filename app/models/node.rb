@@ -68,7 +68,7 @@ class Node < ApplicationRecord
       action(:update)&.iri,
       action(:destroy)&.iri,
       datasets.any? ? datasets.first.action(:update)&.iri : dataset_collection.action(:create)&.iri
-    ].compact)
+    ].compact, scope: false)
   end
 
   def root_object?
@@ -76,6 +76,12 @@ class Node < ApplicationRecord
   end
 
   class << self
+    def attributes_for_new(opts)
+      {
+        parent: opts[:parent]
+      }
+    end
+
     def default_collection_display
       :table
     end
