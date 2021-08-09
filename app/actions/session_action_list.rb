@@ -5,16 +5,15 @@ class SessionActionList < LinkedRails.action_list_parent_class
     Session
   end
 
-  has_action(
-    :create,
-    create_options.merge(
-      collection: false,
-      include_object: true,
-      object: nil,
-      policy: :create?,
-      root_relative_iri: -> { resource.root_relative_iri },
-      type: [NS::ONTOLA['Create::Auth::Session'], RDF::Vocab::SCHEMA.CreateAction],
-      url: -> { LinkedRails.iri(path: '/u/sessions') }
-    )
+  has_singular_create_action(
+    policy: :create?,
+    root_relative_iri: lambda {
+      uri = resource.root_relative_iri.dup
+      uri.path ||= ''
+      uri.path += '/new'
+      uri.query = {redirect_url: resource.redirect_url}.compact.to_param.presence
+      uri.to_s
+    },
+    type: [NS.ontola['Create::Auth::Session'], RDF::Vocab::SCHEMA.CreateAction]
   )
 end
