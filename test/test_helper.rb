@@ -8,7 +8,7 @@ require 'minitest/reporters'
 
 require_relative 'support/test_methods'
 
-Minitest::Reporters.use!
+Minitest::Reporters.use! unless ENV['RM_INFO']
 
 module ActiveSupport
   class TestCase
