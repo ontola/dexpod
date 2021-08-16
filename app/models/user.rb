@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  include RootHelper
-
   has_many :identities, dependent: :destroy
 
   def display_name

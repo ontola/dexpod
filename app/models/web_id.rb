@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class WebId < ApplicationRecord
-  include RootHelper
   devise :confirmable, :database_authenticatable, :lockable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable
   attr_accessor :redirect_url
