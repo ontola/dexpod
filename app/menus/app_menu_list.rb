@@ -57,17 +57,17 @@ class AppMenuList < ApplicationMenuList
     items << menu_item(
       :sign_in,
       label: I18n.t('actions.sessions.create.label'),
-      href: LinkedRails.iri(path: 'u/sign_in')
+      href: LinkedRails.iri(path: 'u/session/new')
     )
     items << menu_item(
       :password,
       label: I18n.t('actions.passwords.create.label'),
-      href: LinkedRails.iri(path: 'users/password/new')
+      href: LinkedRails.iri(path: 'u/password/new')
     )
     items << menu_item(
       :confirmation,
       label: I18n.t('actions.confirmations.create.label'),
-      href: LinkedRails.iri(path: 'users/confirmation/new')
+      href: LinkedRails.iri(path: 'u/confirmation/new')
     )
     items
   end

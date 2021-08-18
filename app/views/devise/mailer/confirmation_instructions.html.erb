@@ -1,0 +1,5 @@
+<p>Welcome <%= @email %>!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><%= link_to 'Confirm my account', LinkedRails.iri(path: 'u/confirmation', query: {confirmation_token: @token}.to_param).to_s %></p>

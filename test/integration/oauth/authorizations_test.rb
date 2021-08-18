@@ -14,7 +14,7 @@ class AuthorizationsTest < ActionDispatch::IntegrationTest
     # assert_difference('Doorkeeper::Application.count' => 1) do
     head auth_url, headers: request_headers
     # end
-    assert_redirected_to LinkedRails.iri(path: '/u/sign_in', query: {redirect_url: auth_url}.to_param).to_s
+    assert_redirected_to LinkedRails.iri(path: '/u/session/new', query: {redirect_url: auth_url}.to_param).to_s
   end
 
   ####################################
@@ -24,7 +24,7 @@ class AuthorizationsTest < ActionDispatch::IntegrationTest
     # assert_difference('Doorkeeper::Application.count' => 1) do
     head auth_url, headers: request_headers
     # end
-    assert_redirected_to LinkedRails.iri(path: '/u/sign_in', query: {redirect_url: auth_url}.to_param).to_s
+    assert_redirected_to LinkedRails.iri(path: '/u/session/new', query: {redirect_url: auth_url}.to_param).to_s
   end
 
   private

@@ -8,7 +8,12 @@ module Dexes
     private
 
     def homepage_widgets
-      @homepage_widgets ||= []
+      @homepage_widgets ||= [
+        LinkedRails::Widget.new(
+          size: 3,
+          resources: [LinkedRails.iri(path: '/u/session/new')]
+        )
+      ]
     end
 
     def welcome_text

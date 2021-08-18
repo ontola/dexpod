@@ -86,7 +86,7 @@ See https://github.com/solid/webid-oidc-spec
 3) The RP discovers the authentication configuration of the OP (dexes.nl/.well-known/openid-configuration)
 4) The RP registers authorization client at the OP and receives a CLIENT_ID (dexes.nl/oauth/register)
 5) User is redirected to the Authorization endpoint of the OP (dexes.nl/oauth/authorize)
-6) User is not logged in at the OP, so he is redirected to a sign up/in page (dexes.nl/u/sign_in)
+6) User is not logged in at the OP, so he is redirected to a sign up/in page (dexes.nl/u/session/new)
 7) User signs in or registers
 8) User is now logged in at the OP
 9) User is redirected back to the Authorization endpoint of the OP (dexes.nl/oauth/authorize)
@@ -116,7 +116,7 @@ See https://github.com/solid/webid-oidc-spec
 
 # Sign in
 ## On dexes.nl:
-* User goes to /u/sign_in.
+* User goes to /u/session/new.
 * User sees regular login form.
 * User enters username/password.
 * BFE receives POST request on /login, containing password/email. (so far nothing new)
@@ -124,7 +124,7 @@ See https://github.com/solid/webid-oidc-spec
 * BFE posts token to the token_endpoint given by the openId config.
 
 ## On [user].dexes.nl:
-* User goes to /u/sign_in.
+* User goes to /u/session/new.
 * User sees list of recommended openId providers.
 * User clicks on DexPod, is redirected to /auth/dexpod.
 * BFE checks if openId client for current website is present. If not: discover config & register client.

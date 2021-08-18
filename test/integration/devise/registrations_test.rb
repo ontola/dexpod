@@ -12,7 +12,7 @@ class RegistrationsTest < ActionDispatch::IntegrationTest
     sign_in :guest_user
     web_id
     assert_difference('WebId.count' => 0) do
-      post users_path,
+      post '/u/registration',
            params: {
              registration: {
                email: web_id.email
@@ -26,7 +26,7 @@ class RegistrationsTest < ActionDispatch::IntegrationTest
     sign_in :guest_user
     web_id
     assert_difference('WebId.count' => 1) do
-      post users_path,
+      post '/u/registration',
            params: {
              registration: {
                email: 'new@example.com'
@@ -40,7 +40,7 @@ class RegistrationsTest < ActionDispatch::IntegrationTest
     sign_in :guest_user
     web_id
     assert_difference('WebId.count' => 1) do
-      post users_path,
+      post '/u/registration',
            params: {
              registration: {
                email: 'new@example.com',
