@@ -26,7 +26,7 @@ require_relative '../lib/apartment_sidekiq'
 require_relative '../lib/types/iri_type'
 require_relative './initializers/version'
 
-require_relative '../lib/first_sub_domain_without_api_and_dex_transfer'
+require_relative '../lib/first_sub_domain_without_api'
 
 module Dexpod
   class Application < Rails::Application
@@ -41,9 +41,6 @@ module Dexpod
     %i[controllers forms models policies serializers].each do |type|
       config.autoload_paths += %W[#{config.root}/app/#{type}/nodes]
     end
-    %i[controllers policies].each do |type|
-      config.autoload_paths += %W[#{config.root}/app/#{type}/rules]
-    end
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
@@ -52,7 +49,6 @@ module Dexpod
 
     config.host_name = ENV['HOSTNAME']
     config.origin = "https://#{ENV['HOSTNAME']}"
-    config.dex_transfer_host_name = ENV['DEX_TRANSFER_HOSTNAME']
 
     config.cache_channel = ENV['CACHE_CHANNEL'].presence || 'cache'
     config.cache_stream = ENV['CACHE_STREAM'].presence || 'transactions'
@@ -67,8 +63,6 @@ module Dexpod
 
     config.from_email = ENV['FROM_EMAIL']
 
-    config.autoload_paths += %W[#{config.root}/app/models/rules]
-
     config.time_zone = 'UTC'
     config.i18n.available_locales = %i[nl en]
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}')]
@@ -81,7 +75,7 @@ module Dexpod
       .content_types_to_serve_as_binary
       .delete('image/svg+xml')
 
-    config.middleware.use FirstSubDomainWithoutAPIAndDexTransfer
+    config.middleware.use FirstSubDomainWithoutAPI
     config.middleware.use LinkedRails::Middleware::LinkedDataParams
     config.middleware.insert_before 0, Rack::Cors do
       allow do

@@ -50,7 +50,7 @@ Apartment.configure do |config|
   #   end
   # end
   #
-  config.tenant_names = -> { Pod.pluck(:pod_name) + ['dex_transfer'] }
+  config.tenant_names = -> { Pod.pluck(:pod_name) }
 
   # PostgreSQL:
   #   Specifies whether to use PostgreSQL schemas or create a new database per Tenant.

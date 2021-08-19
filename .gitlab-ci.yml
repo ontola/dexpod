@@ -11,7 +11,6 @@ variables:
   DATABASE_URL: 'postgresql://testdb:testdb@localhost:5432/apex_rs_staging'
   DEVICE_ID_COOKIE_NAME: 'deviceId'
   DEVICE_ID_COOKIE_SIGNATURE_NAME: 'deviceId.sig'
-  DEX_TRANSFER_HOSTNAME: 'dextransfer.localdev'
   DEXES_DATABASE: 'dexes_test'
   DOCKER_DRIVER: 'overlay2'
   HOSTNAME: 'dexpods.localdev'
@@ -100,7 +99,6 @@ spec:
   before_script:
     - sudo sh -c "echo '127.0.0.1 $HOSTNAME' >> /etc/hosts"
     - sudo sh -c "echo '127.0.0.1 user.$HOSTNAME' >> /etc/hosts"
-    - sudo sh -c "echo '127.0.0.1 $DEX_TRANSFER_HOSTNAME' >> /etc/hosts"
     - sudo sh -c "echo '127.0.0.1 argu.svc.cluster.local' >> /etc/hosts"
     - sudo sh -c "echo '127.0.0.1 apex-rs.svc.cluster.local' >> /etc/hosts"
     - sudo cat /etc/hosts

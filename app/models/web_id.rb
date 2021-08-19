@@ -10,9 +10,6 @@ class WebId < ApplicationRecord
           inverse_of: :web_id,
           autosave: true,
           dependent: :restrict_with_exception
-  has_many :agreements, dependent: :destroy
-
-  with_collection :agreements
 
   accepts_nested_attributes_for :pod
 

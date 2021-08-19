@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'constraints/dex_transfer_constraint'
 require 'constraints/dexes_constraint'
 require 'constraints/dexpod_constraint'
 
@@ -50,15 +49,6 @@ Rails.application.routes.draw do
     end
   end
 
-  constraints(Constraints::DexTransferConstraint) do
-    namespace :dex_transfer, path: nil do
-      concerns :site_setup
-    end
-    resources :offers, only: %i[new create]
-
-    # Stop routing for DexTransfer
-    match '*path', to: 'not_found#show', via: :all
-  end
   constraints(Constraints::DexesConstraint) do
     use_linked_rails_auth(
       authorizations: 'oauth/authorizations',
@@ -79,33 +69,6 @@ Rails.application.routes.draw do
     namespace :dexpod, path: nil do
       concerns :site_setup
     end
-    resources :offers do
-      include_route_concerns
-      collection do
-        concerns :nested_actionable
-      end
-      resources :invites, only: :index
-      resources :rules, only: :index
-      Rule.descendants.each do |klass|
-        resources klass.route_key, only: :index
-      end
-    end
-    resources :invites do
-      include_route_concerns
-      collection do
-        concerns :nested_actionable
-      end
-      post '/accept', to: 'agreements#create'
-    end
-    resources :rules do
-      include_route_concerns
-    end
-    Rule.descendants.each do |klass|
-      resources klass.route_key do
-        include_route_concerns
-      end
-    end
-    resources :agreements
   end
 
   resource :pod, path: 'pod', only: %i[show edit update]

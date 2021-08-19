@@ -16,12 +16,8 @@ module RootHelper
     current_tenant == :public
   end
 
-  def dex_transfer?
-    current_tenant == :dex_transfer
-  end
-
   # Whether the current request is for an individual pod
   def pod?
-    !%i[public dex_transfer].include?(current_tenant)
+    !%i[public].include?(current_tenant)
   end
 end

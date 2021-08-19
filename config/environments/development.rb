@@ -25,8 +25,6 @@ Rails.application.configure do
   config.hosts << '.svc.cluster.local'
   config.hosts << ENV['HOSTNAME']
   config.hosts << ".#{ENV['HOSTNAME']}"
-  config.hosts << ENV['DEX_TRANSFER_HOSTNAME']
-  config.hosts << ".#{ENV['DEX_TRANSFER_HOSTNAME']}"
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

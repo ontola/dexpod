@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  NAME_SPACES = %w[DexTransfer Dexes DexPod].freeze
+  NAME_SPACES = %w[Dexes DexPod].freeze
 
   include ActionController::MimeResponds
   include ActiveResponse::Controller
@@ -36,8 +36,6 @@ class ApplicationController < ActionController::API
 
   def manifest_class
     case current_tenant
-    when :dex_transfer
-      DexTransfer::Manifest
     when :public
       Manifest
     else

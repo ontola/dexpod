@@ -25,9 +25,6 @@ namespace :db do
 
     # Grant shared_extensions usage to public
     ActiveRecord::Base.connection.execute 'GRANT usage ON SCHEMA shared_extensions to public;'
-
-    # Create dex_transfer
-    Apartment::Tenant.create('dex_transfer')
   end
 end
 

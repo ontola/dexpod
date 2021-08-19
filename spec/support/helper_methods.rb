@@ -5,8 +5,7 @@ module HelperMethods # rubocop:disable Metrics/ModuleLength
     'https://chromedriver.storage.googleapis.com',
     /bugsnag.com/,
     'https://user.dexpods.localdev',
-    'https://dexpods.localdev',
-    'https://dextransfer.localdev'
+    'https://dexpods.localdev'
   ].freeze
 
   def application_menu

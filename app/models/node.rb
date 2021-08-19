@@ -9,7 +9,6 @@ class Node < ApplicationRecord
   enhance LinkedRails::Enhancements::Updatable
   enhance LinkedRails::Enhancements::Destroyable
   enhance LinkedRails::Enhancements::Tableable
-  enhance Offerable
   enhance Distributable
 
   belongs_to :parent,
@@ -28,9 +27,6 @@ class Node < ApplicationRecord
            inverse_of: :parent,
            foreign_key: :parent_id,
            dependent: :destroy
-  has_many :offers,
-           inverse_of: :node,
-           dependent: :destroy
   has_many :distributions,
            dependent: :destroy
   has_many :datasets,
@@ -44,7 +40,6 @@ class Node < ApplicationRecord
                   ]
   with_collection :media_objects
   with_collection :folders
-  with_collection :offers
 
   with_columns default: [
     NS::SCHEMA[:image],

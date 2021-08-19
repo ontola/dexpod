@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
 
   def pod_owner?
-    !public_tenant? && !dex_transfer? && pod&.pod_name == current_tenant.to_s
+    !public_tenant? && pod&.pod_name == current_tenant.to_s
   end
 
   def pod

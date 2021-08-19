@@ -16,8 +16,6 @@ module LinkedRails
         case Apartment::Tenant.current
         when 'public'
           LinkedRails.host
-        when 'dex_transfer'
-          Rails.application.config.dex_transfer_host_name
         else
           "#{Apartment::Tenant.current}.#{LinkedRails.host}"
         end
@@ -42,8 +40,6 @@ module LinkedRails
         case Apartment::Tenant.current
         when 'public'
           LinkedRails.host
-        when 'dex_transfer'
-          Rails.application.config.dex_transfer_host_name
         else
           "#{Apartment::Tenant.current}.#{LinkedRails.host}"
         end

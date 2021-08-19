@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_09_105404) do
+ActiveRecord::Schema.define(version: 2021_08_19_111903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -37,15 +37,6 @@ ActiveRecord::Schema.define(version: 2021_02_09_105404) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "agreements", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "invite_id", null: false
-    t.integer "user_id", null: false
-    t.index ["invite_id"], name: "index_agreements_on_invite_id"
-    t.index ["user_id"], name: "index_agreements_on_user_id"
   end
 
   create_table "dataset_themes", force: :cascade do |t|
@@ -86,16 +77,6 @@ ActiveRecord::Schema.define(version: 2021_02_09_105404) do
     t.string "access_token", limit: 1024
     t.string "id_token", limit: 2048
     t.index ["identifier", "provider_id"], name: "index_identities_on_identifier_and_provider_id", unique: true
-  end
-
-  create_table "invites", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "email"
-    t.integer "offer_id", null: false
-    t.string "secret", null: false
-    t.index ["offer_id"], name: "index_invites_on_offer_id"
-    t.index ["secret"], name: "index_invites_on_secret"
   end
 
   create_table "nodes", force: :cascade do |t|
@@ -155,13 +136,13 @@ ActiveRecord::Schema.define(version: 2021_02_09_105404) do
     t.string "nonce", null: false
   end
 
-  create_table "offers", force: :cascade do |t|
+  create_table "otp_secrets", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id", null: false
-    t.integer "node_id", null: false
-    t.index ["node_id"], name: "index_offers_on_node_id"
-    t.index ["user_id"], name: "index_offers_on_user_id"
+    t.integer "owner_id", null: false
+    t.string "otp_secret_key", null: false
+    t.boolean "active", default: false
+    t.index ["owner_id"], name: "index_otp_secrets_on_owner_id", unique: true
   end
 
   create_table "pods", force: :cascade do |t|
@@ -192,16 +173,6 @@ ActiveRecord::Schema.define(version: 2021_02_09_105404) do
     t.string "userinfo_endpoint"
     t.datetime "expires_at"
     t.index ["issuer"], name: "index_providers_on_issuer", unique: true
-  end
-
-  create_table "rules", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "type"
-    t.integer "offer_id", null: false
-    t.integer "action", null: false
-    t.text "description"
-    t.index ["offer_id"], name: "index_rules_on_offer_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -237,17 +208,11 @@ ActiveRecord::Schema.define(version: 2021_02_09_105404) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "agreements", "invites"
-  add_foreign_key "agreements", "users"
   add_foreign_key "identities", "providers"
   add_foreign_key "identities", "users"
-  add_foreign_key "invites", "offers"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "web_ids", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_openid_requests", "oauth_access_grants", column: "access_grant_id", on_delete: :cascade
-  add_foreign_key "offers", "nodes"
-  add_foreign_key "offers", "users"
   add_foreign_key "pods", "web_ids"
-  add_foreign_key "rules", "offers"
 end

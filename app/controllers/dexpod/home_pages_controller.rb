@@ -7,7 +7,7 @@ module Dexpod
 
     private
 
-    def homepage_widgets # rubocop:disable Metrics/MethodLength
+    def homepage_widgets
       return [] unless pod_owner?
 
       @homepage_widgets ||= [
@@ -15,12 +15,6 @@ module Dexpod
           size: 3,
           resources: [
             current_pod.root_node.iri
-          ]
-        ),
-        LinkedRails::Widget.new(
-          size: 3,
-          resources: [
-            Agreement.root_collection.iri
           ]
         )
       ]

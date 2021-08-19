@@ -110,13 +110,8 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-  config.before do |spec|
-    Capybara.app_host =
-      if spec.file_path.include?('/dextransfer/')
-        'https://dextransfer.localdev'
-      else
-        'https://dexpods.localdev'
-      end
+  config.before do
+    Capybara.app_host = 'https://dexpods.localdev'
     LinkedRails.vocabulary_class.graph
     Rails.application.load_seed
   end

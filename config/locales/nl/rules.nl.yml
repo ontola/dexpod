@@ -1,9 +1,0 @@
-nl:
-  rules:
-    plural: "Regels"
-  prohibitions:
-    plural: "Verboden"
-  permissions:
-    plural: "Toegestaan"
-  obligations:
-    plural: "Verplicht"
