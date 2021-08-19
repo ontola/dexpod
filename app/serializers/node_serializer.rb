@@ -10,4 +10,6 @@ class NodeSerializer < RecordSerializer
             predicate: NS.schema[:contentUrl]
   attribute :icon,
             predicate: NS.schema[:image]
+  attribute :type,
+            predicate: NS.dex[:nodeType]
 end

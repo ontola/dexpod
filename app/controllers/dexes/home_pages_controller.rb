@@ -17,7 +17,9 @@ module Dexes
     end
 
     def welcome_text
-      'Welkom bij Dexes!'
+      return 'Welkom bij Dexes!' if current_user.guest?
+
+      "Welkom terug, #{current_user.display_name}!"
     end
   end
 end

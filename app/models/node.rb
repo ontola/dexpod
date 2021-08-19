@@ -34,6 +34,7 @@ class Node < ApplicationRecord
 
   has_ltree_hierarchy
 
+  with_collection :datasets
   with_collection :nodes,
                   default_sortings: [
                     {key: :type, direction: :asc}
@@ -99,8 +100,8 @@ class Node < ApplicationRecord
       return super if collection.type == :infinite
 
       [
-        NS.schema[:image],
-        NS.schema[:name]
+        NS.dex[:nodeType],
+        NS.schema.name
       ]
     end
   end

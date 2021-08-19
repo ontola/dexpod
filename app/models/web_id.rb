@@ -13,7 +13,7 @@ class WebId < ApplicationRecord
   accepts_nested_attributes_for :pod
 
   def display_name
-    email
+    pod&.pod_name || email
   end
 
   def guest?
