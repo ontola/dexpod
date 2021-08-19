@@ -8,6 +8,7 @@ begin
     /.well-known/webfinger
     /.well-known/webfinger?(.*)
     /.well-known/openid-configuration
+    /__better_errors/(.*)
     /oauth/(.*)
     /rails/(.*)
   ]

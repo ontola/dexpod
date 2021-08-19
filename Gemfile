@@ -52,6 +52,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'better_errors', '~> 2.7.0'
+  gem 'binding_of_caller'
   gem 'listen'
   gem 'rubocop'
   gem 'rubocop-rails'

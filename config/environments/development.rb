@@ -13,6 +13,7 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
+  BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if ENV['TRUSTED_IP']
   config.web_console.whitelisted_ips = [
     '192.168.0.0/16',
     '10.0.1.0/16',
@@ -25,6 +26,8 @@ Rails.application.configure do
   config.hosts << '.svc.cluster.local'
   config.hosts << ENV['HOSTNAME']
   config.hosts << ".#{ENV['HOSTNAME']}"
+
+  config.log_level = :debug
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
