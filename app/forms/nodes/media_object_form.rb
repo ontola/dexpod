@@ -5,6 +5,6 @@ class MediaObjectForm < NodeForm
 
   field :content_url,
         min_count: 1,
-        datatype: NS::LL[:blob],
+        datatype: NS.ll[:blob],
         label: ''
 end

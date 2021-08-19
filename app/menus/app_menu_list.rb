@@ -92,7 +92,7 @@ class AppMenuList < ApplicationMenuList
   def user_menu_sign_out_item
     menu_item(
       :signout,
-      action: NS::LIBRO['actions/logout'],
+      action: NS.libro['actions/logout'],
       label: I18n.t('menu.sign_out'),
       href: LinkedRails.iri(path: :logout)
     )

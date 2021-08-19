@@ -7,7 +7,7 @@ class Folder < Node
   enhance LinkedRails::Enhancements::Tableable
 
   with_columns default: [
-    NS::SCHEMA[:name]
+    NS.schema[:name]
   ]
 
   def title

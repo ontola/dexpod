@@ -8,7 +8,7 @@ class NodeActionList < ApplicationActionList
       "new_#{klass.name.underscore}",
       collection: true,
       exclude: true,
-      predicate: NS::ONTOLA[:createAction],
+      predicate: NS.ontola[:createAction],
       root_relative_iri: lambda {
         resource.parent.send("#{klass.name.underscore}_collection").action(:create).iri.path
       }

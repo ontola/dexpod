@@ -18,7 +18,7 @@ class Profile
 
   class << self
     def iri
-      NS::FOAF[:Person]
+      NS.foaf[:Person]
     end
 
     def requested_singular_resource(_params, _user_context)

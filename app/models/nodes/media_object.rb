@@ -22,8 +22,8 @@ class MediaObject < Node
 
   has_one_attached :content
   with_columns default: [
-    NS::SCHEMA[:uploadDate],
-    NS::ARGU[:copyUrl]
+    NS.schema[:uploadDate],
+    NS.argu[:copyUrl]
   ]
 
   attribute :content, FileType.new
@@ -34,7 +34,7 @@ class MediaObject < Node
   alias content_url= content=
 
   with_columns default: [
-    NS::SCHEMA[:name]
+    NS.schema[:name]
   ]
 
   def content_url
@@ -88,7 +88,7 @@ class MediaObject < Node
 
   class << self
     def iri
-      NS::SCHEMA[:MediaObject]
+      NS.schema[:MediaObject]
     end
   end
 end

@@ -2,7 +2,7 @@
 
 class SessionForm < LinkedRails.form_parent_class
   field :host,
-        datatype: NS::XSD[:string]
+        datatype: NS.xsd.string
 
   hidden do
     field :redirect_url

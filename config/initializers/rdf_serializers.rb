@@ -3,7 +3,7 @@
 require 'rdf/serializers/renderers'
 
 RDF::Serializers.configure do |config|
-  config.default_graph = NS::LL[:supplant]
+  config.default_graph = NS.ll[:supplant]
 end
 
 prefixes =

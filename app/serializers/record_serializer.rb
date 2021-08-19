@@ -3,8 +3,8 @@
 class RecordSerializer < LinkedSerializer
   include LinkedRails::Serializer
 
-  attribute :display_name, predicate: NS::SCHEMA[:name]
-  attribute :created_at, predicate: NS::SCHEMA[:dateCreated]
-  attribute :updated_at, predicate: NS::SCHEMA[:dateModified]
-  attribute :_destroy, predicate: NS::ONTOLA[:_destroy], if: method(:never)
+  attribute :display_name, predicate: NS.schema[:name]
+  attribute :created_at, predicate: NS.schema[:dateCreated]
+  attribute :updated_at, predicate: NS.schema[:dateModified]
+  attribute :_destroy, predicate: NS.ontola[:_destroy], if: method(:never)
 end

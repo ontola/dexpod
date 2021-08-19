@@ -9,10 +9,10 @@ module DeltaHelper
 
   def invalidate_resource(iri)
     [
-      NS::SP.Variable,
-      NS::SP.Variable,
-      NS::SP.Variable,
-      NS::ONTOLA["invalidate?graph=#{CGI.escape(iri)}"]
+      NS.sp.Variable,
+      NS.sp.Variable,
+      NS.sp.Variable,
+      NS.ontola["invalidate?graph=#{CGI.escape(iri)}"]
     ]
   end
 end

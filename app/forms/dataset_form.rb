@@ -7,7 +7,7 @@ class DatasetForm < ApplicationForm
   field :themes,
         input_field: LinkedRails::Form::Field::SelectInput,
         grouped: true,
-        datatype: NS::XSD[:string],
+        datatype: NS.xsd.string,
         sh_in: form_options_iri(:theme, DatasetTheme),
         min_count: 1,
         max_count: 99

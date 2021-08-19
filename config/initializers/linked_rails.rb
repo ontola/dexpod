@@ -4,7 +4,7 @@ require_relative './ns'
 
 LinkedRails.host = ENV['HOSTNAME']
 LinkedRails.scheme = :https
-LinkedRails.app_ns = NS::DEX
+LinkedRails.app_ns = NS.dex
 LinkedRails.serializer_parent_class = 'LinkedSerializer'
 LinkedRails.registration_form_class = 'RegistrationForm'
 LinkedRails.user_class = 'WebId'

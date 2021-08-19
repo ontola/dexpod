@@ -16,7 +16,7 @@ class CurrentUser
   end
 
   def rdf_type
-    NS::ONTOLA[actor_type]
+    NS.ontola[actor_type]
   end
 
   class << self

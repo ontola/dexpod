@@ -2,17 +2,17 @@
 
 class WebIdSerializer < LinkedSerializer
   has_one :pod,
-          predicate: NS::ARGU[:pod]
+          predicate: NS.argu[:pod]
 
-  attribute :display_name, predicate: NS::FOAF[:name]
+  attribute :display_name, predicate: NS.foaf[:name]
 
-  attribute :password, predicate: NS::ARGU[:password], datatype: NS::ONTOLA[:'datatype/password'], if: method(:never)
+  attribute :password, predicate: NS.argu[:password], datatype: NS.ontola[:'datatype/password'], if: method(:never)
   attribute :password_confirmation,
-            predicate: NS::ARGU[:passwordConfirmation],
-            datatype: NS::ONTOLA[:'datatype/password'],
+            predicate: NS.argu[:passwordConfirmation],
+            datatype: NS.ontola[:'datatype/password'],
             if: method(:never)
   attribute :current_password,
-            predicate: NS::ARGU[:currentPassword],
-            datatype: NS::ONTOLA[:'datatype/password'],
+            predicate: NS.argu[:currentPassword],
+            datatype: NS.ontola[:'datatype/password'],
             if: method(:never)
 end

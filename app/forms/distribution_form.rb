@@ -3,7 +3,7 @@
 class DistributionForm < ApplicationForm
   field :node_id,
         min_count: 1,
-        datatype: NS::XSD[:string],
+        datatype: NS.xsd.string,
         input_field: LinkedRails::Form::Field::SelectInput
   field :format,
         min_count: 1

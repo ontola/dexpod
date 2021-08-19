@@ -1,0 +1,69 @@
+en:
+  dbo:
+    filename:
+      label: "Filename"
+  dex:
+    nodeType:
+      label: "Type"
+  foaf:
+    name:
+      label: "Naam"
+  ontola:
+    quickActions:
+      label: "Actions"
+  org:
+    hasMember:
+      label: "Members"
+    member:
+      label: "Member"
+  rdfv:
+    type:
+      label: "Type"
+  schema:
+    CreativeWork:
+      label: "Document"
+      plural_label: "Documents"
+    GeoCoordinates:
+      label: "Location"
+      plural_label: "Locations"
+    ImageObject:
+      icon: "file-image-o"
+      label: "Image"
+      plural_label: "Images"
+    MediaObject:
+      description: 'An attachment is a file which has been appended to a document to provide more information.'
+      icon: "file"
+      label: "Attachment"
+      plural_label: "Attachments"
+    Offer:
+      label: "Option"
+      plural_label: "Options"
+    Person:
+      label: "Person"
+      plural_label: "People"
+    Thing:
+      label: "Thing"
+      plural_label: "Things"
+    Widget:
+      label: "Widget"
+      plural_label: "Widgets"
+    creator:
+      label: "Creator"
+    dateCreated:
+      label: "Date created"
+    dateModified:
+      label: "Date modified"
+    email:
+      label: "Email"
+    image:
+      label: "Image"
+    name:
+      label: "Name"
+    option:
+      label: "Option"
+    orderedItem:
+      label: "Ordered item"
+    uploadDate:
+      label: "Upload date"
+    url:
+      label: "Url"

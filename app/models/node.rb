@@ -42,11 +42,11 @@ class Node < ApplicationRecord
   with_collection :folders
 
   with_columns default: [
-    NS::SCHEMA[:image],
-    NS::SCHEMA[:name],
-    NS::SCHEMA[:dateCreated],
-    NS::SCHEMA[:dateModified],
-    NS::ONTOLA[:quickActions]
+    NS.schema[:image],
+    NS.schema[:name],
+    NS.schema[:dateCreated],
+    NS.schema[:dateModified],
+    NS.ontola[:quickActions]
   ]
 
   alias_attribute :display_name, :title
@@ -99,8 +99,8 @@ class Node < ApplicationRecord
       return super if collection.type == :infinite
 
       [
-        NS::SCHEMA[:image],
-        NS::SCHEMA[:name]
+        NS.schema[:image],
+        NS.schema[:name]
       ]
     end
   end

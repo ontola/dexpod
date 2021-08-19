@@ -108,7 +108,7 @@ module HelperMethods # rubocop:disable Metrics/ModuleLength
   end
 
   def select_file(file = photo.jpg)
-    within("fieldset[property=\"#{NS::DEX[:file]}\"]") do
+    within("fieldset[property=\"#{NS.dex[:file]}\"]") do
       attach_file(nil, File.absolute_path("spec/fixtures/#{file}"), make_visible: true)
     end
   end
