@@ -7,7 +7,7 @@ class Manifest
   attr_accessor :pod, :scope
 
   def app_name
-    'Dexes'
+    'DexPods'
   end
 
   def app_theme_color

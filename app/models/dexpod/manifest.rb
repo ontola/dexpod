@@ -3,7 +3,7 @@
 module Dexpod
   class Manifest < ::Manifest
     def app_name
-      'Dexes'
+      'DexPods'
     end
 
     def site_name
