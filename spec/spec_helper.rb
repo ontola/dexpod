@@ -4,6 +4,7 @@ require 'active_support/testing/assertions'
 require 'active_support/testing/time_helpers'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
+require 'database_cleaner/active_record'
 require 'selenium/webdriver'
 require 'webdrivers'
 require 'rspec/instafail'
@@ -16,6 +17,7 @@ require 'support/matchers'
 
 Bugsnag.configuration.notify_release_stages = %w[test]
 Sidekiq::Testing.inline!
+DatabaseCleaner.strategy = :truncation
 
 Capybara.configure do |config|
   config.default_driver = :selenium_chrome
@@ -123,6 +125,36 @@ RSpec.configure do |config|
       upload_browser_logs(example)
       copy_test_log(example)
     end
+  end
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+    Apartment::Tenant.drop('user') if ApplicationRecord.connection.schema_exists?('user')
+  end
+
+  config.before(:each, type: :feature) do
+    # :rack_test driver's Rack app under test shares database connection
+    # with the specs, so continue to use transaction strategy for speed.
+    driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
+
+    unless driver_shares_db_connection_with_specs
+      # Driver is probably for an external browser with an app
+      # under test that does *not* share a database connection with the
+      # specs, so use truncation strategy.
+      DatabaseCleaner.strategy = :truncation
+    end
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.append_after(:each) do
+    DatabaseCleaner.clean
   end
 end
 
