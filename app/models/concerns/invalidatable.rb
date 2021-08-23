@@ -23,11 +23,11 @@ module Invalidatable
     end
 
     def invalidate
-      ResourceInvalidationWorker.perform_later(iri.to_s)
+      ResourceInvalidationJob.perform_later(iri.to_s)
     end
 
     def publish_message(type)
-      ResourceInvalidationStreamWorker.perform_later(type, iri.to_s, self.class.iri.to_s)
+      ResourceInvalidationStreamJob.perform_later(type, iri.to_s, self.class.iri.to_s)
     end
   end
 end

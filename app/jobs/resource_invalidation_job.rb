@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ResourceInvalidationWorker < ApplicationJob
+class ResourceInvalidationJob < ApplicationJob
   include DeltaHelper
 
   def perform(iri)

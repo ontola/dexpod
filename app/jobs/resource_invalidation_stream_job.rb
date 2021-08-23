@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ResourceInvalidationStreamWorker < ApplicationJob
+class ResourceInvalidationStreamJob < ApplicationJob
   def perform(type, iri, resource_type)
     redis = Redis.new(url: Rails.configuration.stream_redis_url)
 
