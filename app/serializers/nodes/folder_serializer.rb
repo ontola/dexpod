@@ -3,7 +3,7 @@
 class FolderSerializer < NodeSerializer
   attribute :parent,
             predicate: NS.schema[:isPartOf] do |object|
-    object.parent || LinkedRails.iri
+    object.parent&.iri || LinkedRails.iri
   end
 
   with_collection :nodes, predicate: NS.dex[:entries]

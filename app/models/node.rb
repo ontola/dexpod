@@ -9,6 +9,7 @@ class Node < ApplicationRecord
   enhance LinkedRails::Enhancements::Updatable
   enhance LinkedRails::Enhancements::Destroyable
   enhance LinkedRails::Enhancements::Tableable
+  enhance LinkedRails::Enhancements::Menuable
   enhance Distributable
 
   belongs_to :parent,
@@ -64,12 +65,8 @@ class Node < ApplicationRecord
     false
   end
 
-  def quick_actions # rubocop:disable Metrics/AbcSize
-    @quick_actions ||= LinkedRails::Sequence.new([
-      action(:update)&.iri,
-      action(:destroy)&.iri,
-      datasets.any? ? datasets.first.action(:update)&.iri : dataset_collection.action(:create)&.iri
-    ].compact, scope: false)
+  def quick_actions
+    @quick_actions ||= menu(:quick).menu_sequence_iri
   end
 
   def root_object?
@@ -90,10 +87,6 @@ class Node < ApplicationRecord
     def inherited(klass)
       klass.enhance LinkedRails::Enhancements::Creatable
       super
-    end
-
-    def preview_includes
-      super + [:quick_actions]
     end
 
     def sort_options(collection)

@@ -2,9 +2,11 @@
 
 class NodeSerializer < RecordSerializer
   attribute :parent,
-            predicate: NS.schema[:isPartOf]
-  has_one :quick_actions,
-          predicate: NS.ontola[:quickActions]
+            predicate: NS.schema[:isPartOf] do |object|
+    object.parent&.iri
+  end
+  attribute :quick_actions,
+            predicate: NS.ontola[:quickActions]
 
   attribute :content_url,
             predicate: NS.schema[:contentUrl]
