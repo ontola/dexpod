@@ -7,6 +7,14 @@ module ExceptionHelper
 
   LOGGER = Logger.new(STDOUT)
 
+  def user_pod?(example)
+    example.example_group.to_s.include?('UserPod')
+  end
+
+  def schema_for_example(example)
+    user_pod?(example) ? 'user' : 'public'
+  end
+
   def copy_test_log(example)
     test_log = Rails.root.join('log/test.log')
     dir = [exception_file_dir, example_filename(example)].join('/')

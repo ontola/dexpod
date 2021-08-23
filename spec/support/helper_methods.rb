@@ -51,9 +51,18 @@ module HelperMethods # rubocop:disable Metrics/ModuleLength
     names.map { |name| name.is_a?(String) ? Base64.encode64(name).gsub("\n", '') : name }.join('.')
   end
 
-  def fill_in_login_form(email, password = 'password') # rubocop:disable Metrics/AbcSize
-    wait_for(page).to have_css('.MuiDialog-paper')
+  def fill_in_oicd_form(provider = 'dexpods.localdev')
+    wait_for { page }.to have_css('.MuiDialog-paper')
     within('.MuiDialog-paper') do
+      wait_for(page).to have_content 'Inloggen of registeren'
+      fill_in field_name(NS.dex[:providerHost].to_s), with: provider
+      click_button 'Ga verder'
+    end
+  end
+
+  def fill_in_login_form(email, password: 'password', wrapper: '.MuiDialog-paper') # rubocop:disable Metrics/AbcSize
+    wait_for { page }.to have_css(wrapper)
+    within(wrapper) do
       wait_for(page).to have_content 'Inloggen of registeren'
       fill_in field_name('http://schema.org/email'), with: email
       click_button 'Ga verder'
@@ -64,9 +73,9 @@ module HelperMethods # rubocop:disable Metrics/ModuleLength
     end
   end
 
-  def fill_in_registration_form(email = 'new@example.com') # rubocop:disable Metrics/AbcSize
-    wait_for(page).to have_css('.MuiDialog-paper')
-    within('.MuiDialog-paper') do
+  def fill_in_registration_form(email = 'new@example.com', wrapper: '.MuiDialog-paper') # rubocop:disable Metrics/AbcSize
+    wait_for(page).to have_css(wrapper)
+    within(wrapper) do
       wait_for(page).to have_content('Inloggen of registeren')
       fill_in field_name('http://schema.org/email'), with: email
       click_button 'Ga verder'
@@ -117,36 +126,52 @@ module HelperMethods # rubocop:disable Metrics/ModuleLength
     find('label', text: label).click
   end
 
-  def sign_in(user) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def sign_in(user, exp: nil) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     WebMock.allow_net_connect!
     visit "#{Capybara.app_host}/d/health"
     cookies, csrf = authentication_values
 
-    conn = Faraday.new(url: "#{Capybara.app_host}/login") do |faraday|
-      faraday.request :multipart
-      faraday.adapter :net_http
-    end
-    response = conn.post do |req|
-      req.headers.merge!(
-        'Accept': 'application/hex+x-ndjson',
-        'Content-Type': 'multipart/form-data',
-        'Cookie' => HTTP::Cookie.cookie_value(cookies),
-        'X-CSRF-Token' => csrf,
-        'Website-IRI' => Capybara.app_host
-      )
-      req.body = {'<http://purl.org/link-lib/graph>' => login_body(user.email, user.password)}
-    end
+    with_token_expiry(exp) do
+      conn = Faraday.new(url: 'https://dexpods.localdev/login') do |faraday|
+        faraday.request :multipart
+        faraday.adapter :net_http
+      end
+      response = conn.post do |req|
+        req.headers.merge!(
+          'Accept': 'application/hex+x-ndjson',
+          'Content-Type': 'multipart/form-data',
+          'Cookie' => HTTP::Cookie.cookie_value(cookies),
+          'X-CSRF-Token' => csrf,
+          'Website-IRI' => Capybara.app_host
+        )
+        req.body = {'<http://purl.org/link-lib/graph>' => login_body(user.email, user.password)}
+      end
 
-    expect(response.status).to eq(200)
+      expect(response.status).to eq(200)
+      verify_token_expiry(response, exp || 7200)
+    end
 
     cookies.each do |cookie|
-      page.driver.browser.manage.add_cookie(name: cookie.name, value: cookie.value)
+      page.driver.browser.manage.add_cookie(
+        domain: 'dexpods.localdev',
+        name: cookie.name,
+        value: cookie.value
+      )
     end
 
     WebMock.disable_net_connect!(
       allow_localhost: true,
       allow: ALLOWED_HOSTS
     )
+  end
+
+  def sign_in_oidc(user)
+    sign_in user
+    visit '/'
+    wait_for(page).to have_link('Log in / registreer')
+    click_link 'Log in / registreer'
+    fill_in_oicd_form
+    verify_logged_in
   end
 
   def login_body(actor, password)
@@ -157,9 +182,26 @@ module HelperMethods # rubocop:disable Metrics/ModuleLength
     Faraday::UploadIO.new(StringIO.new(body), 'application/n-triples')
   end
 
+  def parsed_body(response)
+    JSON.parse(response.body).with_indifferent_access
+  end
+
+  def parsed_access_token(response)
+    JWT.decode(parsed_body(response)['access_token'], nil, false)[0]
+  end
+
   def verify_logged_in
     wait(30).for { page }.to have_css("div[resource=\"#{Capybara.app_host}/c_a\"]", visible: false)
     expect(page).not_to have_content('Log in / registreer')
+  end
+
+  def verify_not_logged_in
+    wait_for { page }.to have_content('Log in / registreer')
+  end
+
+  def verify_token_expiry(response, expected)
+    actual = parsed_access_token(response)['exp'] - parsed_access_token(response)['iat']
+    expect(actual).to eq(expected)
   end
 
   def wait_until_loaded

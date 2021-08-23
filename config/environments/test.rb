@@ -9,7 +9,7 @@ Rails.application.configure do
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
   # Settings specified here will take precedence over those in config/application.rb.
-  config.host_name = 'example.com'
+  config.host_name = 'dexpods.localdev'
   config.origin = "https://#{ENV['HOSTNAME']}"
   config.action_mailer.default_url_options = {
     host: config.host_name,

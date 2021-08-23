@@ -14,6 +14,7 @@ require 'sidekiq/testing'
 require 'support/exception_helper'
 require 'support/helper_methods'
 require 'support/matchers'
+require 'support/auth_test_helper'
 
 Bugsnag.configuration.notify_release_stages = %w[test]
 Sidekiq::Testing.inline!
@@ -74,6 +75,7 @@ Capybara::Screenshot.append_timestamp = false
 
 RSpec.configure do |config|
   config.include HelperMethods
+  config.include AuthTestHelper
   config.include Matchers
   config.include FactoryBot::Syntax::Methods
   config.include ExceptionHelper
@@ -112,8 +114,8 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-  config.before do
-    Capybara.app_host = 'https://dexpods.localdev'
+  config.before do |example|
+    Capybara.app_host = "https://#{user_pod?(example) ? 'user.' : ''}dexpods.localdev"
     Rails.application.load_seed
   end
 
