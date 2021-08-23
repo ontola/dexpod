@@ -5,6 +5,10 @@ class WebId < ApplicationRecord
          :rememberable, :trackable, :validatable
   attr_accessor :redirect_url
 
+  has_one :otp_secret,
+          dependent: :destroy,
+          foreign_key: :owner_id,
+          inverse_of: :owner
   has_one :pod,
           inverse_of: :web_id,
           autosave: true,
@@ -20,17 +24,15 @@ class WebId < ApplicationRecord
     false
   end
 
+  def otp_active?
+    otp_secret&.active?
+  end
+
   def password_required?
     !password.nil? || !password_confirmation.nil?
   end
 
   def profile
     @profile ||= Profile.new(web_id: self) if pod
-  end
-
-  private
-
-  def create_pod?
-    pod.blank? || pod.pod_name_previously_changed?
   end
 end

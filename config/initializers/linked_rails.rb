@@ -8,6 +8,7 @@ LinkedRails.app_ns = NS.dex
 LinkedRails.serializer_parent_class = 'LinkedSerializer'
 LinkedRails.registration_form_class = 'RegistrationForm'
 LinkedRails.user_class = 'WebId'
+LinkedRails.otp_secret_class = 'OtpSecret'
 LinkedRails.otp_owner_class = 'WebId'
 
 module LinkedRails

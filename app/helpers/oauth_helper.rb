@@ -11,6 +11,10 @@ module OauthHelper
     head 401
   end
 
+  def handle_invalid_token
+    @current_user = create_guest_user
+  end
+
   def redirect_guests
     return true if (current_user && !current_user&.guest?) || response_body
 

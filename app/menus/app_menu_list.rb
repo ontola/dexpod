@@ -12,8 +12,6 @@ class AppMenuList < ApplicationMenuList
   has_menu :user,
            label: -> { user_context.display_name },
            menus: -> { user_menu_items }
-  has_menu :session,
-           menus: -> { session_links }
 
   def iri_template
     @iri_template ||= URITemplate.new('/menus{#fragment}')

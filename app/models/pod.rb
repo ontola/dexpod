@@ -37,7 +37,7 @@ class Pod < ApplicationRecord
   private
 
   def create_tenant
-    Apartment::Tenant.create(pod_name)
+    Apartment::Tenant.create(pod_name) unless ApplicationRecord.connection.schema_exists?(pod_name)
 
     seed_tenant
   end
