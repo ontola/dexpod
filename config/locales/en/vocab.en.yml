@@ -9,6 +9,8 @@ en:
     name:
       label: "Naam"
   ontola:
+    password:
+      label: "Wachtwoord"
     quickActions:
       label: "Actions"
   org:

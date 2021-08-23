@@ -19,14 +19,14 @@ spec:
         paths:
           - path: /link-lib/bulk
             backend:
-              serviceName: apex-rs-staging
+              serviceName: cache-staging
               servicePort: 3030
     - host: '*.staging.dexpods.eu'
       http:
         paths:
           - path: /link-lib/bulk
             backend:
-              serviceName: apex-rs-staging
+              serviceName: cache-staging
               servicePort: 3030
     - host: staging.dexpods.eu
       http:
@@ -47,14 +47,14 @@ spec:
         paths:
           - path: /link-lib/bulk
             backend:
-              serviceName: apex-rs-production
+              serviceName: cache-production
               servicePort: 3030
     - host: '*.dexpods.eu'
       http:
         paths:
           - path: /link-lib/bulk
             backend:
-              serviceName: apex-rs-production
+              serviceName: cache-production
               servicePort: 3030
     - host: dexpods.eu
       http:

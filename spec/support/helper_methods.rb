@@ -126,30 +126,28 @@ module HelperMethods # rubocop:disable Metrics/ModuleLength
     find('label', text: label).click
   end
 
-  def sign_in(user, exp: nil) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def sign_in(user) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     WebMock.allow_net_connect!
     visit "#{Capybara.app_host}/d/health"
     cookies, csrf = authentication_values
 
-    with_token_expiry(exp) do
-      conn = Faraday.new(url: 'https://dexpods.localdev/login') do |faraday|
-        faraday.request :multipart
-        faraday.adapter :net_http
-      end
-      response = conn.post do |req|
-        req.headers.merge!(
-          'Accept': 'application/hex+x-ndjson',
-          'Content-Type': 'multipart/form-data',
-          'Cookie' => HTTP::Cookie.cookie_value(cookies),
-          'X-CSRF-Token' => csrf,
-          'Website-IRI' => Capybara.app_host
-        )
-        req.body = {'<http://purl.org/link-lib/graph>' => login_body(user.email, user.password)}
-      end
-
-      expect(response.status).to eq(200)
-      verify_token_expiry(response, exp || 7200)
+    conn = Faraday.new(url: 'https://dexpods.localdev/login') do |faraday|
+      faraday.request :multipart
+      faraday.adapter :net_http
     end
+    response = conn.post do |req|
+      req.headers.merge!(
+        'Accept': 'application/hex+x-ndjson',
+        'Content-Type': 'multipart/form-data',
+        'Cookie' => HTTP::Cookie.cookie_value(cookies),
+        'X-CSRF-Token' => csrf,
+        'Website-IRI' => Capybara.app_host
+      )
+      req.body = {'<http://purl.org/link-lib/graph>' => login_body(user.email, user.password)}
+    end
+
+    expect(response.status).to eq(200)
+    verify_token_expiry(response, 7200)
 
     cookies.each do |cookie|
       page.driver.browser.manage.add_cookie(

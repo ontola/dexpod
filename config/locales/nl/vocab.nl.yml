@@ -9,6 +9,8 @@ nl:
     name:
       label: "Naam"
   ontola:
+    password:
+      label: "Wachtwoord"
     quickActions:
       label: "Acties"
   org:

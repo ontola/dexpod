@@ -6,9 +6,10 @@ cache:
 
 variables:
   ARGU_API_URL: 'http://argu.svc.cluster.local:3000'
+  BACKEND_REDIS_DATABASE: 0
   BUGSNAG_KEY: 'b3e527c0a89dd7ecec4f61a29e1e2265'
   CACHE_CHANNEL: 'cache'
-  DATABASE_URL: 'postgresql://testdb:testdb@localhost:5432/apex_rs_staging'
+  CACHE_REDIS_DATABASE: 8
   DEVICE_ID_COOKIE_NAME: 'deviceId'
   DEVICE_ID_COOKIE_SIGNATURE_NAME: 'deviceId.sig'
   DEXES_DATABASE: 'dexes_test'
@@ -17,12 +18,17 @@ variables:
   JWT_ENCRYPTION_TOKEN: 'secret'
   LIBRO_CLIENT_ID: 'libro'
   LIBRO_CLIENT_SECRET: 'libro'
+  LIBRO_REDIS_DATABASE: 0
+  LOG_LEVEL: 'debug'
   POSTGRESQL_PASSWORD: 'testdb'
   POSTGRESQL_USER: 'testdb'
   POSTGRES_PASSWORD: 'testdb'
   POSTGRES_USER: 'testdb'
   RAILS_OAUTH_TOKEN: 'secret'
-  REDIS_URL: 'redis://localhost:6379/1'
+  STREAM_REDIS_DATABASE: 7
+  STREAM_REDIS_URL: 'redis://localhost:6379/7'
+  REDIS_HOST: 'localhost'
+  REDIS_URL: 'redis://localhost:6379/0'
   SESSION_COOKIE_NAME: 'koa:sess'
   SESSION_COOKIE_SIGNATURE_NAME: 'koa:sess.sig'
   SESSION_SECRET: 'secret'
@@ -100,13 +106,13 @@ spec:
     - sudo sh -c "echo '127.0.0.1 $HOSTNAME' >> /etc/hosts"
     - sudo sh -c "echo '127.0.0.1 user.$HOSTNAME' >> /etc/hosts"
     - sudo sh -c "echo '127.0.0.1 argu.svc.cluster.local' >> /etc/hosts"
-    - sudo sh -c "echo '127.0.0.1 apex-rs.svc.cluster.local' >> /etc/hosts"
+    - sudo sh -c "echo '127.0.0.1 cache.svc.cluster.local' >> /etc/hosts"
     - sudo cat /etc/hosts
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
-    - docker run  --network="host" --add-host argu.svc.cluster.local:127.0.0.1 -e ARGU_API_URL -e REDIS_URL -e DATABASE_URL -e CACHE_CHANNEL -e SESSION_COOKIE_NAME -e SESSION_COOKIE_SIGNATURE_NAME -e SESSION_SECRET registry.gitlab.com/ontola/apex-rs:staging /usr/local/bin/migrate --version setup
-    - docker run -d --name apex_rs_worker --network="host" --add-host argu.svc.cluster.local:127.0.0.1 -e ARGU_API_URL -e REDIS_URL -e DATABASE_URL -e CACHE_CHANNEL -e SESSION_COOKIE_NAME -e SESSION_COOKIE_SIGNATURE_NAME -e SESSION_SECRET registry.gitlab.com/ontola/apex-rs:staging /usr/local/bin/invalidator_redis
-    - docker run -d --name apex_rs --network="host" --add-host argu.svc.cluster.local:127.0.0.1 -e ARGU_API_URL -e REDIS_URL -e DATABASE_URL -e CACHE_CHANNEL -e SESSION_COOKIE_NAME -e SESSION_COOKIE_SIGNATURE_NAME -e SESSION_SECRET registry.gitlab.com/ontola/apex-rs:staging
-    - docker run -d --name frontend --network="host" --add-host argu.svc.cluster.local:127.0.0.1 --add-host apex-rs.svc.cluster.local:127.0.0.1 -e LIBRO_CLIENT_ID -e LIBRO_CLIENT_SECRET -e LOG_LEVEL=debug -e RAILS_OAUTH_TOKEN -e SESSION_SECRET -e BUGSNAG_KEY -e JWT_ENCRYPTION_TOKEN registry.gitlab.com/ontola/libro:$LIBRO_TAG
+    - printenv | grep "^[A-Z_]*=" > env.list
+    - cat env.list
+    - docker run -d --name cache --network="host" --add-host argu.svc.cluster.local:127.0.0.1 --env-file env.list registry.gitlab.com/ontola/cache/master:staging
+    - docker run -d --name frontend --network="host" --add-host argu.svc.cluster.local:127.0.0.1 --add-host cache.svc.cluster.local:127.0.0.1 --env-file env.list registry.gitlab.com/ontola/libro:$LIBRO_TAG
     - cd spec/server; ./setup.sh; cd ../..
     - docker run -v $(pwd)/spec/server/nginx.conf:/etc/nginx/nginx.conf -v $(pwd)/spec/server/ssl:/etc/nginx/ssl --network="host" --name nginx -d nginx
     - docker ps -a
@@ -120,15 +126,13 @@ spec:
     - docker ps --no-trunc -a &> $CI_PROJECT_DIR/container-status.txt || true
     - docker logs frontend &> $CI_PROJECT_DIR/frontend-logs.txt || true
     - docker logs nginx &> $CI_PROJECT_DIR/nginx-logs.txt || true
-    - docker logs apex_rs_worker &> $CI_PROJECT_DIR/apex_rs_worker-logs.txt || true
-    - docker logs apex_rs &> $CI_PROJECT_DIR/apex_rs-logs.txt || true
+    - docker logs cache &> $CI_PROJECT_DIR/cache-logs.txt || true
   artifacts:
     paths:
       - container-status.txt
       - frontend-logs.txt
       - nginx-logs.txt
-      - apex_rs_worker-logs.txt
-      - apex_rs-logs.txt
+      - cache-logs.txt
       - log/
       - tmp/capybara/
     expire_in: 1 week

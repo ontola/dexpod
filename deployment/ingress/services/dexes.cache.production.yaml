@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: apex-rs-production
+  name: cache-production
   namespace: default
 spec:
   type: ExternalName
-  externalName: apex-rs.production.svc.cluster.local
+  externalName: cache.production.svc.cluster.local
   ports:
     - port: 80

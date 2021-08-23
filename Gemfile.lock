@@ -595,6 +595,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15, < 4.0)
   capybara-screenshot
+  database_cleaner-active_record
   devise
   doorkeeper
   doorkeeper-jwt

@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: apex-rs-staging
+  name: cache-staging
   namespace: default
 spec:
   type: ExternalName
-  externalName: apex-rs.staging.svc.cluster.local
+  externalName: cache.staging.svc.cluster.local
   ports:
     - port: 80

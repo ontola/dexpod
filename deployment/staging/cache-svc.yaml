@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: apex-rs
-  namespace: production
+  name: cache
+  namespace: staging
 spec:
   type: ClusterIP
   selector:
-    app: apex-rs
+    app: cache
   ports:
     - name: "http"
       port: 3030

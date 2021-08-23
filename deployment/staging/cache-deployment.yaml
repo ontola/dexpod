@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: apex-rs
+  name: cache
   namespace: staging
 spec:
   selector:
     matchLabels:
-      app: apex-rs
+      app: cache
   template:
     metadata:
       labels:
-        app: apex-rs
+        app: cache
     spec:
       containers:
-        - name: apex-rs
-          image: registry.gitlab.com/ontola/apex-rs:staging
+        - name: cache
+          image: registry.gitlab.com/ontola/cache/master:staging
           envFrom:
             - secretRef:
-                name: apex-rs-secret
+                name: cache-secret
             - secretRef:
                 name: postgres-secret
           resources:
@@ -25,4 +25,4 @@ spec:
               memory: 200Mi
               cpu: 250m
       imagePullSecrets:
-        - name: gitlab-apex-rs
+        - name: gitlab-cache
