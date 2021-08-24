@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_19_115602) do
+ActiveRecord::Schema.define(version: 2021_08_23_141301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_08_19_115602) do
     t.bigint "dataset_id", null: false
     t.bigint "node_id", null: false
     t.string "format"
+    t.string "offer_iri"
     t.index ["dataset_id"], name: "index_distributions_on_dataset_id"
     t.index ["node_id"], name: "index_distributions_on_node_id"
   end

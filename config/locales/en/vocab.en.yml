@@ -2,6 +2,11 @@ en:
   dbo:
     filename:
       label: "Filename"
+  dcat:
+    distribution:
+      label: "Distributions"
+    theme:
+      label: "Themes"
   dex:
     nodeType:
       label: "Type"

@@ -28,6 +28,7 @@ require_relative '../lib/apartment_sidekiq'
 require_relative '../lib/types/iri_type'
 require_relative './initializers/version'
 
+require_relative '../lib/dex_broker'
 require_relative '../lib/first_sub_domain_without_api'
 
 module Dexpod
@@ -58,6 +59,8 @@ module Dexpod
     redis_url_db = ENV['REDIS_URL'] && URI(ENV['REDIS_URL']).path&.split('/')&.dig(1)
     config.redis_database = (ENV['BACKEND_REDIS_DATABASE'] || redis_url_db)&.to_i || 0
     config.stream_redis_url = ENV['STREAM_REDIS_URL'] || ENV['REDIS_URL']
+
+    config.broker_url = ENV['BROKER_URL']
 
     config.action_mailer.default_url_options = {
       host: config.host_name,

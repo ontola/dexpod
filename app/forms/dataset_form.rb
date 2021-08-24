@@ -11,6 +11,7 @@ class DatasetForm < ApplicationForm
         sh_in: form_options_iri(:theme, DatasetTheme),
         min_count: 1,
         max_count: 99
-  field :license
+  field :license,
+        min_count: 1
   field :license_description
 end

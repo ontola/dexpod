@@ -8,6 +8,7 @@ class Dataset < ApplicationRecord
   enhance LinkedRails::Enhancements::Updatable
   enhance LinkedRails::Enhancements::Indexable
   enhance LinkedRails::Enhancements::Tableable
+  enhance LinkedRails::Enhancements::Menuable
 
   belongs_to :user
   has_many :dataset_themes, dependent: :destroy

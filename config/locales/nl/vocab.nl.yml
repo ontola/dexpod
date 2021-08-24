@@ -2,6 +2,11 @@ nl:
   dbo:
     filename:
       label: "Bestandsnaam"
+  dcat:
+    distribution:
+      label: "Distributies"
+    theme:
+      label: "Thema's"
   dex:
     nodeType:
       label: "Type"

@@ -3,6 +3,10 @@
 class User < ApplicationRecord
   has_many :identities, dependent: :destroy
 
+  def dex_identity
+    identities.dexpod.first
+  end
+
   def display_name
     pod_name || "User #{id}"
   end
@@ -22,11 +26,5 @@ class User < ApplicationRecord
 
   def pod
     Pod.find_by!(pod_name: pod_name) if pod_name
-  end
-
-  private
-
-  def dex_identity
-    identities.dexpod.first
   end
 end

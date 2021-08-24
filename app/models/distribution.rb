@@ -9,7 +9,8 @@ class Distribution < ApplicationRecord
   attribute :format, IRIType.new
 
   delegate :title, to: :node
-  delegate :license, :description, to: :dataset
+  delegate :license, :description, :user, to: :dataset
+  after_commit :schedule_offer_job, on: :create
 
   def format
     super || format_from_content_type
@@ -24,5 +25,9 @@ class Distribution < ApplicationRecord
     return unless node&.content_type
 
     options.keys.detect { |k| k.to_s.split('/').last == node.content_type.split('/').last.upcase }
+  end
+
+  def schedule_offer_job
+    CreateOfferJob.perform_later(id)
   end
 end
