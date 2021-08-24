@@ -2,6 +2,20 @@
 
 class DexBroker
   class << self
+    # @return boolean The verdict of the broker
+    def authorize(action, resource, recipient)
+      query = {
+        action: action,
+        resource: resource,
+        recipient: recipient
+      }
+      get("/authorize?#{query.to_param}")
+
+      true
+    rescue Faraday::ForbiddenError
+      false
+    end
+
     # @return string Iri of the newly created Offer
     def create_offer(body)
       response = post('/offers', body.to_json)

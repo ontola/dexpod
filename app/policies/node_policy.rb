@@ -11,11 +11,7 @@ class NodePolicy < ApplicationPolicy
   ]
 
   def show?
-    pod_owner?
-
-    # @todo pod_owner, shared or invitee
-    # Invitees can only see the node, not the content
-    true
+    pod_owner? || broker_authorization(:show)
   end
 
   def create?
@@ -38,11 +34,16 @@ class NodePolicy < ApplicationPolicy
     show?
   end
 
-  def new_folder
-    pod_owner?
-  end
+  private
 
-  def new_media_object
-    pod_owner?
+  def broker_authorization(action)
+    web_id = user_context&.dex_identity&.identifier
+    return false if web_id.blank? || record.new_record?
+
+    DexBroker.authorize(
+      action,
+      record.iri,
+      web_id
+    )
   end
 end
