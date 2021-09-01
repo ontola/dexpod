@@ -4,7 +4,7 @@ class CreateOfferJob < ApplicationJob
   attr_accessor :distribution
 
   def perform(distribution_id)
-    if !broker_url
+    unless DexBroker.has_url?
       Rails.logger.error('No broker URL present')
       return
     end
@@ -28,14 +28,9 @@ class CreateOfferJob < ApplicationJob
       dataOwner: distribution.user.dex_identity&.identifier,
       resource: distribution.node&.iri,
       scope: '',
-      conditions: [
-        {
-          text: distribution.description,
-          type: :ExplicitDisclaimerCondition
-        }
-      ],
+      conditions: [],
       permitted: :permit,
-      recipient: 'https://thom.dexpods.eu'
+      recipient: nil
     }
   end
 end
