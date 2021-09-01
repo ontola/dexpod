@@ -59,6 +59,7 @@ module Dexpod
     redis_url_db = ENV['REDIS_URL'] && URI(ENV['REDIS_URL']).path&.split('/')&.dig(1)
     config.redis_database = (ENV['BACKEND_REDIS_DATABASE'] || redis_url_db)&.to_i || 0
     config.stream_redis_url = ENV['STREAM_REDIS_URL'] || ENV['REDIS_URL']
+    config.redis = {db: config.redis_database}
 
     config.broker_url = ENV['BROKER_URL']
 
