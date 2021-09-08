@@ -7,6 +7,7 @@ class Distribution < ApplicationRecord
   belongs_to :node
 
   attribute :format, IRIType.new
+  attribute :offer_iri, IRIType.new
 
   delegate :title, to: :node
   delegate :license, :description, :user, to: :dataset
