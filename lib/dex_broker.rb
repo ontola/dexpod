@@ -23,7 +23,7 @@ class DexBroker
       broker_url(response.headers['location'])
     end
 
-    def has_url?
+    def url?
       broker_url('').present?
     end
 

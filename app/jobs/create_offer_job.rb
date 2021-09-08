@@ -4,7 +4,7 @@ class CreateOfferJob < ApplicationJob
   attr_accessor :distribution
 
   def perform(distribution_id)
-    unless DexBroker.has_url?
+    unless DexBroker.url?
       Rails.logger.error('No broker URL present')
       return
     end
