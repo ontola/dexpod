@@ -4,12 +4,17 @@ require_relative './ns'
 
 LinkedRails.host = ENV['HOSTNAME']
 LinkedRails.scheme = :https
-LinkedRails.app_ns = NS.dex
+LinkedRails.app_vocab = NS.dex
 LinkedRails.serializer_parent_class = 'LinkedSerializer'
 LinkedRails.registration_form_class = 'RegistrationForm'
 LinkedRails.user_class = 'WebId'
+LinkedRails.guest_user_class = 'GuestUser'
 LinkedRails.otp_secret_class = 'OtpSecret'
 LinkedRails.otp_owner_class = 'WebId'
+
+LinkedRails.whitelisted_spi_ips = [IPAddr.new(ENV['TRUSTED_IP'])] if ENV['TRUSTED_IP']
+
+LinkedRails::Renderers.register!
 
 module LinkedRails
   class << self

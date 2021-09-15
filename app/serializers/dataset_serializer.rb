@@ -3,7 +3,7 @@
 class DatasetSerializer < LinkedSerializer
   attribute :title, predicate: NS.dc.title
   attribute :description, predicate: NS.dc.description
-  attribute :license_description, predicate: LinkedRails.app_ns[:licenseDescription]
+  attribute :license_description, predicate: LinkedRails.app_vocab[:licenseDescription]
   attribute :updated_at, predicate: NS.dc.modified
   attribute :iri, predicate: NS.dc.identifier
   attribute :publisher, predicate: NS.dc.publisher do
