@@ -6,4 +6,10 @@ class DatasetsController < AuthorizedController
   def resource_added_delta(resource)
     super + resource.nodes.map(&method(:invalidate_resource_delta))
   end
+
+  def show_includes
+    super + %i[
+      distributions
+    ]
+  end
 end
