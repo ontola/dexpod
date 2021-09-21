@@ -491,9 +491,8 @@ Doorkeeper::JWT.configure do
 
     user_opts = user && {
       type: user.guest? ? 'guest' : 'user',
-      '@id': user.iri,
+      '@id': user.guest? ? user.iri : user.profile.iri,
       id: user.id.to_s,
-      podIdentity: user.dex_identity&.identifier,
       language: I18n.locale
     }
     payload = {

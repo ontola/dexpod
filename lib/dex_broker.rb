@@ -4,6 +4,8 @@ class DexBroker
   class << self
     # @return boolean The verdict of the broker
     def authorize(action, resource, recipient)
+      puts recipient&.class
+      puts recipient
       query = {
         action: action,
         resource: resource,
