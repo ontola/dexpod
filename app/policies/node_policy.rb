@@ -36,13 +36,17 @@ class NodePolicy < ApplicationPolicy
 
   private
 
+  def authorized_resource
+    record
+  end
+
   def broker_authorization(action)
     web_id = user_context&.dex_identity&.identifier
-    return false if web_id.blank? || record.new_record?
+    return false if web_id.blank? || authorized_resource.new_record?
 
     DexBroker.authorize(
       action,
-      record.iri,
+      authorized_resource.iri,
       web_id
     )
   end
