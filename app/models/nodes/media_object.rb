@@ -12,7 +12,8 @@ class MediaObject < Node
   PRESENTATION_TYPES = %w[application/vnd.oasis.opendocument.presentation application/powerpoint
                           application/vnd.openxmlformats-officedocument.presentationml.presentation
                           application/vnd.openxmlformats-officedocument.presentationml.slideshow].freeze
-  SPREADSHEET_TYPES = %w[text/csv application/excel application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  SPREADSHEET_TYPES = %w[text/csv application/excel application/vnd.ms-excel
+                         application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
                          text/comma-separated-values application/vnd.oasis.opendocument.spreadsheet].freeze
 
   enhance LinkedRails::Enhancements::Actionable
