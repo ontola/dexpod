@@ -51,6 +51,10 @@ class MediaObject < Node
     content.filename if content.present?
   end
 
+  def content_size
+    content.byte_size if content.present?
+  end
+
   def content_type
     content.content_type if content.present?
   end

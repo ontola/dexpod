@@ -27,6 +27,9 @@ class MediaObjectSerializer < NodeSerializer
       NS.schema[:MediaObject]
     end
   end
+  attribute :content_size,
+            predicate: NS.schema[:contentSize],
+            datatype: NS.xsd.string
   attribute :content_type,
             predicate: NS.schema[:encodingFormat],
             datatype: NS.xsd.string do |object|
