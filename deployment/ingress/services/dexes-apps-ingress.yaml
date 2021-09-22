@@ -6,6 +6,7 @@ metadata:
   annotations:
     kubernetes.io/ingress-class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-production-issuer
+    "nginx.ingress.kubernetes.io/proxy-body-size": 100m
 spec:
   tls:
     - hosts:
@@ -70,4 +71,3 @@ spec:
             backend:
               serviceName: dexes-production
               servicePort: 80
-
