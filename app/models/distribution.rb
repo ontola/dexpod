@@ -9,7 +9,7 @@ class Distribution < ApplicationRecord
   attribute :format, IRIType.new
   attribute :offer_iri, IRIType.new
 
-  delegate :title, to: :node
+  delegate :title, to: :dataset
   delegate :license, :description, :user, to: :dataset
   after_commit :schedule_offer_job, on: :create
 
