@@ -4,15 +4,13 @@ class DexBroker
   class << self
     # @return boolean The verdict of the broker
     def authorize(action, resource, recipient)
-      query = {
-        action: action,
-        resource: resource,
-        recipient: recipient
-      }
+      query = broker_payload(action, resource, recipient)
       get("/authorize?#{query.to_param}")
+      Rails.logger.info "[BROKER OK] #{query.to_param}"
 
       true
-    rescue Faraday::ForbiddenError
+    rescue Faraday::ForbiddenError => e
+      Rails.logger.info "[Broker ERR] query: #{query.to_param}, err #{e.message}"
       false
     end
 
@@ -34,6 +32,14 @@ class DexBroker
         Accept: 'application/json',
         'Content-Type': 'application/json'
       }.merge(headers || {})
+    end
+
+    def broker_payload(action, resource, recipient)
+      {
+        action: action,
+        resource: resource,
+        recipient: recipient
+      }
     end
 
     def broker_url(path)
