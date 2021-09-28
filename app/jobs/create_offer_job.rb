@@ -28,9 +28,18 @@ class CreateOfferJob < ApplicationJob
       dataOwner: distribution.user.dex_identity&.identifier,
       resource: distribution.node&.iri,
       scope: '',
-      conditions: [],
+      conditions: conditions,
       permitted: :permit,
       recipient: nil
     }
+  end
+
+  def conditions
+    [
+      {
+        text: distribution.dataset.license,
+        type: :ExplicitDisclaimerCondition
+      }
+    ]
   end
 end
