@@ -6,7 +6,7 @@ class Profile
   enhance LinkedRails::Enhancements::Singularable
 
   attr_accessor :web_id
-  delegate :email, to: :web_id
+  delegate :email, :display_name, to: :web_id
 
   def iri
     @iri ||= RDF::URI("#{document_iri}#me")
