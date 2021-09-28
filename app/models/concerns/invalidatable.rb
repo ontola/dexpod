@@ -8,8 +8,6 @@ module Invalidatable
     after_commit :publish_update, on: :update
     after_commit :publish_delete, on: :destroy
 
-    after_commit :invalidate
-
     def publish_create
       publish_message('io.ontola.transactions.Created')
     end
@@ -20,10 +18,6 @@ module Invalidatable
 
     def publish_delete
       publish_message('io.ontola.transactions.Deleted')
-    end
-
-    def invalidate
-      ResourceInvalidationJob.perform_later(iri.to_s)
     end
 
     def publish_message(type)
