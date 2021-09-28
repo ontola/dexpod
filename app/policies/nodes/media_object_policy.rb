@@ -4,9 +4,7 @@ class MediaObjectPolicy < NodePolicy
   permit_attributes %i[title description]
   permit_attributes %i[content_source]
 
-  private
-
-  def authorized_resource
-    record.parent
+  def show?
+    super || broker_authorization(:show, record.parent)
   end
 end

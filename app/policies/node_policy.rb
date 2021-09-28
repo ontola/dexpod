@@ -11,7 +11,7 @@ class NodePolicy < ApplicationPolicy
   ]
 
   def show?
-    pod_owner? || broker_authorization(:show)
+    pod_owner? || broker_authorization(:show, record)
   end
 
   def create?
@@ -36,17 +36,13 @@ class NodePolicy < ApplicationPolicy
 
   private
 
-  def authorized_resource
-    record
-  end
-
-  def broker_authorization(action)
+  def broker_authorization(action, resource)
     web_id = user_context&.dex_identity&.identifier
-    return false if web_id.blank? || authorized_resource.new_record?
+    return false if web_id.blank? || resource.new_record?
 
     DexBroker.authorize(
       action,
-      authorized_resource.iri,
+      resource.iri,
       web_id
     )
   end
