@@ -63,7 +63,7 @@ nl:
     email:
       label: "Email"
     image:
-      label: "Afbeelding"
+      label: "Icoon"
     name:
       label: "Naam"
     option:

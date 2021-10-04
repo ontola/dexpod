@@ -63,7 +63,7 @@ en:
     email:
       label: "Email"
     image:
-      label: "Image"
+      label: "Icon"
     name:
       label: "Name"
     option:
