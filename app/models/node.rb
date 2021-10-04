@@ -38,7 +38,7 @@ class Node < ApplicationRecord
   with_collection :datasets
   with_collection :nodes,
                   default_sortings: [
-                    {key: :type, direction: :asc}
+                    {key: :created_at, direction: :desc}
                   ]
   with_collection :media_objects
   with_collection :folders
