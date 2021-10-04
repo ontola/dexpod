@@ -94,7 +94,9 @@ class Node < ApplicationRecord
 
       [
         NS.dex[:nodeType],
-        NS.schema.name
+        NS.schema.name,
+        NS.schema.dateCreated,
+        NS.schema.dateModified
       ]
     end
   end
