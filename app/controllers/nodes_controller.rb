@@ -23,6 +23,10 @@ class NodesController < AuthorizedController
     )
   end
 
+  def destroy_success_location
+    current_resource&.parent&.iri&.to_s || current_pod.iri.to_s
+  end
+
   def new_success
     return super unless self.class == NodesController
 
