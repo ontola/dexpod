@@ -14,7 +14,7 @@ Doorkeeper.configure do
     if doorkeeper_token&.acceptable?('user')
       klass = Apartment::Tenant.current == 'public' ? WebId : User
       klass.find_by(id: doorkeeper_token.resource_owner_id)
-    elsif doorkeeper_token&.acceptable?('guest') && doorkeeper_token_payload['user']
+    elsif doorkeeper_token&.acceptable?('guest') && try(:doorkeeper_token_payload).try(:[], 'user')
       GuestUser.new(id: doorkeeper_token.resource_owner_id)
     end
   end

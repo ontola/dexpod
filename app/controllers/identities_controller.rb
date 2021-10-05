@@ -8,7 +8,7 @@ class IdentitiesController < ApplicationController
   def show
     sign_in(authenticated_user)
 
-    redirect_to r_param || LinkedRails.iri.to_s
+    redirect_to stored_redirect || r_param || LinkedRails.iri.to_s
   end
 
   private

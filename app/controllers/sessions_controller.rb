@@ -9,6 +9,11 @@ class SessionsController < LinkedRails::Auth::SessionsController
 
   private
 
+  def create_success
+    store_redirect
+    super
+  end
+
   def create_success_location
     authorization_uri
   end
