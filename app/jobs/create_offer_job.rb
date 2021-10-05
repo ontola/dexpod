@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CreateOfferJob < ApplicationJob
+  include DeltaHelper
+
   attr_accessor :distribution
 
   def perform(distribution_id)
@@ -41,5 +43,9 @@ class CreateOfferJob < ApplicationJob
         type: :ExplicitDisclaimerCondition
       }
     ]
+  end
+
+  def publish_delta
+    hex_delta(resource_added_delta(resource))
   end
 end

@@ -95,7 +95,8 @@ class Manifest
       primary_color: site_theme_color,
       secondary_color: site_secondary_color,
       theme: theme,
-      theme_options: theme_options.to_query
+      theme_options: theme_options.to_query,
+      websocket_path: 'cable'
     }
   end
 
