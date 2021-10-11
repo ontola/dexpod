@@ -4,12 +4,14 @@ require_relative './ns'
 
 LinkedRails.host = ENV['HOSTNAME']
 LinkedRails.scheme = :https
-LinkedRails.app_ns = NS.dex
 LinkedRails.serializer_parent_class = 'LinkedSerializer'
 LinkedRails.registration_form_class = 'RegistrationForm'
+LinkedRails.guest_user_class = 'GuestUser'
 LinkedRails.user_class = 'WebId'
 LinkedRails.otp_secret_class = 'OtpSecret'
 LinkedRails.otp_owner_class = 'WebId'
+
+LinkedRails::Renderers.register!
 
 module LinkedRails
   class << self

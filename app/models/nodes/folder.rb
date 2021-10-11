@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 class Folder < Node
-  enhance LinkedRails::Enhancements::Actionable
   enhance LinkedRails::Enhancements::Creatable
-  enhance LinkedRails::Enhancements::Indexable
-  enhance LinkedRails::Enhancements::Tableable
 
   with_columns default: [
     NS.schema[:name]

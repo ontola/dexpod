@@ -4,12 +4,8 @@
 class Node < ApplicationRecord
   include Invalidatable
 
-  enhance LinkedRails::Enhancements::Actionable
-  enhance LinkedRails::Enhancements::Indexable
   enhance LinkedRails::Enhancements::Updatable
   enhance LinkedRails::Enhancements::Destroyable
-  enhance LinkedRails::Enhancements::Tableable
-  enhance LinkedRails::Enhancements::Menuable
   enhance Distributable
 
   belongs_to :parent,

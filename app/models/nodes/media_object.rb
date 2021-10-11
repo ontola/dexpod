@@ -16,10 +16,7 @@ class MediaObject < Node
                          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
                          text/comma-separated-values application/vnd.oasis.opendocument.spreadsheet].freeze
 
-  enhance LinkedRails::Enhancements::Actionable
-  enhance LinkedRails::Enhancements::Menuable
   enhance LinkedRails::Enhancements::Creatable
-  enhance LinkedRails::Enhancements::Tableable
 
   has_one_attached :content
   with_columns default: [

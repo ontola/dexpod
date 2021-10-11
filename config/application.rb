@@ -21,7 +21,10 @@ require 'rails/test_unit/railtie'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-JSON::LD::Reader # rubocop:disable Lint/Void, fix weird autoload failure
+require 'json/ld/api'
+require 'json/ld/context'
+require 'json/ld/reader'
+require 'json/ld/writer'
 
 require 'linked_rails/middleware/linked_data_params'
 require_relative '../lib/apartment_sidekiq'

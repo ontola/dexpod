@@ -10,9 +10,7 @@ Rails.application.routes.draw do
              path: '/'
     resource :home_page,
              only: :show,
-             path: :home do
-      include_route_concerns
-    end
+             path: :home
   end
 
   use_linked_rails(

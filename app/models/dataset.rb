@@ -3,12 +3,8 @@
 class Dataset < ApplicationRecord
   include Invalidatable
 
-  enhance LinkedRails::Enhancements::Actionable
   enhance LinkedRails::Enhancements::Creatable
   enhance LinkedRails::Enhancements::Updatable
-  enhance LinkedRails::Enhancements::Indexable
-  enhance LinkedRails::Enhancements::Tableable
-  enhance LinkedRails::Enhancements::Menuable
 
   belongs_to :user
   has_many :dataset_themes, dependent: :destroy
@@ -23,6 +19,12 @@ class Dataset < ApplicationRecord
   validates :title, presence: true
   validates :description, length: {maximum: MAXIMUM_DESCRIPTION_LENGTH}, presence: true
   validates :license_description, length: {maximum: MAXIMUM_DESCRIPTION_LENGTH}
+
+  def show_includes
+    super + %i[
+        distributions
+      ]
+  end
 
   def themes
     dataset_themes.pluck(:theme).map { |theme| RDF::URI(theme) }

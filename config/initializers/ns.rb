@@ -12,4 +12,6 @@ class NS < LinkedRails::Vocab
   register(:donl, 'https://data.overheid.nl/dcat.rdf#')
 
   register(:adms, 'http://www.w3.org/ns/adms#')
+
+  app_vocabulary :dex
 end

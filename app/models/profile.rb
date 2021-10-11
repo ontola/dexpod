@@ -3,7 +3,6 @@
 class Profile
   include ActiveModel::Model
   include LinkedRails::Model
-  enhance LinkedRails::Enhancements::Singularable
 
   attr_accessor :web_id
   delegate :email, :display_name, to: :web_id

@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class Pod < ApplicationRecord
-  enhance LinkedRails::Enhancements::Actionable
   enhance LinkedRails::Enhancements::Updatable
-  enhance LinkedRails::Enhancements::Singularable
 
   belongs_to :web_id
   belongs_to :root_node,
