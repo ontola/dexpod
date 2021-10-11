@@ -7,6 +7,10 @@ class CurrentUser
 
   attr_accessor :user
 
+  def actor
+    LinkedRails.iri(path: :web_id)
+  end
+
   def actor_type
     if user.is_a?(GuestUser)
       'GuestUser'

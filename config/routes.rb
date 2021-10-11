@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   end
 
   singular_linked_resource(Pod)
+  singular_linked_resource(WebId)
 
   constraints(Constraints::DexpodConstraint) do
     linked_resource(Node)

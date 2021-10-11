@@ -2,6 +2,7 @@
 
 class PodsController < ApplicationController
   active_response :show
+  has_singular_update_action
 
   private
 

@@ -35,4 +35,14 @@ class WebId < ApplicationRecord
   def profile
     @profile ||= Profile.new(web_id: self) if pod
   end
+
+  class << self
+    def iri
+      NS.schema.Person
+    end
+
+    def requested_singular_resource(_params, user_context)
+      RootHelper.pod? ? user_context.pod.web_id : user_context
+    end
+  end
 end

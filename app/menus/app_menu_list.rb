@@ -83,7 +83,7 @@ class AppMenuList < ApplicationMenuList
     menu_item(
       :settings,
       label: I18n.t('users.settings.title'),
-      href: current_pod.action(:update).iri
+      href: Pod.singular_resource(current_pod.dup).action(:update).iri
     )
   end
 
