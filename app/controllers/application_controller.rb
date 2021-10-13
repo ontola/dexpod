@@ -21,6 +21,12 @@ class ApplicationController < ActionController::API
     @current_manifest ||= manifest_class.new(pod: current_pod)
   end
 
+  def default_create_options(**overwrite)
+    super.merge(
+      label: -> { I18n.t("#{self.class.actionable_class.name.tableize}.type_new", default: '').presence }
+    ).merge(overwrite)
+  end
+
   def handle_and_report_error(error)
     raise if Rails.env.development? || Rails.env.test?
 

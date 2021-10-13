@@ -39,7 +39,7 @@ class CreateOfferJob < ApplicationJob
   def conditions
     [
       {
-        text: distribution.dataset.license_description,
+        text: distribution.dataset.license_description || '',
         type: :ExplicitDisclaimerCondition
       }
     ]

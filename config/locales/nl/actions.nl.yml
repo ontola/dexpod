@@ -2,6 +2,7 @@ nl:
   actions:
     default:
       create:
+        label: "Voeg %{type} toe"
         submit: "Opslaan"
       destroy:
         label: "Verwijderen"

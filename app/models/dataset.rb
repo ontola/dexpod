@@ -22,8 +22,8 @@ class Dataset < ApplicationRecord
 
   def show_includes
     super + %i[
-        distributions
-      ]
+      distributions
+    ]
   end
 
   def themes

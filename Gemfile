@@ -7,6 +7,7 @@ ruby '2.7.0'
 
 gem 'active_model_otp'
 gem 'active_response', git: 'https://github.com/ontola/active_response'
+gem 'activeresource'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'bugsnag'

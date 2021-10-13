@@ -13,5 +13,6 @@ class DatasetForm < ApplicationForm
         max_count: 99
   field :license,
         min_count: 1
-  field :license_description
+  field :license_description,
+        min_count: 1
 end

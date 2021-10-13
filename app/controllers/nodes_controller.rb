@@ -9,7 +9,7 @@ class NodesController < AuthorizedController
       **create_collection_options(
         inherit: false,
         predicate: NS.ontola[:createAction],
-        root_relative_iri: -> {
+        root_relative_iri: lambda {
           resource.parent.send("#{klass.name.underscore}_collection").action(:create).iri.path
         }
       )

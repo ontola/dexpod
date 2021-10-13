@@ -2,6 +2,7 @@ en:
   actions:
     default:
       create:
+        label: "Add %{type}"
         submit: "Save"
       destroy:
         label: "Delete"

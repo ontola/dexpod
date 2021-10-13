@@ -112,9 +112,17 @@ GEM
       globalid (>= 0.3.6)
     activemodel (6.1.4.1)
       activesupport (= 6.1.4.1)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (6.1.4.1)
       activemodel (= 6.1.4.1)
       activesupport (= 6.1.4.1)
+    activeresource (5.1.1)
+      activemodel (>= 5.0, < 7)
+      activemodel-serializers-xml (~> 1.0)
+      activesupport (>= 5.0, < 7)
     activestorage (6.1.4.1)
       actionpack (= 6.1.4.1)
       activejob (= 6.1.4.1)
@@ -609,6 +617,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_otp
   active_response!
+  activeresource
   aws-sdk-s3
   better_errors (~> 2.9.1)
   binding_of_caller

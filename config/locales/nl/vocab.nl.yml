@@ -8,8 +8,25 @@ nl:
     theme:
       label: "Thema's"
   dex:
+    Agreement:
+      label: "DataDeal"
+      plural_label: "DataDeals"
+    Folder:
+      label: "Map"
+      plural_label: "Mappen"
+    Offer:
+      label: "Gedeeld bestand"
+      plural_label: "Gedeelde bestanden"
+    dateSigned:
+      label: "Deal gesloten op"
+    dataOwner:
+      label: "Deler"
+    file:
+      label: "Bestand"
     nodeType:
       label: "Type"
+    recipients:
+      label: "Gedeeld met"
   foaf:
     name:
       label: "Naam"
@@ -62,6 +79,8 @@ nl:
       label: "Wijzigingsdatum"
     email:
       label: "Email"
+    encodingFormat:
+      label: "Formaat"
     image:
       label: "Icoon"
     name:

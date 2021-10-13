@@ -10,9 +10,9 @@ class BulkController < LinkedRails::BulkController
   end
 
   def response_for_wrong_host(opts)
-    return super unless self.class.external_resources.key?(opts[:iri])
+    return super unless self.class.external_resources.key?(opts[:iri].to_s)
 
-    resource = self.class.external_resources[opts[:iri]]
+    resource = self.class.external_resources[opts[:iri].to_s]
 
     resource_response(
       resource.iri,

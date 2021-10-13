@@ -7,6 +7,6 @@ class ProfileSerializer < LinkedSerializer
   attribute :email,
             predicate: NS.foaf[:mbox],
             if: lambda { |record, context|
-              !context[:scope].guest? && context[:scope].email == record.email
+              !context[:scope].guest? && context[:scope].pod&.web_id&.email == record.email
             }
 end

@@ -17,6 +17,14 @@ class Distribution < ApplicationRecord
     super || format_from_content_type
   end
 
+  def offer
+    return unless offer_iri.present?
+
+    offer_id = offer_iri.to_s.split('/').last
+
+    LinkedRails.iri(path: Offer.iri_template.expand(id: offer_id))
+  end
+
   private
 
   def format_from_content_type # rubocop:disable Metrics/AbcSize

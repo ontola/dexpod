@@ -60,7 +60,9 @@ Rails.application.routes.draw do
       linked_resource(klass)
     end
     linked_resource(Dataset)
+    linked_resource(Deal)
     linked_resource(Distribution)
+    linked_resource(Offer)
   end
 
   linked_resource(User)

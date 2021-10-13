@@ -8,8 +8,25 @@ en:
     theme:
       label: "Themes"
   dex:
+    Agreement:
+      label: "DataDeal"
+      plural_label: "DataDeals"
+    Folder:
+      label: "Folder"
+      plural_label: "Folders"
+    Offer:
+      label: "Shared file"
+      plural_label: "Shared files"
+    dateSigned:
+      label: "Deal closed at"
+    dataOwner:
+      label: "Sharer"
+    file:
+      label: "File"
     nodeType:
       label: "Type"
+    recipients:
+      label: "Shared with"
   foaf:
     name:
       label: "Naam"
@@ -62,6 +79,8 @@ en:
       label: "Date modified"
     email:
       label: "Email"
+    encodingFormat:
+      label: "Format"
     image:
       label: "Icon"
     name:
