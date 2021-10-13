@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class ProfilesTest < ActionDispatch::IntegrationTest
-  let(:pod) { create(:pod, web_id: build(:web_id)) }
+  define_pod
 
   ####################################
   # As Guest

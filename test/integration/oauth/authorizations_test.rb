@@ -7,6 +7,10 @@ class AuthorizationsTest < ActionDispatch::IntegrationTest
   let(:client_id) { application.uid }
   let(:state) { SecureRandom.hex }
 
+  before do
+    Apartment::Tenant.switch! 'public'
+  end
+
   ####################################
   # As Guest
   ####################################

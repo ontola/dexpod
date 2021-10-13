@@ -3,14 +3,17 @@
 require 'test_helper'
 
 class RegistrationsTest < ActionDispatch::IntegrationTest
-  let(:web_id) { create(:pod).web_id }
+  define_pod
+
+  before do
+    Apartment::Tenant.switch! 'public'
+  end
 
   ####################################
   # As Guest
   ####################################
   test 'should not post create existing' do
     sign_in :guest_user
-    web_id
     assert_difference('WebId.count' => 0) do
       post '/u/registration',
            params: {
@@ -24,7 +27,6 @@ class RegistrationsTest < ActionDispatch::IntegrationTest
 
   test 'should post create without password' do
     sign_in :guest_user
-    web_id
     assert_difference('WebId.count' => 1) do
       post '/u/registration',
            params: {
@@ -38,7 +40,6 @@ class RegistrationsTest < ActionDispatch::IntegrationTest
 
   test 'should post create with password' do
     sign_in :guest_user
-    web_id
     assert_difference('WebId.count' => 1) do
       post '/u/registration',
            params: {

@@ -20,6 +20,14 @@ module TestMethods
     headers
   end
 
+  def resource_iri(resource, pod = nil)
+    Apartment::Tenant.switch(pod&.pod_name || Apartment::Tenant.current) do
+      resource.instance_variable_set(:@iri, nil) if resource.instance_variable_get(:@iri)
+
+      resource.iri
+    end
+  end
+
   def sign_in(resource = create(:user))
     token =
       if resource == :guest_user
