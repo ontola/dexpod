@@ -488,19 +488,20 @@ Doorkeeper::JWT.configure do
         klass = Apartment::Tenant.current == 'public' ? WebId : User
         klass.find(opts[:resource_owner_id])
       end
+    web_id = user.guest? ? user.iri : user.pod&.web_id&.profile&.iri if user
 
     user_opts = user && {
       type: user.guest? ? 'guest' : 'user',
       '@id': user.iri,
-      webId: user.guest? ? user.iri : user.pod.web_id.profile.iri,
       id: user.id.to_s,
       language: I18n.locale
     }
     payload = {
+      application_id: opts[:application]&.uid,
       iat: Time.current.to_i,
       iss: LinkedRails.iri.to_s,
-      application_id: opts[:application]&.uid,
       scopes: opts[:scopes].entries,
+      sub: web_id,
       user: user_opts
     }
     payload[:exp] = (opts[:created_at] + opts[:expires_in].seconds).to_i if opts[:expires_in].present?
