@@ -102,7 +102,7 @@ class Manifest
 
   def web_manifest_sw_section
     {
-      src: "#{scope}/sw.js?manifestLocation=#{Rack::Utils.escape("#{scope}/manifest.json")}",
+      src: '/sw.js',
       scope: scope
     }
   end
