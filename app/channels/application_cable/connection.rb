@@ -37,8 +37,12 @@ module ApplicationCable
 
     def find_verified_user
       Apartment::Tenant.switch(current_tenant) do
-        return current_resource_owner || reject_unauthorized_connection
+        return current_resource_owner || guest_user || reject_unauthorized_connection
       end
+    end
+
+    def guest_user
+      GuestUser.new
     end
 
     def send_welcome_message
