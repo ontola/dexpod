@@ -2,10 +2,12 @@
 
 class DatasetsController < AuthorizedController
   has_collection_create_action(
-    image: 'fa-send'
+    image: 'fa-send',
+    predicate: NS.dex[:publishAction]
   )
   has_resource_update_action(
-    image: 'fa-send'
+    image: 'fa-send',
+    predicate: NS.dex[:publishAction]
   )
 
   private
