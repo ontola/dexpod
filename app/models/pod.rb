@@ -13,7 +13,9 @@ class Pod < ApplicationRecord
 
   after_create :setup_pod
   after_update :rename_pod, if: :rename_pod?
-  validates :pod_name, uniqueness: true
+  validates :pod_name,
+            uniqueness: true,
+            presence: true
   validates :theme_color, presence: true
 
   alias_attribute :display_name, :pod_name
