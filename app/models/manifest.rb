@@ -86,7 +86,7 @@ class Manifest
     }
   end
 
-  def web_manifest_ontola_section
+  def web_manifest_ontola_section # rubocop:disable Metrics/MethodLength
     {
       css_class: 'dexes',
       header_background: 'primary',

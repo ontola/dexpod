@@ -9,7 +9,7 @@ class BulkController < LinkedRails::BulkController
     super
   end
 
-  def response_for_wrong_host(opts)
+  def response_for_wrong_host(opts) # rubocop:disable Metrics/AbcSize
     return super unless self.class.external_resources.key?(opts[:iri].to_s)
 
     resource = self.class.external_resources[opts[:iri].to_s]

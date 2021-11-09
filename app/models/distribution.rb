@@ -18,7 +18,7 @@ class Distribution < ApplicationRecord
   end
 
   def offer
-    return unless offer_iri.present?
+    return if offer_iri.blank?
 
     offer_id = offer_iri.to_s.split('/').last
 
