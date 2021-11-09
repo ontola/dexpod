@@ -14,10 +14,21 @@ module Dexpod
         LinkedRails::Widget.new(
           size: 3,
           resources: [
-            current_pod.root_node.iri
+            current_pod.root_node.iri,
+            shared_with_me_iri
           ]
         )
       ]
+    end
+
+    def shared_with_me_iri
+      web_id = current_user&.dex_identity&.identifier
+      return unless web_id
+
+      Deal.root_collection.new_child(
+        display: :table,
+        filter: {NS.app[:recipients] => [web_id]}
+      ).iri
     end
 
     def welcome_text

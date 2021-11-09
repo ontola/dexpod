@@ -31,6 +31,7 @@ class Node < ApplicationRecord
 
   has_ltree_hierarchy
 
+  collection_options(display: :table)
   with_collection :datasets
   with_collection :nodes,
                   default_sortings: [
@@ -74,10 +75,6 @@ class Node < ApplicationRecord
       {
         parent: opts[:parent]
       }
-    end
-
-    def default_collection_display
-      :table
     end
 
     def inherited(klass)

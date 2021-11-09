@@ -96,6 +96,7 @@ class Manifest
       secondary_color: site_secondary_color,
       theme: theme,
       theme_options: theme_options.to_query,
+      website_iri: LinkedRails.iri,
       websocket_path: 'cable'
     }
   end

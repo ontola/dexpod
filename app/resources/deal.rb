@@ -1,6 +1,23 @@
 # frozen_string_literal: true
 
-class Deal < BrokerResource
+class Deal < Broker::Resource
+  collection_options(
+    title: lambda do
+      web_id = RootHelper.current_pod&.web_id&.profile&.iri
+      return I18n.t('deals.shared_with_me') if filter[NS.app[:recipients]] == [web_id]
+      return I18n.t('deals.shared_with_others') if filter[NS.app[:dataOwner]] == [web_id]
+
+      I18n.t('dex.Agreement.plural_label')
+    end
+  )
+
+  filterable NS.app[:recipients] => {values: []}
+  with_columns default: [
+    NS.app[:file],
+    NS.app[:dataOwner],
+    NS.schema.dateCreated
+  ]
+
   def data_owner
     RDF::URI(super) if super.present?
   end

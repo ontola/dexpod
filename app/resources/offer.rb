@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
-class Offer < BrokerResource
+class Offer < Broker::Resource
+  with_columns default: [
+    NS.app[:file],
+    NS.app[:dataOwner],
+    NS.app[:recipients]
+  ]
+
   def data_owner
     RDF::URI(super) if super.present?
   end
@@ -11,6 +17,12 @@ class Offer < BrokerResource
 
   def broker_url
     RDF::URI(element_url)
+  end
+
+  def iri_opts
+    {
+      id: _id
+    }
   end
 
   def parent
