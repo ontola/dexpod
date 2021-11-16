@@ -15,20 +15,19 @@ module Dexpod
           size: 3,
           resources: [
             current_pod.root_node.iri,
-            shared_with_me_iri
+            shared_with_me_iri,
+            shared_with_others_iri
           ]
         )
       ]
     end
 
     def shared_with_me_iri
-      web_id = current_user&.dex_identity&.identifier
-      return unless web_id
+      current_pod.web_id.recipient_agreement_collection.iri
+    end
 
-      Deal.root_collection.new_child(
-        display: :table,
-        filter: {NS.app[:recipients] => [web_id]}
-      ).iri
+    def shared_with_others_iri
+      current_pod.web_id.owner_agreement_collection.iri
     end
 
     def welcome_text

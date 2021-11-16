@@ -2,6 +2,7 @@
 
 class Deal < Broker::Resource
   collection_options(
+    display: :table,
     title: lambda do
       web_id = RootHelper.current_pod&.web_id&.profile&.iri
       return I18n.t('deals.shared_with_me') if filter[NS.app[:recipients]] == [web_id]
@@ -11,7 +12,6 @@ class Deal < Broker::Resource
     end
   )
 
-  filterable NS.app[:recipients] => {values: []}
   with_columns default: [
     NS.app[:file],
     NS.app[:dataOwner],

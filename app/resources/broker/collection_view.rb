@@ -8,9 +8,17 @@ module Broker
       @broker_query ||= association_class.where(where_hash)
     end
 
+    def key_for_filter(filter)
+      key = association_class.predicate_mapping[filter.key].key
+
+      return :owner if key == :data_owner
+
+      key
+    end
+
     def where_hash
       (collection.filters || []).reduce({page: page}) do |hash, filter|
-        hash[association_class.predicate_mapping[filter.key].key] = filter.value.first
+        hash[key_for_filter(filter)] = filter.value.first
         hash
       end
     end

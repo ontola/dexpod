@@ -36,6 +36,18 @@ class WebId < ApplicationRecord
     @profile ||= Profile.new(web_id: self) if pod
   end
 
+  def recipient_agreement_collection
+    Deal.root_collection.new_child(
+      filter: {NS.app[:recipients] => [profile.iri]}
+    )
+  end
+
+  def owner_agreement_collection
+    Deal.root_collection.new_child(
+      filter: {NS.app[:dataOwner] => [profile.iri]}
+    )
+  end
+
   class << self
     def iri
       NS.schema.Person

@@ -5,7 +5,8 @@ class Profile
   include LinkedRails::Model
 
   attr_accessor :web_id
-  delegate :email, :display_name, to: :web_id
+  delegate :email, :display_name, :owner_agreement_collection, :pod, :recipient_agreement_collection, to: :web_id
+  delegate :root_node, to: :pod
 
   def iri
     @iri ||= RDF::URI("#{document_iri}#me")
