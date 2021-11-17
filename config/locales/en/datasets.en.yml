@@ -1,8 +1,8 @@
 en:
-  datasets:
-    properties:
+  forms:
+    datasets:
       distributions:
-        label: "Distribution"
+        label: "Distributions"
       title:
         label: "Name"
         helper_text: "Choose a descriptive name. Use terms other people might use when searching."

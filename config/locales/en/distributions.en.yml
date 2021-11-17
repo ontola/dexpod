@@ -1,6 +1,6 @@
 en:
-  distributions:
-    properties:
+  forms:
+    distributions:
       node_id:
         label: "File / folder"
       format:

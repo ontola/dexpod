@@ -4,12 +4,12 @@ class Distribution < ApplicationRecord
   include Invalidatable
 
   belongs_to :dataset
-  belongs_to :node
+  belongs_to :node, optional: true
 
   attribute :format, IRIType.new
   attribute :offer_iri, IRIType.new
+  attribute :access_url, IRIType.new
 
-  delegate :title, to: :dataset
   delegate :license, :description, :user, to: :dataset
   after_commit :schedule_offer_job, on: :create
 
@@ -23,6 +23,10 @@ class Distribution < ApplicationRecord
     offer_id = offer_iri.to_s.split('/').last
 
     LinkedRails.iri(path: Offer.iri_template.expand(id: offer_id))
+  end
+
+  def title
+    super || dataset&.title
   end
 
   private

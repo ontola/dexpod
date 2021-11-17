@@ -1,9 +1,24 @@
 # frozen_string_literal: true
 
 class DatasetForm < ApplicationForm
+  def self.has_part_of(has: true)
+    [
+      LinkedRails::SHACL::PropertyShape.new(
+        path: [NS.schema.isPartOf],
+        max_count: has ? nil : 0,
+        min_count: has ? 1 : nil
+      )
+    ]
+  end
   field :title
   field :description
-  has_one :distributions, label: '', min_count: 1
+  has_one :distributions,
+          label: '',
+          min_count: 1,
+          if: has_part_of(has: true)
+  has_many :distributions,
+           min_count: 1,
+           if: has_part_of(has: false)
   field :themes,
         input_field: LinkedRails::Form::Field::SelectInput,
         grouped: true,

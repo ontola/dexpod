@@ -1,6 +1,7 @@
 en:
   menu:
     home: "Home"
+    datasets: "Datasets"
     dexes: "Go to Dexes"
     my_pod: "Go to my pod"
     sign_out: "Sign out"

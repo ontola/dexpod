@@ -27,6 +27,11 @@ class AppMenuList < ApplicationMenuList
       href: LinkedRails.iri,
       image: 'fa-home'
     )
+    items << menu_item(
+      :datasets,
+      label: I18n.t('menu.datasets'),
+      href: Dataset.collection_iri
+    )
 
     items
   end

@@ -1,8 +1,8 @@
 nl:
-  datasets:
-    properties:
+  forms:
+    datasets:
       distributions:
-        label: "Distributie"
+        label: "Distributies"
       title:
         label: "Naam"
         helper_text: "Kies een omschrijvende naam. Gebruik termen die anderen kunnen zoeken."

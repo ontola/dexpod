@@ -1,6 +1,6 @@
 nl:
-  distributions:
-    properties:
+  forms:
+    distributions:
       node_id:
         label: "Bestand / map"
       format:

@@ -15,10 +15,18 @@ class Dataset < ApplicationRecord
 
   attribute :license, IRIType.new
   attribute :themes, array: true
+  attr_accessor :part_of
 
   validates :title, presence: true
   validates :description, length: {maximum: MAXIMUM_DESCRIPTION_LENGTH}, presence: true
   validates :license_description, length: {maximum: MAXIMUM_DESCRIPTION_LENGTH}
+
+  collection_options(
+    display: :table
+  )
+  with_columns default: [
+    NS.dc.title
+  ]
 
   def show_includes
     super + %i[
@@ -56,6 +64,7 @@ class Dataset < ApplicationRecord
       return super unless opts[:parent].is_a?(Node)
 
       child = super
+      child.part_of = opts[:parent]
       child.distributions << Distribution.new(node: opts[:parent])
       child
     end

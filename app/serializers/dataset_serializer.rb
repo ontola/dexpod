@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 class DatasetSerializer < LinkedSerializer
+  has_one :part_of, predicate: NS.schema.isPartOf
   attribute :title, predicate: NS.dc.title
   attribute :description, predicate: NS.dc.description
   attribute :license_description, predicate: NS.app[:licenseDescription]
   attribute :updated_at, predicate: NS.dc.modified
-  attribute :iri, predicate: NS.dc.identifier
+  attribute :iri, predicate: NS.dc.identifier do |object|
+    object.iri unless object.anonymous_iri?
+  end
   attribute :publisher, predicate: NS.dc.publisher do
     RDF::URI('https://dexpods.eu')
   end
