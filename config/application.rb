@@ -65,6 +65,7 @@ module Dexpod
     config.redis = {db: config.redis_database}
 
     config.broker_url = ENV['BROKER_URL']
+    config.dexcat_url = ENV['DEXCAT_URL']
 
     config.action_mailer.default_url_options = {
       host: config.host_name,

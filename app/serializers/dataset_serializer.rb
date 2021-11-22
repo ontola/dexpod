@@ -13,6 +13,9 @@ class DatasetSerializer < LinkedSerializer
     RDF::URI('https://dexpods.eu')
   end
   attribute :themes, predicate: NS.dcat[:theme]
+  attribute :dexes_resolve, predicate: NS.dex[:resolve] do |object|
+    RDF::URI("#{Rails.application.config.dexcat_url}/resolve?uri=#{CGI.escape(object.iri.to_s)}")
+  end
   attribute :web_id, predicate: NS.donl[:authority] do |object|
     RDF::URI(object.web_id.identifier) if object.web_id
   end
