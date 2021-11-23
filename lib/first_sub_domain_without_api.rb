@@ -15,6 +15,6 @@ class FirstSubDomainWithoutAPI < Apartment::Elevators::Generic
   end
 
   def spi_request?(request)
-    ENV['ARGU_API_URL'].present? && request.url.starts_with?(ENV['ARGU_API_URL'])
+    ENV['DATA_SERVICE_URL'].present? && request.url.starts_with?(ENV['DATA_SERVICE_URL'])
   end
 end
