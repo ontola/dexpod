@@ -15,7 +15,13 @@ module Broker
     def assign_attributes(_); end
 
     def load(attributes, remove_root = false, persisted = false)
-      super(attributes.transform_keys(&:underscore), remove_root, persisted)
+      super(attributes.transform_keys(&method(:sanitize_key)), remove_root, persisted)
+    end
+
+    private
+
+    def sanitize_key(key)
+      key.to_s.underscore.sub('_id', 'id')
     end
 
     class << self

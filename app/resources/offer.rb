@@ -19,12 +19,6 @@ class Offer < Broker::Resource
     RDF::URI(element_url)
   end
 
-  def iri_opts
-    {
-      id: _id
-    }
-  end
-
   def parent
     return unless local_resource?
 
