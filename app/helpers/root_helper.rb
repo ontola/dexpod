@@ -5,7 +5,9 @@ module RootHelper
 
   # The pod targeted in this request, if any
   def current_pod
-    @current_pod ||= Pod.find_by!(pod_name: current_tenant) if pod? # rubocop:disable Rails/HelperInstanceVariable
+    Thread.current[:current_pod] = nil if Thread.current[:current_pod]&.pod_name != current_tenant
+
+    Thread.current[:current_pod] ||= Pod.find_by!(pod_name: current_tenant) if pod?
   end
 
   def current_tenant
