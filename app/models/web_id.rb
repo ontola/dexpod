@@ -42,6 +42,12 @@ class WebId < ApplicationRecord
     )
   end
 
+  def offer_collection
+    Offer.root_collection.new_child(
+      filter: {NS.app[:dataOwner] => [profile.iri]}
+    )
+  end
+
   def owner_agreement_collection
     Deal.root_collection.new_child(
       filter: {NS.app[:dataOwner] => [profile.iri]}

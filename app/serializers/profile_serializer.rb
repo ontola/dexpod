@@ -10,6 +10,8 @@ class ProfileSerializer < LinkedSerializer
             }
   has_one :root_node,
           predicate: NS.dex[:rootFolder]
+  has_one :offer_collection,
+          predicate: NS.dex[:offers]
   has_one :owner_agreement_collection,
           predicate: NS.dex[:ownerAgreements]
   has_one :recipient_agreement_collection,
