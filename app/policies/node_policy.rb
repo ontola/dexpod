@@ -8,6 +8,7 @@ class NodePolicy < ApplicationPolicy
     folder_id
     owner
     parent_id
+    payment_pointer
   ]
 
   def show?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_152012) do
+ActiveRecord::Schema.define(version: 2021_12_29_121641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2021_11_17_152012) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "payment_pointer"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|

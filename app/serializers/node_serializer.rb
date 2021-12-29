@@ -14,4 +14,6 @@ class NodeSerializer < RecordSerializer
             predicate: NS.schema[:image]
   attribute :type,
             predicate: NS.dex[:nodeType]
+  attribute :payment_pointer,
+            predicate: NS.dex[:paymentPointer]
 end

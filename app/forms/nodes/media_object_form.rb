@@ -7,4 +7,5 @@ class MediaObjectForm < NodeForm
         min_count: 1,
         datatype: NS.ll[:blob],
         label: ''
+  field :payment_pointer
 end

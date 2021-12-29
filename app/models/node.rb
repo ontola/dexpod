@@ -28,6 +28,7 @@ class Node < ApplicationRecord
            dependent: :destroy
   has_many :datasets,
            through: :distributions
+  attribute :payment_pointer, IRIType.new
 
   has_ltree_hierarchy
 
