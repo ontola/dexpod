@@ -13,7 +13,7 @@ class Dataset < ApplicationRecord
   accepts_nested_attributes_for :distributions
   accepts_nested_attributes_for :dataset_themes
 
-  attribute :license, IRIType.new
+  attribute :license, LinkedRails::Types::IRI.new
   attribute :themes, array: true
   attr_accessor :part_of
 

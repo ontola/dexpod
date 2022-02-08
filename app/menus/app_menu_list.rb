@@ -3,9 +3,8 @@
 class AppMenuList < ApplicationMenuList
   include RootHelper
 
-  has_menu :info,
-           label: -> { 'Gebruiker' },
-           menus: -> { info_links }
+  has_menu :session,
+           menus: -> { session_menu_items }
   has_menu :navigations,
            iri_base: '/menus',
            menus: -> { navigation_links }
@@ -27,16 +26,35 @@ class AppMenuList < ApplicationMenuList
       href: LinkedRails.iri,
       image: 'fa-home'
     )
-    items << menu_item(
-      :datasets,
-      label: I18n.t('menu.datasets'),
-      href: Dataset.collection_iri
-    )
+    if RootHelper.pod?
+      items << menu_item(
+        :datasets,
+        label: I18n.t('menu.datasets'),
+        href: Dataset.collection_iri
+      )
+    end
 
     items
   end
 
-  def info_links # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def session_menu_items
+    [
+      sign_out_menu_item
+    ]
+  end
+
+  def sign_out_menu_item
+    menu_item(
+      :signout,
+      action: NS.libro['actions/logout'],
+      label: I18n.t('menu.sign_out'),
+      href: LinkedRails.iri(path: 'u/logout')
+    )
+  end
+
+  def user_menu_items
+    return [] if user_context.guest?
+
     items = []
     if !user_context.guest? && RootHelper.public_tenant?
       items << menu_item(
@@ -49,38 +67,10 @@ class AppMenuList < ApplicationMenuList
       items << menu_item(
         :dexes_home,
         label: I18n.t('menu.dexes'),
-        href: LinkedRails.iri(host: LinkedRails.host)
+        href: LinkedRails.iri(host: Rails.application.config.host_name)
       )
     end
-    items
-  end
-
-  def session_links # rubocop:disable Metrics/MethodLength
-    items = []
-    items << menu_item(
-      :sign_in,
-      label: I18n.t('actions.sessions.create.label'),
-      href: LinkedRails.iri(path: 'u/session/new')
-    )
-    items << menu_item(
-      :password,
-      label: I18n.t('actions.passwords.create.label'),
-      href: LinkedRails.iri(path: 'u/password/new')
-    )
-    items << menu_item(
-      :confirmation,
-      label: I18n.t('actions.confirmations.create.label'),
-      href: LinkedRails.iri(path: 'u/confirmation/new')
-    )
-    items
-  end
-
-  def user_menu_items
-    return [] if user_context.guest?
-
-    items = []
     items << update_pod_item if user_context.try(:pod_owner?)
-    items << user_menu_sign_out_item
     items
   end
 
@@ -89,15 +79,6 @@ class AppMenuList < ApplicationMenuList
       :settings,
       label: I18n.t('users.settings.title'),
       href: Pod.singular_resource(current_pod.dup).action(:update).iri
-    )
-  end
-
-  def user_menu_sign_out_item
-    menu_item(
-      :signout,
-      action: NS.libro['actions/logout'],
-      label: I18n.t('menu.sign_out'),
-      href: LinkedRails.iri(path: :logout)
     )
   end
 end

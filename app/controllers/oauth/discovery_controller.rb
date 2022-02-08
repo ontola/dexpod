@@ -6,7 +6,8 @@ module Oauth
 
     def provider_response
       super.merge(
-        registration_endpoint: register_url(protocol: protocol, host: Rails.application.config.host_name)
+        registration_endpoint: register_url(protocol: protocol, host: Rails.application.config.host_name),
+        token_endpoint_auth_methods_supported: %w[client_secret_post]
       )
     end
 

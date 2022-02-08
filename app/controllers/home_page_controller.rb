@@ -6,7 +6,7 @@ class HomePageController < ApplicationController
 
   def show_success
     respond_with_resource resource: website,
-                          include: LinkedRails::WebSite.show_includes
+                          include: %i[homepage]
   end
 
   private
@@ -15,18 +15,9 @@ class HomePageController < ApplicationController
     const_get(:HomePage).new(
       name: current_manifest.site_name.capitalize,
       description: welcome_text,
-      includes: homepage_includes,
       iri: LinkedRails.iri(path: 'home'),
       widgets: homepage_widgets
     )
-  end
-
-  def homepage_includes
-    homepage_widgets
-  end
-
-  def homepage_widgets
-    []
   end
 
   def website

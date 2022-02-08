@@ -26,9 +26,10 @@ require 'json/ld/context'
 require 'json/ld/reader'
 require 'json/ld/writer'
 
+require 'linked_rails/middleware/error_handling'
 require 'linked_rails/middleware/linked_data_params'
+require 'linked_rails/types/iri_type'
 require_relative '../lib/apartment_sidekiq'
-require_relative '../lib/types/iri_type'
 require_relative './initializers/version'
 
 require_relative '../lib/dex_broker'
@@ -44,6 +45,8 @@ module Dexpod
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.autoloader = :zeitwerk
 
     %i[controllers forms models policies serializers].each do |type|
       config.autoload_paths += %W[#{config.root}/app/#{type}/nodes]
@@ -86,7 +89,8 @@ module Dexpod
       .content_types_to_serve_as_binary
       .delete('image/svg+xml')
 
-    config.middleware.use FirstSubDomainWithoutAPI
+    config.middleware.insert_after ActionDispatch::DebugExceptions, LinkedRails::Middleware::ErrorHandling
+    config.middleware.insert_after ActionDispatch::DebugExceptions, FirstSubDomainWithoutAPI
     config.middleware.use LinkedRails::Middleware::LinkedDataParams
     config.middleware.insert_before 0, Rack::Cors do
       allow do

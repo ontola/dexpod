@@ -17,14 +17,13 @@ module Broker
     end
 
     def where_hash
-      (collection.filters || []).reduce({page: page}) do |hash, filter|
+      (collection.filters || []).each_with_object({page: page}) do |filter, hash|
         hash[key_for_filter(filter)] = filter.value.first
-        hash
       end
     end
 
-    def raw_members
-      broker_query
+    def members
+      @members ||= broker_query
     end
 
     class << self

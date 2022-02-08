@@ -7,4 +7,3 @@ module Broker
     end
   end
 end
-

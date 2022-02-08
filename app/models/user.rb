@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  POD_NAME_MATCH = %r{^https:\/\/(\w*)\.#{Rails.application.config.host_name}\/pod\/profile#me$}
+
   has_many :identities, dependent: :destroy
 
   def dex_identity
@@ -16,8 +18,7 @@ class User < ApplicationRecord
   end
 
   def pod_name
-    @pod_name ||=
-      dex_identity&.identifier&.match(%r{^https:\/\/(\w*)\.#{LinkedRails.host}\/pod\/profile#me$})&.captures&.first
+    @pod_name ||= dex_identity&.identifier&.match(POD_NAME_MATCH)&.captures&.first
   end
 
   def pod_owner?

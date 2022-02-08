@@ -7,7 +7,7 @@ class ManifestsController < ApplicationController
 
   def tenant
     render json: {
-      iri_prefix: LinkedRails.iri.host
+      iri_prefix: URI(params[:iri]).host
     }
   end
 

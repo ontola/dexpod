@@ -14,17 +14,17 @@ GIT
 
 GIT
   remote: https://github.com/ontola/active_response
-  revision: 4486c79d27f593176175bc7582d71dbb179ebad1
+  revision: 6ca39fb81936c8fe0dc796949e3577a33b747f32
   specs:
     active_response (0.0.3)
       railties
 
 GIT
   remote: https://github.com/ontola/linked_rails
-  revision: 5fe3448cd891089568e5ddc39c588149e7704753
-  branch: collections-dsl
+  revision: cda65ff431483e6658f3f102acf0ebcf2b9e4f01
+  branch: enum-identifier
   specs:
-    linked_rails (0.0.3)
+    linked_rails (0.0.4)
       active_response (~> 0.0.2)
       kaminari-activerecord
       pundit
@@ -48,12 +48,13 @@ GIT
 
 GIT
   remote: https://github.com/ontola/rdf-serializers
-  revision: baad12916a1f65159ee58187593d99c3224ad3ca
+  revision: bf61835d9ca9b5c6aaac9b26bd3704cc486be755
+  branch: refactor-includes
   specs:
-    rdf-serializers (0.0.10)
+    rdf-serializers (0.0.11)
       jsonapi-serializer (>= 2.1.0)
       oj
-      railties (>= 4.2.0, < 7)
+      railties (>= 4.2.0, < 8)
       rdf (~> 3.0)
 
 GIT
@@ -257,14 +258,12 @@ GEM
     haml (5.2.2)
       temple (>= 0.8.0)
       tilt
-    hamster (3.0.0)
-      concurrent-ruby (~> 1.0)
     hashdiff (1.0.1)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
-    i18n (1.8.11)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.1)
       mini_magick (>= 4.9.5, < 5)
@@ -288,10 +287,10 @@ GEM
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
     jwt (2.3.0)
-    kaminari-activerecord (1.2.1)
+    kaminari-activerecord (1.2.2)
       activerecord
-      kaminari-core (= 1.2.1)
-    kaminari-core (1.2.1)
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     kramdown (2.3.1)
       rexml
     kramdown-parser-gfm (1.1.0)
@@ -302,7 +301,7 @@ GEM
     listen (3.6.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.12.0)
+    loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     ltree_hierarchy (1.0.0)
@@ -321,8 +320,8 @@ GEM
     mime-types-data (3.2021.0704)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.6.1)
-    minitest (5.14.4)
+    mini_portile2 (2.7.1)
+    minitest (5.15.0)
     minitest-bang (1.0.4)
       minitest (>= 4.7.5)
     minitest-rails (6.1.0)
@@ -341,13 +340,13 @@ GEM
     net_http_timeout_errors (0.3.5)
     netrc (0.11.0)
     nio4r (2.5.8)
-    nokogiri (1.12.5)
-      mini_portile2 (~> 2.6.1)
+    nokogiri (1.13.1)
+      mini_portile2 (~> 2.7.0)
       racc (~> 1.4)
     oga (3.3)
       ast
       ruby-ll (~> 2.1)
-    oj (3.13.9)
+    oj (3.13.11)
     openid_connect (1.2.0)
       activemodel
       attr_required (>= 1.0.0)
@@ -366,7 +365,7 @@ GEM
     public_suffix (4.0.6)
     puma (5.4.0)
       nio4r (~> 2.0)
-    pundit (2.1.1)
+    pundit (2.2.0)
       activesupport (>= 3.0.0)
     racc (1.6.0)
     rack (2.2.3)
@@ -411,8 +410,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rdf (3.1.15)
-      hamster (~> 3.0)
+    rdf (3.2.3)
       link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (3.1.0)
       rdf (~> 3.1)
@@ -436,8 +434,8 @@ GEM
     rdf-turtle (3.1.3)
       ebnf (~> 2.1)
       rdf (~> 3.1, >= 3.1.8)
-    rdf-vocab (3.1.14)
-      rdf (~> 3.1, >= 3.1.12)
+    rdf-vocab (3.2.0)
+      rdf (~> 3.2)
     rdf-xsd (3.1.1)
       rdf (~> 3.1)
       rexml (~> 3.2)
@@ -563,7 +561,7 @@ GEM
     sxp (1.1.0)
       rdf (~> 3.1)
     temple (0.8.2)
-    thor (1.1.0)
+    thor (1.2.1)
     tilt (2.0.10)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -610,7 +608,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.26)
-    zeitwerk (2.5.1)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby

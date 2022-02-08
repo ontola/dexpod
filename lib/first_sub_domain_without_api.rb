@@ -11,7 +11,7 @@ class FirstSubDomainWithoutAPI < Apartment::Elevators::Generic
   end
 
   def landing_page?(request)
-    request.url.starts_with?("https://#{Rails.application.config.host_name}/")
+    request.url.starts_with?("#{Rails.application.config.origin}/")
   end
 
   def spi_request?(request)

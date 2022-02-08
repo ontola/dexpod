@@ -60,7 +60,7 @@ class WebId < ApplicationRecord
     end
 
     def requested_singular_resource(_params, user_context)
-      RootHelper.pod? ? user_context.pod.web_id : user_context
+      RootHelper.pod? ? user_context.pod&.web_id : user_context
     end
   end
 end

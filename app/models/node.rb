@@ -28,7 +28,7 @@ class Node < ApplicationRecord
            dependent: :destroy
   has_many :datasets,
            through: :distributions
-  attribute :payment_pointer, IRIType.new
+  attribute :payment_pointer, LinkedRails::Types::IRI.new
 
   has_ltree_hierarchy
 
@@ -37,7 +37,8 @@ class Node < ApplicationRecord
   with_collection :nodes,
                   default_sortings: [
                     {key: :created_at, direction: :desc}
-                  ]
+                  ],
+                  title: -> { parent.display_name }
   with_collection :media_objects
   with_collection :folders
 

@@ -10,7 +10,7 @@ class Session < LinkedRails::Auth::Session
 
     def requested_singular_resource(params, _user_context)
       resource = super
-      resource.host = ENV['HOSTNAME']
+      resource.host = Rails.application.config.host_name
       resource
     end
   end

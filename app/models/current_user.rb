@@ -24,6 +24,10 @@ class CurrentUser
   end
 
   class << self
+    def requested_resource(opts, user_context)
+      new(user: user_context)
+    end
+
     def route_key
       :c_a
     end

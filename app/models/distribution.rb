@@ -6,9 +6,9 @@ class Distribution < ApplicationRecord
   belongs_to :dataset
   belongs_to :node, optional: true
 
-  attribute :format, IRIType.new
-  attribute :offer_iri, IRIType.new
-  attribute :access_url, IRIType.new
+  attribute :format, LinkedRails::Types::IRI.new
+  attribute :offer_iri, LinkedRails::Types::IRI.new
+  attribute :access_url, LinkedRails::Types::IRI.new
 
   delegate :license, :description, :user, to: :dataset
   after_commit :schedule_offer_job, on: :create
