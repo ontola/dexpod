@@ -15,7 +15,8 @@ class Deal < Broker::Resource
   with_columns default: [
     NS.app[:file],
     NS.app[:dataOwner],
-    NS.schema.dateCreated
+    NS.schema.dateCreated,
+    NS.app[:brokerUrl]
   ]
 
   def data_owner

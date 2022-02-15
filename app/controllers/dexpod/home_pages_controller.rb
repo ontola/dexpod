@@ -13,11 +13,16 @@ module Dexpod
       @homepage_widgets ||= [
         LinkedRails::Widget.new(
           size: 3,
-          resources: [
-            current_pod.root_node.iri,
-            shared_with_me_iri,
-            shared_with_others_iri
-          ]
+          resources: [current_pod.root_node.iri],
+          topology: NS.argu[:largeContainer]
+        ),
+        LinkedRails::Widget.new(
+          size: 3,
+          resources: [shared_with_me_iri]
+        ),
+        LinkedRails::Widget.new(
+          size: 3,
+          resources: [shared_with_others_iri]
         )
       ]
     end
