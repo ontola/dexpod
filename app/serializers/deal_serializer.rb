@@ -7,11 +7,8 @@ class DealSerializer < LinkedSerializer
   attribute :broker_url, predicate: NS.app[:brokerUrl]
   attribute :resource, predicate: NS.app[:file]
   attribute :recipient, predicate: NS.app[:recipients]
-  attribute :permitted, predicate: NS.app[:permitted]
-  attribute :scope, predicate: NS.app[:scope]
-  attribute :based_on, predicate: NS.app[:basedOn]
-  attribute :source_template, predicate: NS.app[:sourceTemplate]
-  attribute :commitments, predicate: NS.app[:commitments]
   attribute :signature, predicate: NS.app[:signature]
   attribute :updated_at, predicate: NS.schema.dateModified
+  attribute :created_at, predicate: NS.schema.dateCreated
+  # has_many :commitments, predicate: NS.app[:commitments]
 end

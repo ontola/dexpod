@@ -16,7 +16,7 @@ class DexBroker
 
     # @return string Iri of the newly created Offer
     def create_offer(body)
-      response = post('/offers', body.to_json)
+      response = post('/offers', body.to_json, Authorization: "Bearer #{authorization}")
 
       broker_url(response.headers['location'])
     end
@@ -26,6 +26,22 @@ class DexBroker
     end
 
     private
+
+    def authorization
+      JWT.encode(
+        {
+          application_id: broker_app_id,
+          iss: Rails.application.config.origin,
+          sub: RootHelper.current_pod.web_id.profile.iri
+        },
+        Doorkeeper::JWT.configuration.secret_key,
+        Doorkeeper::JWT.configuration.encryption_method.to_s.upcase
+      )
+    end
+
+    def broker_app_id
+      Doorkeeper::Application.find_by!(name: ENV['BROKER_APP_NAME']).uid
+    end
 
     def broker_headers(headers = nil)
       {

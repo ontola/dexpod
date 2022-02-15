@@ -11,12 +11,27 @@ nl:
     Agreement:
       label: "DataDeal"
       plural_label: "DataDeals"
+    Condition:
+      label: "Conditie"
+      plural_label: "Condities"
     Folder:
       label: "Map"
       plural_label: "Mappen"
     Offer:
       label: "Gedeeld bestand"
       plural_label: "Gedeelde bestanden"
+    brokerUrl:
+      label: "Bekijk in broker"
+    conditionType:
+      label: "Type"
+    conditionText:
+      label: "Tekst"
+    conditionAmount:
+      label: "Bedrag"
+    conditionAddress:
+      label: "Interledger wallet"
+    conditionDuration:
+      label: "Duur (seconden)"
     dateSigned:
       label: "Deal gesloten op"
     dataOwner:
@@ -73,6 +88,8 @@ nl:
       plural_label: "Widgets"
     creator:
       label: "Plaatser"
+    currency:
+      label: "Munteenheid"
     dateCreated:
       label: "Aanmaakdatum"
     dateModified:
@@ -89,6 +106,8 @@ nl:
       label: "Optie"
     orderedItem:
       label: "Item"
+    priceCurrency:
+      label: "Munteenheid"
     uploadDate:
       label: "Upload datum"
     url:

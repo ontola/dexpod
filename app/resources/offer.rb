@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Offer < Broker::Resource
+  class Condition < Broker::Resource
+  end
+
   with_columns default: [
     NS.app[:file],
     NS.app[:dataOwner],

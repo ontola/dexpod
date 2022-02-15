@@ -7,11 +7,21 @@ class Dataset < ApplicationRecord
   enhance LinkedRails::Enhancements::Updatable
 
   belongs_to :user
+  has_many :conditions, dependent: :destroy
   has_many :dataset_themes, dependent: :destroy
   has_many :distributions, dependent: :destroy
   has_many :nodes, through: :distributions
+
   accepts_nested_attributes_for :distributions
   accepts_nested_attributes_for :dataset_themes
+
+  Condition.types.each do |klass|
+    name = klass.name.underscore.to_sym
+    has_one name, dependent: :destroy
+    accepts_nested_attributes_for name
+  end
+
+  with_collection :conditions
 
   attribute :license, LinkedRails::Types::IRI.new
   attribute :themes, array: true

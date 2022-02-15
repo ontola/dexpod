@@ -1,0 +1,9 @@
+nl:
+  enums:
+    conditions:
+      type:
+        ImplicitDisclaimerCondition: 'Eigen voorwaarden (impliciet)'
+        ExplicitDisclaimerCondition: 'Eigen voorwaarden (expliciet)'
+        AttributionCondition: 'Naamsvermelding verplicht'
+        InterledgerPaymentCondition: 'Eenmalige betaling (Interledger)'
+        TimespanCondition: 'Beperkte tijd'

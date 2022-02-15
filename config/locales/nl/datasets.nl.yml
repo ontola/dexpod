@@ -16,3 +16,21 @@ nl:
       license_description:
         label: "Eigen voorwaarden"
         helper_text: "Leg hier uit wat de voorwaarden zijn. De gebruiker moet hier mee akkoord gaan."
+      explicit_disclaimer_condition:
+        label: 'Eigen voorwaarden (expliciet)'
+        description: "Ontvangers moeten onderstaande voorwarden expliciet accepteren"
+      implicit_disclaimer_condition:
+        label: 'Eigen voorwaarden (impliciet)'
+        description: "Ontvangers accepteren onderstaande voorwarden impliciet bij het sluiten van de deal"
+      attribution_condition:
+        label: 'Naamsvermelding verplicht'
+        description: "Ontvangers moeten onderstaande naamsvermelding tonen bij hergebruik van de data"
+      interledger_payment_condition:
+        label: 'Eenmalige betaling (Interledger)'
+        description: "Ontvangers moeten een eenmalig bedrag betalen via Interledger om de deal te kunnen sluiten"
+      timespan_condition:
+        label: 'Beperkte tijd'
+        description: "Ontvangers mogen de data gedurende beperkte tijd gebruiken"
+      conditions:
+        label: "Condities"
+        description: "Welke condities gelden voor het sluiten van een deal voor deze data?"

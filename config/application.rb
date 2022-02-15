@@ -49,6 +49,7 @@ module Dexpod
     config.autoloader = :zeitwerk
 
     %i[controllers forms models policies serializers].each do |type|
+      config.autoload_paths += %W[#{config.root}/app/#{type}/conditions]
       config.autoload_paths += %W[#{config.root}/app/#{type}/nodes]
     end
 

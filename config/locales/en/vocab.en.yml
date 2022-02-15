@@ -11,12 +11,27 @@ en:
     Agreement:
       label: "DataDeal"
       plural_label: "DataDeals"
+    Condition:
+      label: "Condition"
+      plural_label: "Conditions"
     Folder:
       label: "Folder"
       plural_label: "Folders"
     Offer:
       label: "Shared file"
       plural_label: "Shared files"
+    brokerUrl:
+      label: "Show in the Broker"
+    conditionType:
+      label: "Type"
+    conditionText:
+      label: "Text"
+    conditionAmount:
+      label: "Amount"
+    conditionAddress:
+      label: "Interledger wallet"
+    conditionDuration:
+      label: "Duration (seconds)"
     dateSigned:
       label: "Deal closed at"
     dataOwner:
@@ -73,6 +88,8 @@ en:
       plural_label: "Widgets"
     creator:
       label: "Creator"
+    currency:
+      label: "Currency"
     dateCreated:
       label: "Date created"
     dateModified:
@@ -89,6 +106,8 @@ en:
       label: "Option"
     orderedItem:
       label: "Ordered item"
+    priceCurrency:
+      label: "Currency"
     uploadDate:
       label: "Upload date"
     url:

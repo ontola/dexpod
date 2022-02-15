@@ -27,22 +27,14 @@ class CreateOfferJob < ApplicationJob
 
   def body
     {
-      dataOwner: distribution.user.dex_identity&.identifier,
       resource: distribution.node&.iri,
-      scope: '',
       conditions: conditions,
-      permitted: :permit,
       recipient: nil
     }
   end
 
   def conditions
-    [
-      {
-        text: distribution.dataset.license_description || '',
-        type: :ExplicitDisclaimerCondition
-      }
-    ]
+    distribution.dataset.conditions.map(&:offer_attributes)
   end
 
   def publish_delta

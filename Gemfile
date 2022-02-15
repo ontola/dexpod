@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.0'
 
+gem 'activerecord-typedstore'
 gem 'active_model_otp'
 gem 'active_response', git: 'https://github.com/ontola/active_response'
 gem 'activeresource'
@@ -28,6 +29,7 @@ gem 'linked_rails-auth', git: 'https://github.com/ontola/linked_rails-auth'
 gem 'ltree_hierarchy'
 gem 'mailjet'
 gem 'mime-types'
+gem 'money'
 gem 'oj'
 gem 'openid_connect'
 gem 'pg'

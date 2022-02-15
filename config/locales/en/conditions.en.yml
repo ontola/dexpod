@@ -1,0 +1,9 @@
+en:
+  enums:
+    conditions:
+      type:
+        ImplicitDisclaimerCondition: 'Custom terms (implicit)'
+        ExplicitDisclaimerCondition: 'Custom terms (explicit)'
+        AttributionCondition: 'Attribution required'
+        InterledgerPaymentCondition: 'Onetime payment (Interledger)'
+        TimespanCondition: 'Limited time'

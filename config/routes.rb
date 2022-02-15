@@ -59,6 +59,10 @@ Rails.application.routes.draw do
     Node.descendants.each do |klass|
       linked_resource(klass)
     end
+    linked_resource(Condition)
+    Condition.types.each do |condition_class|
+      linked_resource(condition_class, controller: :conditions)
+    end
     linked_resource(Dataset)
     linked_resource(Deal)
     linked_resource(Distribution)

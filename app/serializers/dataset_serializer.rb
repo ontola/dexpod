@@ -19,7 +19,10 @@ class DatasetSerializer < LinkedSerializer
   attribute :web_id, predicate: NS.donl[:authority] do |object|
     RDF::URI(object.web_id.identifier) if object.web_id
   end
-
+  with_collection :conditions, predicate: NS.dex[:conditions]
+  Condition.types.each do |klass|
+    has_one klass.name.underscore.to_sym, predicate: NS.dex[klass.name.camelize(:lower)]
+  end
   enum :license, predicate: NS.dc.license, options: EnumHelper.list_options('licenses')
 
   has_many :distributions, predicate: NS.dcat[:distribution]

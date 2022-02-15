@@ -26,8 +26,12 @@ class DatasetForm < ApplicationForm
         sh_in: form_options_iri(:theme, DatasetTheme),
         min_count: 1,
         max_count: 99
-  field :license,
-        min_count: 1
-  field :license_description,
-        min_count: 1
+  group :conditions,
+        description: -> { I18n.t('forms.datasets.conditions.description') },
+        label: -> { I18n.t('forms.datasets.conditions.label') },
+        collapsible: false do
+    Condition.types.each do |klass|
+      has_one klass.name.underscore.to_sym
+    end
+  end
 end
