@@ -6,8 +6,10 @@ class MediaObject < Node
   ARCHIVE_TYPES = %w[application/gzip application/vnd.rar application/x-7z-compressed application/x-bzip2
                      application/x-compress application/x-gtar application/x-lzip application/x-lzma
                      application/zip].freeze
+  AUDIO_TYPES = %w[audio/mpeg audio/mp4 audio/m4a audio/ogg audio/aac].freeze
   DOCUMENT_TYPES = %w[application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document
                       application/vnd.oasis.opendocument.text application/epub+zip text/plain].freeze
+  IMAGE_TYPES = %w[image/jpeg image/png image/webp image/svg+xml].freeze
   PORTABLE_DOCUMENT_TYPES = %w[application/pdf].freeze
   PRESENTATION_TYPES = %w[application/vnd.oasis.opendocument.presentation application/powerpoint
                           application/vnd.openxmlformats-officedocument.presentationml.presentation
@@ -15,6 +17,13 @@ class MediaObject < Node
   SPREADSHEET_TYPES = %w[text/csv application/excel application/vnd.ms-excel
                          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
                          text/comma-separated-values application/vnd.oasis.opendocument.spreadsheet].freeze
+  CONTENT_TYPES = ARCHIVE_TYPES +
+    AUDIO_TYPES +
+    DOCUMENT_TYPES +
+    PORTABLE_DOCUMENT_TYPES +
+    IMAGE_TYPES +
+    PRESENTATION_TYPES +
+    SPREADSHEET_TYPES
 
   enhance LinkedRails::Enhancements::Creatable
 
@@ -25,6 +34,8 @@ class MediaObject < Node
   ]
 
   attribute :content, FileType.new
+  attribute :filename
+  attribute :content_type
 
   enum content_source: {local: 0, remote: 1}
 

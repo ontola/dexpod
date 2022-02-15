@@ -8,4 +8,9 @@ class MediaObjectForm < NodeForm
         datatype: NS.ll[:blob],
         label: ''
   field :payment_pointer
+
+  hidden do
+    field :content_type, sh_in: -> { MediaObject::CONTENT_TYPES }
+    field :filename
+  end
 end
