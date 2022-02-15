@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_07_133744) do
+ActiveRecord::Schema.define(version: 2022_02_16_083552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -231,9 +231,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_133744) do
   add_foreign_key "conditions", "datasets"
   add_foreign_key "identities", "providers"
   add_foreign_key "identities", "users"
-  add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "web_ids", column: "resource_owner_id"
-  add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_openid_requests", "oauth_access_grants", column: "access_grant_id", on_delete: :cascade
   add_foreign_key "pods", "web_ids"
 end
