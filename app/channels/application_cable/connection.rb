@@ -8,7 +8,7 @@ module ApplicationCable
     identified_by :current_user
 
     def initialize(*_args)
-      self.current_tenant = Apartment::Tenant.current
+      self.current_tenant = Apartment::Tenant.current&.to_sym
       Apartment::Tenant.switch!(current_tenant) if current_tenant
       super
     end
@@ -24,6 +24,8 @@ module ApplicationCable
     private
 
     def allow_request_origin?
+      return true unless current_pod
+
       "#{env['HTTP_ORIGIN']}/".ends_with?(current_pod.home_iri.to_s)
     end
 
