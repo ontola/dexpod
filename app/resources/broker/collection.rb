@@ -2,7 +2,9 @@
 
 module Broker
   class Collection < LinkedRails::Collection
-    def total_count; end
+    def total_count
+      default_view.count
+    end
 
     private
 

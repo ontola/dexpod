@@ -40,7 +40,11 @@ nl:
       label: "Bestand"
     nodeType:
       label: "Type"
+    publishAction:
+      label: "Publiceren"
     recipients:
+      label: "Gedeeld met"
+    sharedWith:
       label: "Gedeeld met"
   foaf:
     name:

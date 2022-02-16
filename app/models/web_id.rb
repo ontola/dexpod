@@ -50,7 +50,7 @@ class WebId < ApplicationRecord
 
   def owner_agreement_collection
     Deal.root_collection.new_child(
-      filter: {NS.app[:dataOwner] => [profile.iri]}
+      table_type: :owner
     )
   end
 

@@ -16,4 +16,12 @@ class NodeSerializer < RecordSerializer
             predicate: NS.dex[:nodeType]
   attribute :payment_pointer,
             predicate: NS.dex[:paymentPointer]
+  attribute :shared_with_iri, predicate: NS.dex[:sharedWith]
+  has_one :publish_action, predicate: NS.dex[:publishAction] do |object|
+    if object.datasets.any?
+      object.datasets.first
+    else
+      object.dataset_collection.action(:create)
+    end
+  end
 end

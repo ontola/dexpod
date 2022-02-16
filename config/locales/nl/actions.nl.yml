@@ -20,7 +20,7 @@ nl:
         submit: "Verstuur"
     datasets:
       create:
-        label: "Publiceren op Dexes"
+        label: "Publiceren"
         description: "Je kunt jouw bestanden aanbieden op de [datamartkplaats](https://dexes.eu) van Dexes. Hierdoor kunnen anderen jouw dataset makkelijker vinden."
         submit: "Publiceren"
     passwords:

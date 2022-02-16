@@ -40,7 +40,11 @@ en:
       label: "File"
     nodeType:
       label: "Type"
+    publishAction:
+      label: "Publish"
     recipients:
+      label: "Shared with"
+    sharedWith:
       label: "Shared with"
   foaf:
     name:

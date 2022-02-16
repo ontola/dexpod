@@ -28,7 +28,6 @@ class Node < ApplicationRecord
            dependent: :destroy
   has_many :datasets,
            through: :distributions
-  attribute :payment_pointer, LinkedRails::Types::IRI.new
 
   has_ltree_hierarchy
 
@@ -45,12 +44,14 @@ class Node < ApplicationRecord
   with_columns default: [
     NS.schema[:image],
     NS.schema[:name],
-    NS.schema[:dateCreated],
+    NS.dex[:publishAction],
+    NS.dex[:sharedWith],
     NS.schema[:dateModified],
     NS.ontola[:quickActions]
   ]
 
   alias_attribute :display_name, :title
+  attribute :payment_pointer, LinkedRails::Types::IRI.new
 
   validates :parent,
             presence: true,
@@ -65,11 +66,18 @@ class Node < ApplicationRecord
   end
 
   def quick_actions
-    @quick_actions ||= menu(:quick).menu_sequence_iri
+    @quick_actions ||= menu(:quick).iri
   end
 
   def root_object?
     parent_id.nil?
+  end
+
+  def shared_with_iri
+    Deal.root_collection.new_child(
+      filter: {NS.app[:file] => [iri]},
+      table_type: :owner
+    ).iri
   end
 
   class << self

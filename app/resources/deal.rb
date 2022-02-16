@@ -12,12 +12,20 @@ class Deal < Broker::Resource
     end
   )
 
-  with_columns default: [
-    NS.app[:file],
-    NS.app[:dataOwner],
-    NS.schema.dateCreated,
-    NS.app[:brokerUrl]
-  ]
+  with_columns(
+    default: [
+      NS.app[:file],
+      NS.app[:dataOwner],
+      NS.schema.dateCreated,
+      NS.app[:brokerUrl]
+    ],
+    owner: [
+      NS.app[:file],
+      NS.app[:recipients],
+      NS.schema.dateCreated,
+      NS.app[:brokerUrl]
+    ]
+  )
 
   def data_owner
     RDF::URI(super) if super.present?

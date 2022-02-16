@@ -19,20 +19,12 @@ module Dexpod
         LinkedRails::Widget.new(
           size: 3,
           resources: [shared_with_me_iri]
-        ),
-        LinkedRails::Widget.new(
-          size: 3,
-          resources: [shared_with_others_iri]
         )
       ]
     end
 
     def shared_with_me_iri
       current_pod.web_id.recipient_agreement_collection.iri
-    end
-
-    def shared_with_others_iri
-      current_pod.web_id.owner_agreement_collection.iri
     end
 
     def welcome_text
