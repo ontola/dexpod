@@ -38,18 +38,19 @@ class WebId < ApplicationRecord
 
   def recipient_agreement_collection
     Deal.root_collection.new_child(
-      filter: {NS.app[:recipients] => [profile.iri]}
+      filter: {NS.app[:recipients] => [profile.iri.to_s.sub('dexpods.localdev', 'staging.dexpods.eu')]}
     )
   end
 
   def offer_collection
     Offer.root_collection.new_child(
-      filter: {NS.app[:dataOwner] => [profile.iri]}
+      filter: {NS.app[:recipients] => [profile.iri.to_s.sub('dexpods.localdev', 'staging.dexpods.eu')]}
     )
   end
 
   def owner_agreement_collection
     Deal.root_collection.new_child(
+      filter: {NS.app[:recipients] => [profile.iri.to_s.sub('dexpods.localdev', 'staging.dexpods.eu')]},
       table_type: :owner
     )
   end

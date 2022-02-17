@@ -2,10 +2,10 @@
 
 class DatasetsController < AuthorizedController
   has_collection_create_action(
-    image: 'fa-send',
+    image: 'fa-send'
   )
   has_resource_update_action(
-    image: 'fa-send',
+    image: 'fa-send'
   )
 
   private

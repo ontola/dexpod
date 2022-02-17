@@ -11,20 +11,28 @@ module Dexpod
       return [] unless pod_owner?
 
       @homepage_widgets ||= [
-        LinkedRails::Widget.new(
-          size: 3,
-          resources: [current_pod.root_node.iri],
-          topology: NS.argu[:largeContainer]
-        ),
-        LinkedRails::Widget.new(
-          size: 3,
-          resources: [shared_with_me_iri]
-        )
+        root_node_widget,
+        shared_with_me_widget
       ]
     end
 
     def shared_with_me_iri
       current_pod.web_id.recipient_agreement_collection.iri
+    end
+
+    def shared_with_me_widget
+      LinkedRails::Widget.new(
+        size: 3,
+        resources: [shared_with_me_iri]
+      )
+    end
+
+    def root_node_widget
+      LinkedRails::Widget.new(
+        size: 3,
+        resources: [current_pod.root_node.iri],
+        topology: NS.argu[:largeContainer]
+      )
     end
 
     def welcome_text

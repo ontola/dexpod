@@ -26,9 +26,9 @@ class Condition < ApplicationRecord
     end
 
     def type_options
-      @type_options ||= types.map do |type|
-        [type, exact_match: type.iri]
-      end.to_h
+      @type_options ||= types.index_with do |type|
+        {exact_match: type.iri}
+      end
     end
 
     def types

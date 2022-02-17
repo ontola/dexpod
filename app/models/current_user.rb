@@ -24,7 +24,7 @@ class CurrentUser
   end
 
   class << self
-    def requested_resource(opts, user_context)
+    def requested_resource(_opts, user_context)
       new(user: user_context)
     end
 

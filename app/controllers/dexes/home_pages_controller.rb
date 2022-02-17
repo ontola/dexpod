@@ -25,11 +25,11 @@ module Dexes
     end
 
     def homepage_widgets
-      current_user.guest? ? homepage_widgets_guest : homepage_widgets_user
+      @homepage_widgets ||= current_user.guest? ? homepage_widgets_guest : homepage_widgets_user
     end
 
     def homepage_widgets_user
-      @homepage_widgets ||= [
+      [
         LinkedRails::Widget.new(
           size: 1,
           resources: [go_to_pod_action.target.iri],
@@ -39,7 +39,7 @@ module Dexes
     end
 
     def homepage_widgets_guest
-      @homepage_widgets ||= [
+      [
         LinkedRails::Widget.new(
           size: 3,
           resources: [LinkedRails.iri(path: '/u/session/new')]

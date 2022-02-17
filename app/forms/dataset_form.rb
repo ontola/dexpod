@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DatasetForm < ApplicationForm
-  def self.has_part_of(has: true)
+  def self.with_part_of(has: true)
     [
       LinkedRails::SHACL::PropertyShape.new(
         path: [NS.schema.isPartOf],
@@ -15,10 +15,10 @@ class DatasetForm < ApplicationForm
   has_one :distributions,
           label: '',
           min_count: 1,
-          if: has_part_of(has: true)
+          if: with_part_of(has: true)
   has_many :distributions,
            min_count: 1,
-           if: has_part_of(has: false)
+           if: with_part_of(has: false)
   field :themes,
         input_field: LinkedRails::Form::Field::SelectInput,
         grouped: true,

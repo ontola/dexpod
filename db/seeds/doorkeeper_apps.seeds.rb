@@ -12,5 +12,3 @@ token = Doorkeeper::AccessToken.find_or_create_for(
 )
 token.update(token: ENV['RAILS_OAUTH_TOKEN'])
 token
-
-

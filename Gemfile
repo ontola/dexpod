@@ -5,9 +5,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.0'
 
-gem 'activerecord-typedstore'
 gem 'active_model_otp'
 gem 'active_response', git: 'https://github.com/ontola/active_response'
+gem 'activerecord-typedstore'
 gem 'activeresource'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
