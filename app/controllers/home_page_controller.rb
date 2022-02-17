@@ -23,7 +23,6 @@ class HomePageController < ApplicationController
   def website
     LinkedRails::WebSite.new(
       homepage: homepage,
-      image: RDF::URI('http://fontawesome.io/icon/home'),
       iri: LinkedRails.iri,
       name: current_manifest.site_name.capitalize,
       navigations_menu: AppMenuList.new(resource: current_user).menu(:navigations).iri

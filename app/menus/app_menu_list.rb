@@ -24,7 +24,6 @@ class AppMenuList < ApplicationMenuList
       :home,
       label: I18n.t('menu.home'),
       href: LinkedRails.iri,
-      image: 'fa-home'
     )
     if RootHelper.pod?
       items << menu_item(

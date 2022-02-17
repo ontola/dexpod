@@ -22,10 +22,6 @@ class Manifest
     'dexes'
   end
 
-  def header_text
-    'white'
-  end
-
   def preload_iris # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     [
       scope,
@@ -59,7 +55,9 @@ class Manifest
     app_name
   end
 
-  def theme; end
+  def theme
+    :dexes
+  end
 
   def theme_options
     {}
@@ -89,8 +87,8 @@ class Manifest
   def web_manifest_ontola_section # rubocop:disable Metrics/MethodLength
     {
       css_class: 'dexes',
-      header_background: 'primary',
-      header_text: header_text,
+      header_background: 'white',
+      header_text: 'auto',
       preload: preload_iris,
       primary_color: site_theme_color,
       secondary_color: site_secondary_color,
