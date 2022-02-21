@@ -14,6 +14,10 @@ class DatasetForm < ApplicationForm
   field :description
   field :dataspace_id,
         sh_in: -> { Dataspace.collection_iri }
+  field :data_owned,
+        input_field: LinkedRails::Form::Field::CheckboxInput
+  field :data_owner,
+        min_count: 1
   has_one :distributions,
           label: '',
           min_count: 1,

@@ -38,6 +38,15 @@ class Dataset < ApplicationRecord
     NS.dc.title
   ]
 
+  def data_owned?
+    data_owner.blank?
+  end
+  alias data_owned data_owned?
+
+  def data_owned=(val)
+    self.data_owner = nil if val
+  end
+
   def dataspace
     @dataspace ||= Dataspace.find(dataspace_id) if dataspace_id
   end

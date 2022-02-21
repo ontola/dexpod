@@ -11,6 +11,10 @@ nl:
         helper_text: "Omschrijf waar je dataset over gaat."
       themes:
         label: "Thema's"
+      data_owned:
+        label: "Ik ben de eigenaar van deze data"
+      data_owner:
+        label: "Eigenaar van de data"
       license:
         label: "Onder welke licentie deel je de data?"
       license_description:

@@ -11,6 +11,10 @@ en:
         helper_text: "Describe what your dataset is about."
       themes:
         label: "Themes"
+      data_owned:
+        label: "I own this data"
+      data_owner:
+        label: "Owner of the data"
       license:
         label: "Which license applies to your data?"
       license_description:
