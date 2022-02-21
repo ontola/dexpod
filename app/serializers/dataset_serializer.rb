@@ -6,6 +6,12 @@ class DatasetSerializer < LinkedSerializer
   attribute :description, predicate: NS.dc.description
   attribute :license_description, predicate: NS.app[:licenseDescription]
   attribute :updated_at, predicate: NS.dc.modified
+  attribute :dataspace_id, predicate: NS.app[:dataspace] do |object|
+    object.dataspace&.iri
+  end
+  attribute :dataspace_uri, predicate: NS.app[:dataspaceURI] do |object|
+    RDF::URI(object.dataspace.url) if object.dataspace&.url
+  end
   attribute :iri, predicate: NS.dc.identifier do |object|
     object.iri unless object.anonymous_iri?
   end

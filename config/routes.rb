@@ -64,6 +64,7 @@ Rails.application.routes.draw do
       linked_resource(condition_class, controller: :conditions)
     end
     linked_resource(Dataset)
+    linked_resource(Dataspace)
     linked_resource(Deal)
     linked_resource(Distribution)
     linked_resource(Offer)

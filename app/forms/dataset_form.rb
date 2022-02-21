@@ -12,6 +12,8 @@ class DatasetForm < ApplicationForm
   end
   field :title
   field :description
+  field :dataspace_id,
+        sh_in: -> { Dataspace.collection_iri }
   has_one :distributions,
           label: '',
           min_count: 1,

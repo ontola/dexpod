@@ -38,6 +38,16 @@ class Dataset < ApplicationRecord
     NS.dc.title
   ]
 
+  def dataspace
+    @dataspace ||= Dataspace.find(dataspace_id) if dataspace_id
+  end
+
+  def dataspace_id=(val)
+    return super unless val.is_a?(String) && !(val =~ /\D/).nil?
+
+    super(val.split('/').last)
+  end
+
   def show_includes
     super + %i[
       distributions
@@ -67,7 +77,10 @@ class Dataset < ApplicationRecord
 
   class << self
     def attributes_for_new(opts)
-      {user: opts[:user_context]}
+      {
+        dataspace_id: ENV['DEFAULT_DATASPACE_ID'] || 2,
+        user: opts[:user_context]
+      }
     end
 
     def build_new(opts = {})
