@@ -40,4 +40,6 @@ class DatasetForm < ApplicationForm
       has_one klass.name.underscore.to_sym
     end
   end
+  field :license,
+        min_count: 1
 end
