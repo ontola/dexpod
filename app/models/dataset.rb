@@ -87,7 +87,7 @@ class Dataset < ApplicationRecord
   class << self
     def attributes_for_new(opts)
       {
-        dataspace_id: ENV['DEFAULT_DATASPACE_ID'] || 2,
+        dataspace_id: ENV['DEFAULT_DATASPACE_ID'],
         user: opts[:user_context]
       }
     end
