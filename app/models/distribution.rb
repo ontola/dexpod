@@ -10,7 +10,7 @@ class Distribution < ApplicationRecord
   attribute :offer_iri, LinkedRails::Types::IRI.new
   attribute :access_url, LinkedRails::Types::IRI.new
 
-  delegate :license, :description, :user, to: :dataset
+  delegate :dataspace, :dataspace_uri, :license, :description, :user, to: :dataset
   after_commit :schedule_offer_job, on: :create
 
   def format

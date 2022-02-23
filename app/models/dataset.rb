@@ -51,6 +51,10 @@ class Dataset < ApplicationRecord
     @dataspace ||= Dataspace.find(dataspace_id) if dataspace_id
   end
 
+  def dataspace_uri
+    RDF::URI(dataspace.url) if dataspace&.url
+  end
+
   def dataspace_id=(val)
     return super unless val.is_a?(String) && !(val =~ /\D/).nil?
 

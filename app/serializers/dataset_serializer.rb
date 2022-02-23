@@ -9,9 +9,7 @@ class DatasetSerializer < LinkedSerializer
   attribute :dataspace_id, predicate: NS.app[:dataspace] do |object|
     object.dataspace&.iri
   end
-  attribute :dataspace_uri, predicate: NS.app[:dataspaceURI] do |object|
-    RDF::URI(object.dataspace.url) if object.dataspace&.url
-  end
+  attribute :dataspace_uri, predicate: NS.app[:dataspaceURI]
   attribute :data_owned, predicate: NS.app[:dataOwned]
   attribute :data_owner, predicate: NS.app[:legalOwner]
   attribute :iri, predicate: NS.dc.identifier do |object|

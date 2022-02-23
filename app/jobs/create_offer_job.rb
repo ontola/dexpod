@@ -27,6 +27,7 @@ class CreateOfferJob < ApplicationJob
 
   def body
     {
+      dataspace: distribution.dataspace_uri,
       resource: distribution.node&.iri,
       conditions: conditions,
       recipient: nil
