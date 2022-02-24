@@ -21,11 +21,8 @@ nl:
         label: "Eigen voorwaarden"
         helper_text: "Leg hier uit wat de voorwaarden zijn. De gebruiker moet hier mee akkoord gaan."
       explicit_disclaimer_condition:
-        label: 'Eigen voorwaarden (expliciet)'
-        description: "Ontvangers moeten onderstaande voorwarden expliciet accepteren"
-      implicit_disclaimer_condition:
-        label: 'Eigen voorwaarden (impliciet)'
-        description: "Ontvangers accepteren onderstaande voorwarden impliciet bij het sluiten van de deal"
+        label: 'Eigen voorwaarden'
+        description: "Ontvangers moeten onderstaande voorwarden accepteren"
       attribution_condition:
         label: 'Naamsvermelding verplicht'
         description: "Ontvangers moeten onderstaande naamsvermelding tonen bij hergebruik van de data"

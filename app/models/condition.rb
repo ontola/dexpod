@@ -33,7 +33,6 @@ class Condition < ApplicationRecord
 
     def types
       [
-        ImplicitDisclaimerCondition,
         ExplicitDisclaimerCondition,
         AttributionCondition,
         PaymentCondition,

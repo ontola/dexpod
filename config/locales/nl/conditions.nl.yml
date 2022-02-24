@@ -2,7 +2,6 @@ nl:
   enums:
     conditions:
       type:
-        ImplicitDisclaimerCondition: 'Eigen voorwaarden (impliciet)'
         ExplicitDisclaimerCondition: 'Eigen voorwaarden (expliciet)'
         AttributionCondition: 'Naamsvermelding verplicht'
         PaymentCondition: 'Eenmalige betaling'

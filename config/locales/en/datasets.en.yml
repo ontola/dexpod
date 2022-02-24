@@ -21,11 +21,8 @@ en:
         label: "Custom terms"
         helper_text: "Explain what the terms of usage are. The user must accept these terms."
       explicit_disclaimer_condition:
-        label: 'Custom terms (implicit)'
-        description: "Ontvangers moeten onderstaande voorwarden expliciet accepteren"
-      implicit_disclaimer_condition:
-        label: 'Custom terms (explicit)'
-        description: "Ontvangers accepteren onderstaande voorwarden impliciet bij het sluiten van de deal"
+        label: 'Custom terms'
+        description: "Ontvangers moeten onderstaande voorwarden accepteren"
       attribution_condition:
         label: 'Attribution required'
         description: "Ontvangers moeten onderstaande naamsvermelding tonen bij hergebruik van de data"

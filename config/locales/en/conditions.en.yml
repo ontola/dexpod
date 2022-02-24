@@ -2,7 +2,6 @@ en:
   enums:
     conditions:
       type:
-        ImplicitDisclaimerCondition: 'Custom terms (implicit)'
         ExplicitDisclaimerCondition: 'Custom terms (explicit)'
         AttributionCondition: 'Attribution required'
         PaymentCondition: 'Onetime payment'
