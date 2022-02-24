@@ -5,5 +5,5 @@ en:
         ImplicitDisclaimerCondition: 'Custom terms (implicit)'
         ExplicitDisclaimerCondition: 'Custom terms (explicit)'
         AttributionCondition: 'Attribution required'
-        InterledgerPaymentCondition: 'Onetime payment (Interledger)'
+        PaymentCondition: 'Onetime payment'
         TimespanCondition: 'Limited time'

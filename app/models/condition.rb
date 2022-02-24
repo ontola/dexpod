@@ -36,7 +36,7 @@ class Condition < ApplicationRecord
         ImplicitDisclaimerCondition,
         ExplicitDisclaimerCondition,
         AttributionCondition,
-        InterledgerPaymentCondition,
+        PaymentCondition,
         TimespanCondition
       ]
     end

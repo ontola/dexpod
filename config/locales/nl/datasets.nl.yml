@@ -29,9 +29,9 @@ nl:
       attribution_condition:
         label: 'Naamsvermelding verplicht'
         description: "Ontvangers moeten onderstaande naamsvermelding tonen bij hergebruik van de data"
-      interledger_payment_condition:
-        label: 'Eenmalige betaling (Interledger)'
-        description: "Ontvangers moeten een eenmalig bedrag betalen via Interledger om de deal te kunnen sluiten"
+      payment_condition:
+        label: 'Eenmalige betaling'
+        description: "Ontvangers moeten een eenmalig bedrag betalen om de deal te kunnen sluiten"
       timespan_condition:
         label: 'Beperkte tijd'
         description: "Ontvangers mogen de data gedurende beperkte tijd gebruiken"

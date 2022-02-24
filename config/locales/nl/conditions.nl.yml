@@ -5,5 +5,5 @@ nl:
         ImplicitDisclaimerCondition: 'Eigen voorwaarden (impliciet)'
         ExplicitDisclaimerCondition: 'Eigen voorwaarden (expliciet)'
         AttributionCondition: 'Naamsvermelding verplicht'
-        InterledgerPaymentCondition: 'Eenmalige betaling (Interledger)'
+        PaymentCondition: 'Eenmalige betaling'
         TimespanCondition: 'Beperkte tijd'

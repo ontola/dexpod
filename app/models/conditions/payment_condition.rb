@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class InterledgerPaymentCondition < Condition
+class PaymentCondition < Condition
   condition_attrs(
     amount: {
       type: :integer,
@@ -9,10 +9,6 @@ class InterledgerPaymentCondition < Condition
     currency: {
       type: :string,
       default: 'EUR',
-      required: true
-    },
-    address: {
-      type: :string,
       required: true
     }
   )

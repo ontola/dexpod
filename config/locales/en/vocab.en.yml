@@ -28,8 +28,6 @@ en:
       label: "Text"
     conditionAmount:
       label: "Amount"
-    conditionAddress:
-      label: "Interledger wallet"
     conditionDuration:
       label: "Duration (seconds)"
     dateSigned:

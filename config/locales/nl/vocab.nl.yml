@@ -28,8 +28,6 @@ nl:
       label: "Tekst"
     conditionAmount:
       label: "Bedrag"
-    conditionAddress:
-      label: "Interledger wallet"
     conditionDuration:
       label: "Duur (seconden)"
     dateSigned:

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-class InterledgerPaymentConditionForm < ApplicationForm
+class PaymentConditionForm < ApplicationForm
   field :amount,
         input_field: MoneyInput
-  field :address
 end
