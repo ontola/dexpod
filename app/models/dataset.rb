@@ -92,6 +92,7 @@ class Dataset < ApplicationRecord
     def attributes_for_new(opts)
       {
         dataspace_id: ENV['DEFAULT_DATASPACE_ID'],
+        license: NS.dex[:customLicense],
         user: opts[:user_context]
       }
     end

@@ -1,4 +1,10 @@
 {
+  "https://dexpods.eu/ns/core#customLicense": {
+    "labels": {
+      "nl-NL": "Dexes Custom Licentie",
+      "en-US": "Dexes Custom License"
+    }
+  },
   "http://creativecommons.org/publicdomain/zero/1.0/deed.nl": {
     "labels": {
       "nl-NL": "CC-0 (1.0)",
