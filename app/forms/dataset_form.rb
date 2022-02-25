@@ -39,7 +39,8 @@ class DatasetForm < ApplicationForm
         label: -> { I18n.t('forms.datasets.conditions.label') },
         collapsible: false do
     field :dataspace_id,
-          sh_in: -> { Dataspace.collection_iri }
+          sh_in: -> { Dataspace.collection_iri },
+          min_count: 1
     field :license,
           min_count: 1
     Condition.types.each do |klass|
