@@ -14,8 +14,6 @@ class NodeSerializer < RecordSerializer
             predicate: NS.schema[:image]
   attribute :type,
             predicate: NS.dex[:nodeType]
-  attribute :payment_pointer,
-            predicate: NS.dex[:paymentPointer]
   attribute :shared_with_iri, predicate: NS.dex[:sharedWith]
   has_one :publish_action, predicate: NS.dex[:publishAction] do |object|
     if object.datasets.any?

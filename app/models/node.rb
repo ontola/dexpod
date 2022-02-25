@@ -51,7 +51,6 @@ class Node < ApplicationRecord
   ]
 
   alias_attribute :display_name, :title
-  attribute :payment_pointer, LinkedRails::Types::IRI.new
 
   validates :parent,
             presence: true,
