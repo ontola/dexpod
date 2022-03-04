@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.0'
+ruby '3.1.0'
 
 gem 'active_model_otp'
 gem 'active_response', git: 'https://github.com/ontola/active_response'
@@ -29,6 +29,8 @@ gem 'ltree_hierarchy'
 gem 'mailjet'
 gem 'mime-types'
 gem 'money'
+# https://stackoverflow.com/questions/70500220/rails-7-ruby-3-1-loaderror-cannot-load-such-file-net-smtp
+gem 'net-smtp', require: false
 gem 'oj'
 gem 'openid_connect'
 gem 'pg'
