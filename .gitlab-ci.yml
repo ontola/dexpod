@@ -29,6 +29,7 @@ variables:
   STREAM_REDIS_URL: 'redis://localhost:6379/7'
   REDIS_HOST: 'localhost'
   REDIS_URL: 'redis://localhost:6379/0'
+  DEXCAT_URL: 'https://dexcat.localdev'
   SESSION_COOKIE_NAME: 'koa:sess'
   SESSION_COOKIE_SIGNATURE_NAME: 'koa:sess.sig'
   SESSION_SECRET: 'secret'

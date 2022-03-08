@@ -21,8 +21,8 @@ GIT
 
 GIT
   remote: https://github.com/ontola/linked_rails
-  revision: cda65ff431483e6658f3f102acf0ebcf2b9e4f01
-  branch: enum-identifier
+  revision: 4892fb88987d0b138fbb62e50148534b72bd51bc
+  branch: refactor-includes
   specs:
     linked_rails (0.0.4)
       active_response (~> 0.0.2)
@@ -35,15 +35,16 @@ GIT
 
 GIT
   remote: https://github.com/ontola/linked_rails-auth
-  revision: 3f56e4328811e69788388a59e197d82997403b08
+  revision: 98221183c18d95f04a58587d66c4ae578bbe1ef5
   specs:
-    linked_rails-auth (0.0.3)
+    linked_rails-auth (0.0.4)
       active_model_otp
       devise
       doorkeeper
       doorkeeper-jwt
       jwt
       rails
+      rfc-822
       rqrcode
 
 GIT
@@ -451,6 +452,7 @@ GEM
     reverse_markdown (2.0.0)
       nokogiri
     rexml (3.2.5)
+    rfc-822 (0.4.1)
     ros-apartment (2.9.0)
       activerecord (>= 5.0.0, < 6.2)
       parallel (< 2.0)
