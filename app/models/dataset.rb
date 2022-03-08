@@ -56,9 +56,11 @@ class Dataset < ApplicationRecord
   end
 
   def dataspace_id=(val)
-    return super unless val.is_a?(String) && !(val =~ /\D/).nil?
-
-    super(val.split('/').last)
+    if val.is_a?(String) && !(val =~ /\D/).nil?
+      super(val.split('/').last)
+    else
+      super
+    end
   end
 
   def show_includes
