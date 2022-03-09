@@ -21,8 +21,7 @@ GIT
 
 GIT
   remote: https://github.com/ontola/linked_rails
-  revision: 4892fb88987d0b138fbb62e50148534b72bd51bc
-  branch: refactor-includes
+  revision: 057b7f4a7a327d5211c094b9c4f17b8d0f941bb5
   specs:
     linked_rails (0.0.4)
       active_response (~> 0.0.2)
@@ -49,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/ontola/rdf-serializers
-  revision: bf61835d9ca9b5c6aaac9b26bd3704cc486be755
+  revision: ef10c737fe37023bc2dd2fbe5017758d2b74fc6a
   branch: refactor-includes
   specs:
     rdf-serializers (0.0.11)
@@ -410,7 +409,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rdf (3.2.4)
+    rdf (3.2.5)
       link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (3.1.0)
       rdf (~> 3.1)
