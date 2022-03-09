@@ -5,11 +5,11 @@ cache:
     - vendor/
 
 variables:
-  ARGU_API_URL: 'http://argu.svc.cluster.local:3000'
   BACKEND_REDIS_DATABASE: '0'
   BUGSNAG_KEY: 'b3e527c0a89dd7ecec4f61a29e1e2265'
   CACHE_CHANNEL: 'cache'
   CACHE_REDIS_DATABASE: '8'
+  DATA_SERVICE_URL: 'http://argu.svc.cluster.local:3000'
   DEVICE_ID_COOKIE_NAME: 'deviceId'
   DEVICE_ID_COOKIE_SIGNATURE_NAME: 'deviceId.sig'
   DEXES_DATABASE: 'dexes_test'

@@ -37,7 +37,7 @@ We use nginx internally ('devproxy') to provide reverse-proxying and TLS connect
   - Devproxy users: copy most values form that `.env`
   - The hostname is up to you, eg `dexes.localdev`
   - `OIDC_SUBJECT_SALT` should be random (eg. `bundle exec rake secret`)
-  - `OIDC_KEY` is a private key on a single line, so convert newlines to literal `\\n`. The key can be generated with `ssh-keygen -t rsa -b 4096 -m pem` ensure its type is `RSA PRIVATE KEY`. (Eg. `-----BEGIN RSA PRIVATE KEY-----\n[...]\n-----END RSA PRIVATE KEY-----\n`)
+  - `OIDC_KEY` is a private key on a single line, so convert newlines to literal `\n`. The key can be generated with `ssh-keygen -t rsa -b 4096 -m pem` ensure its type is `RSA PRIVATE KEY`. (Eg. `-----BEGIN RSA PRIVATE KEY-----\n[...]\n-----END RSA PRIVATE KEY-----\n`)
   - Create OAuth2 app credentials for your client by setting `LIBRO_CLIENT_ID` and `LIBRO_CLIENT_SECRET` which are created on database initialization.
   - The first bearer token with administrative privileges can be set in the same way via `RAILS_OAUTH_TOKEN`.
 - Devproxy users: Add the chosen hostname and a wildcard variant (Eg `*.dexes.localdev`) to `nginx.template.conf` as the `server_name`. The devproxy will regenerate the nginx.config from the template on restarting the devproxy.
