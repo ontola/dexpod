@@ -32,7 +32,7 @@ class Deal < Broker::Resource
   end
 
   def broker_url
-    RDF::URI(element_url.sub('deals', 'deal'))
+    RDF::URI(element_url)
   end
 
   def name
