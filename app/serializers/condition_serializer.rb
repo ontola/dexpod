@@ -3,7 +3,9 @@
 class ConditionSerializer < LinkedSerializer
   enum :type,
        options: Condition.type_options,
-       predicate: NS.app[:conditionType], &:rdf_type
+       predicate: NS.app[:conditionType] do |object|
+    object.rdf_type
+  end
 
   class << self
     def inherited(klass)

@@ -8,6 +8,7 @@ LinkedRails.serializer_parent_class = 'LinkedSerializer'
 LinkedRails.registration_form_class = 'RegistrationForm'
 LinkedRails.guest_user_class = 'GuestUser'
 LinkedRails.user_class = 'WebId'
+LinkedRails.ontology_class = 'Ontology'
 LinkedRails.otp_secret_class = 'OtpSecret'
 LinkedRails.otp_owner_class = 'WebId'
 

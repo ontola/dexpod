@@ -4,5 +4,5 @@ en:
       type:
         ExplicitDisclaimerCondition: 'Custom terms (explicit)'
         AttributionCondition: 'Attribution required'
-        PaymentCondition: 'Onetime payment'
+        PaymentCondition: 'One-time payment'
         TimespanCondition: 'Limited time'

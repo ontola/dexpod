@@ -14,6 +14,14 @@ nl:
     Condition:
       label: "Conditie"
       plural_label: "Condities"
+    ExplicitDisclaimerCondition:
+      label: 'Eigen voorwaarden'
+    AttributionCondition:
+      label: 'Naamsvermelding verplicht'
+    PaymentCondition:
+      label: 'Eenmalige betaling'
+    TimespanCondition:
+      label: 'Beperkte tijd'
     Folder:
       label: "Map"
       plural_label: "Mappen"
@@ -30,6 +38,8 @@ nl:
       label: "Bedrag"
     conditionDuration:
       label: "Duur (seconden)"
+    customLicense:
+      label: "Dexes Custom Licentie"
     dateSigned:
       label: "Deal gesloten op"
     dataOwner:

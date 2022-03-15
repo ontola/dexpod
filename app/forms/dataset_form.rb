@@ -35,14 +35,18 @@ class DatasetForm < ApplicationForm
           min_count: 1,
           max_count: 99
   end
-  group :conditions,
-        label: -> { I18n.t('forms.datasets.conditions.label') },
+  group :license_and_space,
+        label: -> { I18n.t('forms.datasets.license_and_space.label') },
         collapsible: false do
     field :dataspace_id,
           sh_in: -> { Dataspace.collection_iri },
-          min_count: 1
+          min_count: Rails.env.development? ? 0 : 1
     field :license,
           min_count: 1
+  end
+  group :conditions,
+        label: -> { I18n.t('forms.datasets.conditions.label') },
+        collapsible: false do
     Condition.types.each do |klass|
       has_one klass.name.underscore.to_sym
     end

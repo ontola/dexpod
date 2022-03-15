@@ -11,6 +11,14 @@ en:
     Agreement:
       label: "DataDeal"
       plural_label: "DataDeals"
+    ExplicitDisclaimerCondition:
+      label: 'Custom terms'
+    AttributionCondition:
+      label: 'Attribution required'
+    PaymentCondition:
+      label: 'One-time payment'
+    TimespanCondition:
+      label: 'Limited time'
     Condition:
       label: "Condition"
       plural_label: "Conditions"
@@ -30,6 +38,8 @@ en:
       label: "Amount"
     conditionDuration:
       label: "Duration (seconds)"
+    customLicense:
+      label: "Dexes Custom License"
     dateSigned:
       label: "Deal closed at"
     dataOwner:

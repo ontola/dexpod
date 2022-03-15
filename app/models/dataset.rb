@@ -29,7 +29,6 @@ class Dataset < ApplicationRecord
 
   validates :title, presence: true
   validates :description, length: {maximum: MAXIMUM_DESCRIPTION_LENGTH}, presence: true
-  validates :license_description, length: {maximum: MAXIMUM_DESCRIPTION_LENGTH}
 
   collection_options(
     display: :table

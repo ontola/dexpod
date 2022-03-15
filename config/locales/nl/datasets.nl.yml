@@ -19,9 +19,6 @@ nl:
         label: "Kies je omgeving die vertrouwen en zekerheid regelt"
       license:
         label: "Onder welke licentie deel je de data?"
-      license_description:
-        label: "Eigen voorwaarden"
-        helper_text: "Leg hier uit wat de voorwaarden zijn. De gebruiker moet hier mee akkoord gaan."
       explicit_disclaimer_condition:
         label: 'Eigen voorwaarden'
         description: "Ontvangers moeten onderstaande voorwarden accepteren"
@@ -36,5 +33,7 @@ nl:
         description: "Ontvangers mogen de data gedurende beperkte tijd gebruiken"
       describe_data:
         label: "Wat wil je delen?"
+      license_and_space:
+        label: "Waar en onder welke licentie wil je je data delen?"
       conditions:
-        label: "Wat zijn je voorwaarden om te delen?"
+        label: "Kies je aanvullende condities"

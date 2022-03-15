@@ -19,22 +19,21 @@ en:
         label: "Choose your environment that regulates trust and security"
       license:
         label: "Which license applies to your data?"
-      license_description:
-        label: "Custom terms"
-        helper_text: "Explain what the terms of usage are. The user must accept these terms."
       explicit_disclaimer_condition:
         label: 'Custom terms'
-        description: "Ontvangers moeten onderstaande voorwarden accepteren"
+        description: "Recipients must accept the conditions below"
       attribution_condition:
         label: 'Attribution required'
-        description: "Ontvangers moeten onderstaande naamsvermelding tonen bij hergebruik van de data"
+        description: "Recipients must show the attribution below when reusing the data"
       payment_condition:
-        label: 'Onetime payment'
-        description: "Ontvangers moeten een eenmalig bedrag betalen om de deal te kunnen sluiten"
+        label: 'One-time payment'
+        description: "Recipients must pay a one-time fee to close the deal"
       timespan_condition:
         label: 'Limited time'
-        description: "Ontvangers mogen de data gedurende beperkte tijd gebruiken"
+        description: "Recipients are allowed to use the data for a limited time"
       describe_data:
         label: "What do you want to share?"
+      license_and_space:
+        label: "Where and with which license do you want to share your data?"
       conditions:
-        label: "What are your conditions for sharing?"
+        label: "Choose your additional conditions"
