@@ -60,7 +60,9 @@ class Manifest
   end
 
   def theme_options
-    {}
+    {
+      footerResources: [LinkedRails.iri(path: 'menus/footer_about'), LinkedRails.iri(path: 'menus/footer_follow')].join(',')
+    }
   end
 
   def web_manifest

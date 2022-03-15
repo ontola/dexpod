@@ -8,3 +8,8 @@ nl:
     user_menu:
       view: "Bekijk"
       settings: "Instellingen"
+  menus:
+    default:
+      footer_about: 'Over'
+      footer_about_dexes: 'Over Dexes'
+      footer_follow: 'Volg ons'

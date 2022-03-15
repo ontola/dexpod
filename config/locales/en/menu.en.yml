@@ -8,3 +8,8 @@ en:
     user_menu:
       view: "View"
       settings: "Settings"
+  menus:
+    default:
+      footer_about: 'About'
+      footer_about_dexes: 'About Dexes'
+      footer_follow: 'Follow us'

@@ -11,6 +11,10 @@ class AppMenuList < ApplicationMenuList
   has_menu :user,
            label: -> { user_context.display_name },
            menus: -> { user_menu_items }
+  has_menu :footer_about,
+           menus: -> { footer_about_links }
+  has_menu :footer_follow,
+           menus: -> { footer_follow_links }
 
   def iri_template
     @iri_template ||= URITemplate.new('/menus{#fragment}')
@@ -24,6 +28,26 @@ class AppMenuList < ApplicationMenuList
       label: I18n.t('menu.datasets'),
       href: Dataset.collection_iri
     )
+  end
+
+  def footer_about_links
+    [
+      menu_item(
+        :footer_about_dexes,
+        href: RDF::URI('https://dexes.eu')
+      )
+    ]
+  end
+
+  def footer_follow_links
+    [
+      menu_item(
+        :follow_linked_in,
+        label: '',
+        image: 'fa-linkedin',
+        href: RDF::URI('https://www.linkedin.com/company/dexes-data-exchange/')
+      )
+    ]
   end
 
   def navigation_links
