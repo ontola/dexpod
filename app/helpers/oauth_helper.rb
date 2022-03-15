@@ -16,4 +16,8 @@ module OauthHelper
 
     redirect_to(LinkedRails.iri(path: '/u/session/new', query: {redirect_url: request.original_url}.to_param).to_s)
   end
+
+  def update_oauth_token(token)
+    super if token.application.uid == ENV['LIBRO_CLIENT_ID']
+  end
 end
