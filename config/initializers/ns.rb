@@ -10,6 +10,7 @@ class NS < LinkedRails::Vocab
   register(:dex, 'https://dexpods.eu/ns/core#')
   register(:dcat, 'http://www.w3.org/ns/dcat#')
   register(:donl, 'https://data.overheid.nl/dcat.rdf#')
+  register(:space, 'http://www.w3.org/ns/pim/space#')
 
   register(:adms, 'http://www.w3.org/ns/adms#')
 

@@ -10,11 +10,7 @@ class Profile
   delegate :root_node, to: :pod
 
   def iri
-    @iri ||= RDF::URI("#{document_iri}#me")
-  end
-
-  def document_iri
-    @document_iri ||= RDF::URI("#{web_id.pod.iri}/profile")
+    @iri ||= RDF::URI("#{web_id.iri}#me")
   end
 
   class << self
@@ -22,11 +18,7 @@ class Profile
       NS.foaf[:Person]
     end
 
-    def requested_singular_resource(_params, _user_context)
-      RootHelper.current_pod&.web_id&.profile
-    end
-
-    def singular_route_key
+    def route_key
       :profile
     end
   end

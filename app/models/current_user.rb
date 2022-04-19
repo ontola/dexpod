@@ -8,7 +8,9 @@ class CurrentUser
   attr_accessor :user
 
   def actor
-    LinkedRails.iri(path: :web_id)
+    return user.iri if RootHelper.pod?
+
+    LinkedRails.iri(path: :profile)
   end
 
   def actor_type

@@ -16,4 +16,7 @@ class ProfileSerializer < LinkedSerializer
           predicate: NS.dex[:ownerAgreements]
   has_one :recipient_agreement_collection,
           predicate: NS.dex[:recipientAgreements]
+  has_one :pod, predicate: NS.space[:storage] do |object|
+    object.pod&.home_iri
+  end
 end

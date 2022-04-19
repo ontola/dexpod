@@ -23,11 +23,15 @@ class Pod < ApplicationRecord
   end
 
   def iri
-    @iri ||= LinkedRails.iri(host: "#{pod_name}.#{Rails.application.config.host_name}#{root_relative_iri}")
+    @iri ||= LinkedRails.iri(host: pod_host, path: root_relative_iri)
   end
 
   def home_iri
-    @home_iri ||= LinkedRails.iri(host: "#{pod_name}.#{Rails.application.config.host_name}/")
+    @home_iri ||= LinkedRails.iri(host: pod_host, path: '/')
+  end
+
+  def pod_host
+    @pod_host ||= "#{pod_name}.#{Rails.application.config.host_name}"
   end
 
   def root_relative_iri

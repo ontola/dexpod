@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  POD_NAME_MATCH = %r{^https:\/\/(\w*)\.#{Rails.application.config.host_name}\/pod\/profile#me$}.freeze
+  POD_NAME_MATCH = %r{^https:\/\/(\w*)\.#{Rails.application.config.host_name}\/profile#me$}.freeze
 
   has_many :identities, dependent: :destroy
 
@@ -27,5 +27,11 @@ class User < ApplicationRecord
 
   def pod
     Pod.find_by!(pod_name: pod_name) if pod_name
+  end
+
+  class << self
+    def iri
+      NS.schema.Person
+    end
   end
 end

@@ -71,7 +71,6 @@ Rails.application.routes.draw do
   end
 
   linked_resource(User)
-  singular_linked_resource(Profile)
 
   match '*path',
         to: 'not_found#show',

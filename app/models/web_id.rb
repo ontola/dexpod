@@ -24,8 +24,25 @@ class WebId < ApplicationRecord
     false
   end
 
+  def iri
+    singular_iri
+  end
+
+  def offer_collection
+    Offer.root_collection.new_child(
+      filter: {NS.app[:recipients] => [profile.iri.to_s.sub('dexpods.localdev', 'staging.dexpods.eu')]}
+    )
+  end
+
   def otp_active?
     otp_secret&.active?
+  end
+
+  def owner_agreement_collection
+    Deal.root_collection.new_child(
+      filter: {NS.app[:recipients] => [profile.iri.to_s.sub('dexpods.localdev', 'staging.dexpods.eu')]},
+      table_type: :owner
+    )
   end
 
   def password_required?
@@ -42,26 +59,31 @@ class WebId < ApplicationRecord
     )
   end
 
-  def offer_collection
-    Offer.root_collection.new_child(
-      filter: {NS.app[:recipients] => [profile.iri.to_s.sub('dexpods.localdev', 'staging.dexpods.eu')]}
-    )
+  def singular_iri
+    @singular_iri ||= LinkedRails.iri(host: pod.pod_host, path: :profile)
   end
 
-  def owner_agreement_collection
-    Deal.root_collection.new_child(
-      filter: {NS.app[:recipients] => [profile.iri.to_s.sub('dexpods.localdev', 'staging.dexpods.eu')]},
-      table_type: :owner
-    )
+  def unscoped_iri
+    LinkedRails.iri(path: :profile)
   end
 
   class << self
     def iri
-      NS.schema.Person
+      NS.foaf.PersonalProfileDocument
+    end
+
+    def singular_route_key
+      :profile
+    end
+
+    def route_key
+      :profile
     end
 
     def requested_singular_resource(_params, user_context)
-      RootHelper.pod? ? user_context.pod&.web_id : user_context
+      return RootHelper.current_pod&.web_id if RootHelper.pod?
+
+      user_context.pod.web_id
     end
   end
 end
