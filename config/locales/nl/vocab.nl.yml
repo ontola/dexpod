@@ -82,10 +82,9 @@ nl:
       label: "Plaatje"
       plural_label: "Plaatjes"
     MediaObject:
-      description: 'Een bijlage is een bestand dat bij een document gevoegd is om meer informatie te verschaffen.'
       icon: "file"
-      label: "Bijlage"
-      plural_label: "Bijlages"
+      label: "Bestand"
+      plural_label: "Bestanden"
     Offer:
       label: "Optie"
       plural_label: "Opties"

@@ -82,10 +82,9 @@ en:
       label: "Image"
       plural_label: "Images"
     MediaObject:
-      description: 'An attachment is a file which has been appended to a document to provide more information.'
       icon: "file"
-      label: "Attachment"
-      plural_label: "Attachments"
+      label: "File"
+      plural_label: "Filess"
     Offer:
       label: "Option"
       plural_label: "Options"
