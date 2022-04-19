@@ -40,7 +40,7 @@ class DexBroker
     end
 
     def broker_app_id
-      Doorkeeper::Application.find_by!(name: ENV['BROKER_APP_NAME']).uid
+      Doorkeeper::Application.order(created_at: :asc).find_by!(name: ENV['BROKER_APP_NAME']).uid
     end
 
     def broker_headers(headers = nil)
